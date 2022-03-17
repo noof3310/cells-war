@@ -10,7 +10,9 @@ public class WhiteBloodCellBounce : MonoBehaviour
     int randomRatio;
 
     // Update is called once per frame
-    void Start() {
+    void Start()
+    {
+        gameObject.name = "whitebloodcell";
         yCenter = transform.position.y;
     }
     void Update()

@@ -396,6 +396,7 @@ MonoBehaviour:
   ItemPrefab: {fileID: 5959020422095505994, guid: f48f370c7cfdc2f4e88b0f34096e2d2b, type: 3}
   shouldSpawn: 1
   Radius: 50
+  amount: 100
 --- !u!4 &1311006747
 Transform:
   m_ObjectHideFlags: 0
@@ -454,6 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0402bbfabc5a3394bbab9b1fcaf513f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemPrefab: {fileID: 5959020422095505994, guid: f48f370c7cfdc2f4e88b0f34096e2d2b, type: 3}
+  ItemPrefab: {fileID: 3387968803048733207, guid: f48f370c7cfdc2f4e88b0f34096e2d2b, type: 3}
   shouldSpawn: 1
-  Radius: 50
+  Radius: 5
+  amount: 10
