@@ -10,6 +10,9 @@ public class Objective : MonoBehaviour
     public int maxHealth = 1000;
     void Start()
     {
+
+        hp = FindObjectOfType(typeof(HP)) as HP;
+        healthBar = FindObjectOfType(typeof(HealthBar)) as HealthBar;
         hp.SetMaxHealth(maxHealth);
         hp.SetHealth(maxHealth);
         healthBar.SetMaxHealthBar(maxHealth);
@@ -20,7 +23,9 @@ public class Objective : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space)){
-            hp.SetHealth(hp.GetHealth()-20);
+            int resultHp = hp.GetHealth()-100;
+            hp.SetHealth(resultHp);
+            healthBar.SetHealthBar(resultHp);
         }
         // hp.SetHealth(currentHealth);
         // if(hp.GetHealth() < 900){
