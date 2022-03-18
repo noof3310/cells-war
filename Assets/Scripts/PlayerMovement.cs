@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movVertical;
     Vector2 velocity;
 
+    string direction = "left";
+
     // Update is called once per frame
     void Update()
     {
@@ -28,9 +30,37 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("Speed", velocity.sqrMagnitude);
 
-        if (xMov > 0) spriteRenderer.flipX = true;
-        else if (xMov < 0) spriteRenderer.flipX = false;
+        if (xMov > 0)
+        {
+            spriteRenderer.flipX = true;
+            direction = "right";
+        }
+        else if (xMov < 0)
+        {
+            spriteRenderer.flipX = false;
+            direction = "left";
+        }
+        
+        if (yMov > 0)
+        {
+            direction = "up";
+        }
+        else if (yMov < 0)
+        {
+            direction = "down";
+        }
 
         rb.MovePosition(rb.position + velocity * Time.deltaTime);
+    }
+
+    public string getDirection()
+    {
+        return direction;
+    }
+
+    public Vector3 getPosition()
+    {
+        Vector3 position = rb.position;
+        return position;
     }
 }
