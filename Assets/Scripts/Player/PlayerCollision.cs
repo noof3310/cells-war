@@ -21,7 +21,8 @@ public class PlayerCollision : MonoBehaviour
         Debug.Log("colide");
         if (collider.gameObject.name == "whitebloodcell")
         {
-            Destroy(collider);
+            Destroy(collider.gameObject);
+            PlayerDetails.whiteBloodCellNumber += 1;
         }
     }
 }

@@ -12,19 +12,19 @@ public class WhiteBloodCell : MonoBehaviour
     // public Text whiteBloodCell = "test";
     void Start()
     {
-        numberOfWhiteBloodCell = 0;
-        countText = GetComponent<Text> ();
+        numberOfWhiteBloodCell = PlayerDetails.whiteBloodCellNumber;
         setCountText(numberOfWhiteBloodCell);
-        // whiteBloodCell.Text = "0";
     }
 
     // Update is called once per frame
     void Update()
     {
+        numberOfWhiteBloodCell = PlayerDetails.whiteBloodCellNumber;
         setCountText(numberOfWhiteBloodCell);
 
     }
-     void setCountText(int count){
-         countText.GetComponent<Text> ().text = count.ToString();
+    void setCountText(int count)
+    {
+        countText.text = count.ToString();
     }
 }
