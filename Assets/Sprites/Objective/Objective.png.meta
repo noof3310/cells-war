@@ -1,0 +1,693 @@
+fileFormatVersion: 2
+guid: 0ee16d066f8c4ac40abd8489c84c8357
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4211884387507883645
+    second: Real_heart_0
+  - first:
+      213: -8808844943647667016
+    second: Real_heart_1
+  - first:
+      213: -1325385966591069483
+    second: Real_heart_2
+  - first:
+      213: -4614611495989516374
+    second: Real_heart_3
+  - first:
+      213: 4376332730734611036
+    second: Real_heart_4
+  - first:
+      213: -4760857657565267792
+    second: Real_heart_5
+  - first:
+      213: -646679738350358562
+    second: Real_heart_6
+  - first:
+      213: 8077156094365263441
+    second: Real_heart_7
+  - first:
+      213: -1911641389780367389
+    second: Real_heart_8
+  - first:
+      213: -8623163141680967475
+    second: Real_heart_9
+  - first:
+      213: -7860429894264313067
+    second: Real_heart_10
+  - first:
+      213: 6309351062600114874
+    second: Real_heart_11
+  - first:
+      213: -8469080159861410804
+    second: Real_heart_12
+  - first:
+      213: -4437887523441776241
+    second: Real_heart_13
+  - first:
+      213: 1603776061297789899
+    second: Real_heart_14
+  - first:
+      213: 7915315817125646935
+    second: Real_heart_15
+  - first:
+      213: 8345502676678618025
+    second: Real_heart_16
+  - first:
+      213: 4772396453001868821
+    second: Real_heart_17
+  - first:
+      213: -7649763039085278960
+    second: Real_heart_18
+  - first:
+      213: 1214008527508157903
+    second: Real_heart_19
+  - first:
+      213: 1699671707159959789
+    second: Real_heart_20
+  - first:
+      213: -5762408483861889465
+    second: Real_heart_21
+  - first:
+      213: -8611015439062197612
+    second: Real_heart_22
+  - first:
+      213: 2848317466173324996
+    second: Real_heart_23
+  - first:
+      213: -3151996480721219100
+    second: Real_heart_24
+  - first:
+      213: 2457191336484346211
+    second: Real_heart_25
+  - first:
+      213: 7198015205464890696
+    second: Real_heart_26
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Real_heart_2
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 1448
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d23d0f4c784b9de0800000000000000
+      internalID: -1325385966591069483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_3
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 1448
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa76c1d2b4b95ffb0800000000000000
+      internalID: -4614611495989516374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_4
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 1448
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5a0a5a8e6bdbbc30800000000000000
+      internalID: 4376332730734611036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1086
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b8bf9e3f290eedb0800000000000000
+      internalID: -4760857657565267792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_6
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 1086
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edf2f2844388607f0800000000000000
+      internalID: -646679738350358562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_9
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 1086
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc05dd36fce545880800000000000000
+      internalID: -8623163141680967475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 724
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51ba38258a42ae290800000000000000
+      internalID: -7860429894264313067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_11
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 724
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab26381fc515f8750800000000000000
+      internalID: 6309351062600114874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_12
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 724
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c04f6293778c77a80800000000000000
+      internalID: -8469080159861410804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_13
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 724
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f896d147fc47962c0800000000000000
+      internalID: -4437887523441776241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_14
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 724
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcb0ee0a4d1c14610800000000000000
+      internalID: 1603776061297789899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 362
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7521ecc6cc9d8dd60800000000000000
+      internalID: 7915315817125646935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_16
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 362
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ab2083d77e21d370800000000000000
+      internalID: 8345502676678618025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_17
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 362
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 516b28ce945fa3240800000000000000
+      internalID: 4772396453001868821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_18
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 362
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 019c86fcb0596d590800000000000000
+      internalID: -7649763039085278960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_19
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 362
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc53b6cd25609d010800000000000000
+      internalID: 1214008527508157903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de81d049962769710800000000000000
+      internalID: 1699671707159959789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_21
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 0
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ef6b4b300d700b0800000000000000
+      internalID: -5762408483861889465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_22
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 0
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49a1b4fc4178f7880800000000000000
+      internalID: -8611015439062197612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_23
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 0
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ce3dcaf4a1478720800000000000000
+      internalID: 2848317466173324996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1448
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7ecb60f88e937a30800000000000000
+      internalID: 4211884387507883645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_1
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 1448
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bc826ce132b0c580800000000000000
+      internalID: -8808844943647667016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_7
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 1086
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 156e5085ca2d71070800000000000000
+      internalID: 8077156094365263441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Real_heart_8
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 1086
+        width: 482
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e70538c84c7875e0800000000000000
+      internalID: -1911641389780367389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
