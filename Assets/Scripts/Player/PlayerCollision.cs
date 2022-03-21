@@ -18,7 +18,6 @@ public class PlayerCollision : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("colide");
         if (collider.gameObject.name == "whitebloodcell")
         {
             Destroy(collider.gameObject);

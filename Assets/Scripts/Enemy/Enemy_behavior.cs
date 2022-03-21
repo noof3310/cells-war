@@ -10,7 +10,7 @@ public class Enemy_behavior : MonoBehaviour
     public float attackDistance;
     public float moveSpeed;
     public float timer;
-    public Transform player;
+    // public Transform player;
     public static bool attackMode;
 
     private Rigidbody2D rb;
@@ -26,6 +26,7 @@ public class Enemy_behavior : MonoBehaviour
 
     void Start()
     {
+        target = Enemy.target;
         died = false;
         intTimer = timer;
         anim = GetComponent<Animator>();
@@ -102,7 +103,7 @@ public class Enemy_behavior : MonoBehaviour
 
     void EnemyLogic()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
+        distance = Vector2.Distance(transform.position, target.transform.position);
 
         if (distance > attackDistance && !inRange && !cooling)
         {
@@ -126,12 +127,12 @@ public class Enemy_behavior : MonoBehaviour
         anim.SetBool("canWalk", true);
         // if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_Type_1_attack"))
         // {
-        Vector3 direction = player.position - transform.position;
+        Vector3 direction = target.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            // rb.rotation = angle;
-            direction.Normalize();
+        // rb.rotation = angle;
+        direction.Normalize();
         movement = direction;
-            rb.MovePosition((Vector2)transform.position + (Vector2)(direction * moveSpeed * Time.deltaTime));
+        rb.MovePosition((Vector2)transform.position + (Vector2)(direction * moveSpeed * Time.deltaTime));
 
         // if(angle > 0 && angle < 90 || angle < 0 && angle > -90){
         //     transform.rotation = new Quaternion(0,0,0,1);
@@ -217,7 +218,7 @@ public class Enemy_behavior : MonoBehaviour
 
     float getAngle()
     {
-        Vector3 direction = player.position - transform.position;
+        Vector3 direction = target.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         return angle;
     }

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform player;
+    public static GameObject target;
     public static HP hp;
-
+    public string gameObjectName;
     private int maxHealth = 1000;
     // Start is called before the first frame update
     void Start()
     {
+        target = GameObject.FindWithTag("Player");
+        gameObject.name = gameObjectName;
         hp = FindObjectOfType(typeof(HP)) as HP;
-        Debug.Log(hp);
         hp.SetMaxHealth(maxHealth);
         hp.SetHealth(maxHealth);
     }
@@ -32,12 +33,12 @@ public class Enemy : MonoBehaviour
     }
 
     // For testing taken damage. It can be hidden.
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Player")
-        {
-            hp.takenDamage(100);
-        }
-    }
+    // void OnTriggerEnter2D(Collider2D collider)
+    // {
+    //     if (collider.gameObject.tag == "Player")
+    //     {
+    //         hp.takenDamage(100);
+    //     }
+    // }
 
 }
