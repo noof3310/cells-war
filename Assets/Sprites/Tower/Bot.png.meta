@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 93c377b7b92d3eb49a9ae343ce9e2f4b
+guid: 65078c8a91d92334481237747df88571
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 540803829919948875
-    second: Brain_0
-  - first:
-      213: -6597746790429190138
-    second: Brain_1
-  - first:
-      213: -607332128543417956
-    second: Brain_2
-  - first:
-      213: 7085326713702782872
-    second: Brain_3
-  - first:
-      213: 5877450452412718023
-    second: Brain_4
+      213: -6041226390763924132
+    second: Bot_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -61,7 +49,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 240
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -118,97 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Brain_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 812
-        width: 203
-        height: 203
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b40ac8fc732518700800000000000000
-      internalID: 540803829919948875
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brain_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 609
-        width: 203
-        height: 203
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6089e7e10481074a0800000000000000
-      internalID: -6597746790429190138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brain_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 406
-        width: 203
-        height: 203
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c99dc7995a25297f0800000000000000
-      internalID: -607332128543417956
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brain_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 203
-        width: 203
-        height: 203
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89717df3b13245260800000000000000
-      internalID: 7085326713702782872
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brain_4
+      name: Bot_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 203
-        height: 203
+        width: 240
+        height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,8 +120,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cbd401eb06e09150800000000000000
-      internalID: 5877450452412718023
+      spriteID: c551dcafa90492ca0800000000000000
+      internalID: -6041226390763924132
       vertices: []
       indices: 
       edges: []
