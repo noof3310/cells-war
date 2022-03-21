@@ -5,38 +5,39 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public Transform player;
-    public float moveSpeed = 5f;
-    private Rigidbody2D rb;
-    private Vector2 movement;
+    public static HP hp;
+
+    private int maxHealth = 1000;
     // Start is called before the first frame update
     void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
-
+        hp = FindObjectOfType(typeof(HP)) as HP;
+        Debug.Log(hp);
+        hp.SetMaxHealth(maxHealth);
+        hp.SetHealth(maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = player.position - transform.position;
-        float angle = Mathf.Atan2(direction.y,direction.x) * Mathf.Rad2Deg;
-        // rb.rotation = angle;
-        direction.Normalize();
-        movement = direction;
-        if(angle > 0 && angle < 90 || angle < 0 && angle > -90){
-            transform.rotation = new Quaternion(0,0,0,1);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            int resultHp = hp.GetHealth() - 100;
+            Debug.Log(resultHp);
+            hp.SetHealth(resultHp);
+        }
+        // if(Enemy_behavior.attackMode){
+        //     Debug.Log("Attack !!");
+        // }
+    }
 
-        } else {
-            transform.rotation = new Quaternion(0,-1,0,0);
-
+    // For testing taken damage. It can be hidden.
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
+            hp.takenDamage(100);
         }
     }
 
-    private void FixedUpdate() {
-        moveCharacter(movement);
-    }
-
-    void moveCharacter(Vector2 direction){
-        rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
-    }
 }
