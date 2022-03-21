@@ -30,7 +30,6 @@ public class Enemy : MonoBehaviour
             transform.rotation = new Quaternion(0,-1,0,0);
 
         }
-        Debug.Log(angle);
     }
 
     private void FixedUpdate() {
