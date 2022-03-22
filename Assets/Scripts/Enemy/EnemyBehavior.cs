@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_behavior : MonoBehaviour
+public class EnemyBehavior : MonoBehaviour
 {
     public Transform rayCast;
     public LayerMask raycastMask;
@@ -59,27 +59,16 @@ public class Enemy_behavior : MonoBehaviour
                 if (angle > 0 && angle < 90 || angle < 0 && angle > -90)
                 {
                     hit = Physics2D.Raycast(rayCast.position, Vector2.right, rayCastLength, raycastMask);
-                    // RaycastDebugger(direction);
+                    RaycastDebugger(direction);
                 }
                 else
                 {
                     direction = "left";
                     hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, raycastMask);
-                    // RaycastDebugger(direction);
+                    RaycastDebugger(direction);
                 }
             }
-
-            if (hit.collider != null)
-            {
-                inRange = true;
-                EnemyLogic();
-            }
-            else if (hit.collider == null)
-            {
-                inRange = false;
-                EnemyLogic();
-            }
-
+            EnemyLogic();
             if (inRange == false)
             {
                 anim.SetBool("canWalk", false);
@@ -108,13 +97,15 @@ public class Enemy_behavior : MonoBehaviour
     void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.transform.position);
-
-        if (distance > attackDistance && !inRange && !cooling)
+        Debug.Log(distance);
+        Debug.Log(attackDistance);
+        Debug.Log(cooling);
+        if (distance > attackDistance && !cooling)
         {
             Move();
             StopAttack();
         }
-        else if (inRange && !cooling)
+        else if (distance <= attackDistance && !cooling)
         {
             Attack();
         }
@@ -195,6 +186,8 @@ public class Enemy_behavior : MonoBehaviour
 
     void RaycastDebugger(string direction)
     {
+        Debug.Log(distance);
+        Debug.Log(attackDistance);
         if (distance > attackDistance)
         {
             if (direction == "right")
