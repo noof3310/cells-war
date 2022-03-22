@@ -48,6 +48,10 @@ public class Enemy_behavior : MonoBehaviour
         }
         else
         {
+            if (target == null)
+            {
+                target = Enemy.target;
+            }
             if (inRange)
             {
                 float angle = getAngle();
@@ -133,12 +137,14 @@ public class Enemy_behavior : MonoBehaviour
         direction.Normalize();
         movement = direction;
         rb.MovePosition((Vector2)transform.position + (Vector2)(direction * moveSpeed * Time.deltaTime));
+        // if (angle > 0 && angle < 90 || angle < 0 && angle > -90)
+        // {
+        //     rb.rotation = 180;
 
-        // if(angle > 0 && angle < 90 || angle < 0 && angle > -90){
-        //     transform.rotation = new Quaternion(0,0,0,1);
-
-        // } else {
-        //     transform.rotation = new Quaternion(0,-1,0,0);
+        // }
+        // else
+        // {
+        //     rb.rotation = 0;
 
         // }
         // }
