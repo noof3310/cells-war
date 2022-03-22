@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public static GameObject target;
+    public GameObject coreTarget;
+    public static GameObject currentTarget;
     public static HP hp;
     public string gameObjectName;
     private int maxHealth = 1000;
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindWithTag("Player");
+        currentTarget = coreTarget;
         gameObject.name = gameObjectName;
         hp = FindObjectOfType(typeof(HP)) as HP;
         hp.SetMaxHealth(maxHealth);

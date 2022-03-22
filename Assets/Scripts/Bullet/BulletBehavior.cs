@@ -20,7 +20,6 @@ public class BulletBehavior : MonoBehaviour
     {
         destroy = false;
         anim = GetComponent<Animator>();
-        target = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -54,7 +53,7 @@ public class BulletBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.name == "Player")
+        if (collider.gameObject.name == target.name)
         {
             destroy = true;
             anim.SetBool("destroy", true);
@@ -67,5 +66,10 @@ public class BulletBehavior : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void SetTarget(GameObject currentTarget)
+    {
+        target = currentTarget;
     }
 }

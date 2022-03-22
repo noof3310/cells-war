@@ -26,7 +26,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void Start()
     {
-        target = Enemy.target;
+        target = Enemy.currentTarget;
         died = false;
         intTimer = timer;
         anim = GetComponent<Animator>();
@@ -50,7 +50,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             if (target == null)
             {
-                target = Enemy.target;
+                target = Enemy.currentTarget;
             }
             if (inRange)
             {
@@ -87,7 +87,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D trig)
     {
-        if (trig.gameObject.tag == "Player" && !cooling)
+        if (trig.gameObject.tag == target.tag && !cooling)
         {
             target = trig.gameObject;
             inRange = true;
@@ -97,9 +97,6 @@ public class EnemyBehavior : MonoBehaviour
     void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.transform.position);
-        Debug.Log(distance);
-        Debug.Log(attackDistance);
-        Debug.Log(cooling);
         if (distance > attackDistance && !cooling)
         {
             Move();
@@ -186,8 +183,6 @@ public class EnemyBehavior : MonoBehaviour
 
     void RaycastDebugger(string direction)
     {
-        Debug.Log(distance);
-        Debug.Log(attackDistance);
         if (distance > attackDistance)
         {
             if (direction == "right")

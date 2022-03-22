@@ -27,7 +27,7 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void Start()
     {
-        target = Enemy.target;
+        target = Enemy.currentTarget;
         died = false;
         intTimer = timer;
         anim = GetComponent<Animator>();
@@ -51,7 +51,7 @@ public class EnemyRangebehavior : MonoBehaviour
         {
             if (target == null)
             {
-                target = Enemy.target;
+                target = Enemy.currentTarget;
             }
             if (inRange)
             {
@@ -89,7 +89,7 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D trig)
     {
-        if (trig.gameObject.tag == "Player" && !cooling)
+        if (trig.gameObject == target && !cooling)
         {
             target = trig.gameObject;
             inRange = true;
@@ -171,7 +171,8 @@ public class EnemyRangebehavior : MonoBehaviour
     void Shoot()
     {
         // Vector3 randomPos = Random.insideUnitCircle * Radius;
-        Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+        var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+        obj.GetComponent<BulletBehavior>().SetTarget(target);
     }
 
     void Died()
