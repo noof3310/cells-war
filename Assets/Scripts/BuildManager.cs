@@ -30,7 +30,7 @@ public class BuildManager : MonoBehaviour
     public Transform handGridUI;
 
     public List<GameObject> UIHands;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +55,7 @@ public class BuildManager : MonoBehaviour
             i++;
         }
         foreach (Tile towerIcon in towerIcons)
-        {   
+        {
             GameObject UIHand = new GameObject("UI Tower");
             UIHand.transform.parent = handGridUI;
             UIHand.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -133,7 +133,6 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        Debug.Log(tilemap.GetTile(Vector3Int.FloorToInt(towerPos)));
     }
 
     void RenderUITowers(int selecter)

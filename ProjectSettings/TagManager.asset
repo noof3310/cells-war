@@ -51,6 +51,9 @@ TagManager:
   - name: Actor
     uniqueID: 139418097
     locked: 0
+  - name: Enemy
+    uniqueID: 1752516697
+    locked: 0
   - name: Tower
     uniqueID: 1304221267
     locked: 0
