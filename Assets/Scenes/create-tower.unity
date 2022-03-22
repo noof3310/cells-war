@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5598b5abf52332e488d0611ba4272639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 60
+  moveSpeed: 40
   spriteRenderer: {fileID: 347125413}
   rb: {fileID: 347125417}
   animator: {fileID: 347125415}
@@ -81653,12 +81653,12 @@ MonoBehaviour:
   UITowers: []
   selectedTower: 0
   tileGridUI: {fileID: 1319297590}
-  handGridUI: {fileID: 1973620202}
   player: {fileID: 347125416}
   target: {fileID: 11400000, guid: 616b6c266401972449907798f4e52a9d, type: 2}
   isSelected: 0
   handItem: 0
   inHand: 0
+  handGridUI: {fileID: 1973620202}
   UIHands: []
 --- !u!4 &1914456639
 Transform:
