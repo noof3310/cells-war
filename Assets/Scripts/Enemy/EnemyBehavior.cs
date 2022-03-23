@@ -87,9 +87,9 @@ public class EnemyBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D trig)
     {
-        if (trig.gameObject.tag == target.tag && !cooling)
+        if (trig.gameObject.name == target.name && !cooling)
         {
-            target = trig.gameObject;
+            // target = trig.gameObject;
             inRange = true;
         }
     }

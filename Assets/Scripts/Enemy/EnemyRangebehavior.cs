@@ -89,9 +89,9 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D trig)
     {
-        if (trig.gameObject == target && !cooling)
+        if (trig.gameObject.name == target.name && !cooling)
         {
-            target = trig.gameObject;
+            // target = trig.gameObject;
             inRange = true;
         }
     }
@@ -209,7 +209,7 @@ public class EnemyRangebehavior : MonoBehaviour
 
             }
         }
-        else if (attackDistance > distance)
+        else if (attackDistance >= distance)
         {
             if (direction == "right")
             {
