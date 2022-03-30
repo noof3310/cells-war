@@ -11,9 +11,10 @@ public class EnemyRangebehavior : MonoBehaviour
     public float moveSpeed;
     public float timer;
     // public Transform player;
-    public static bool attackMode;
     public GameObject ItemPrefab;
+    public GameObject coreTarget;
 
+    private bool attackMode;
     private Rigidbody2D rb;
     private Vector2 movement;
     private RaycastHit2D hit;
@@ -24,10 +25,15 @@ public class EnemyRangebehavior : MonoBehaviour
     private bool cooling;
     private bool died;
     private float intTimer;
+    private GameObject currentTarget;
+    private Enemy enemy;
+
 
     void Start()
     {
-        target = Enemy.currentTarget;
+        enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
+        currentTarget = coreTarget;
+        target = currentTarget;
         died = false;
         intTimer = timer;
         anim = GetComponent<Animator>();
@@ -38,7 +44,7 @@ public class EnemyRangebehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Enemy.hp.GetHealth() <= 0 && !died)
+        if (enemy.GetCurrentHealth() <= 0 && !died)
         {
             died = true;
         }
@@ -51,7 +57,7 @@ public class EnemyRangebehavior : MonoBehaviour
         {
             if (target == null)
             {
-                target = Enemy.currentTarget;
+                target = currentTarget;
             }
             if (inRange)
             {
