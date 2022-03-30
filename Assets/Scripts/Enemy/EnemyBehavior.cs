@@ -42,7 +42,6 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(enemy.GetCurrentHealth());
         if (enemy.GetCurrentHealth() <= 0 && !died)
         {
             died = true;
