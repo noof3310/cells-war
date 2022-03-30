@@ -43,6 +43,11 @@ public class Enemy : MonoBehaviour
         return currentHealth;
     }
 
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
     public void TakenDamage(int value)
     {
         int resultHp = currentHealth - value;
