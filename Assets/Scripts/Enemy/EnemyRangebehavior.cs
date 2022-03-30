@@ -8,6 +8,7 @@ public class EnemyRangebehavior : MonoBehaviour
     public LayerMask raycastMask;
     public float rayCastLength;
     public float attackDistance;
+    public int damage = 50;
     public float moveSpeed;
     public float timer;
     // public Transform player;
@@ -179,6 +180,7 @@ public class EnemyRangebehavior : MonoBehaviour
         // Vector3 randomPos = Random.insideUnitCircle * Radius;
         var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
         obj.GetComponent<BulletBehavior>().SetTarget(target);
+        obj.GetComponent<BulletBehavior>().SetDamage(damage);
     }
 
     void Died()

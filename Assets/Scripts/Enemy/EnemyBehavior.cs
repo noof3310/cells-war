@@ -8,6 +8,7 @@ public class EnemyBehavior : MonoBehaviour
     public LayerMask raycastMask;
     public float rayCastLength;
     public float attackDistance;
+    public int damage;
     public float moveSpeed;
     public float timer;
     // public Transform player;
@@ -88,6 +89,16 @@ public class EnemyBehavior : MonoBehaviour
     public void TriggerCooling()
     {
         cooling = true;
+        TakeDamage();
+    }
+
+    public void TakeDamage()
+    {
+        Debug.Log(target);
+        if (target.tag == "Objective")
+        {
+            target.GetComponent<Objective>().TakenDamage(damage);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D trig)
