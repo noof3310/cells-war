@@ -12,8 +12,7 @@ public class EnemyBehavior : MonoBehaviour
     public float moveSpeed;
     public float timer;
     // public Transform player;
-    public GameObject coreTarget;
-    public GameObject spawner;
+    private GameObject coreTarget;
     private bool attackMode;
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -31,14 +30,13 @@ public class EnemyBehavior : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
-        currentTarget = coreTarget;
-        target = currentTarget;
+        coreTarget = GameObject.FindWithTag("Objective");
+        currentTarget = GameObject.FindWithTag("Objective");
+        target = GameObject.FindWithTag("Objective");
         died = false;
         intTimer = timer;
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
-        if (spawner == null)
-            spawner = GameObject.FindWithTag("Spawner");
 
     }
 
