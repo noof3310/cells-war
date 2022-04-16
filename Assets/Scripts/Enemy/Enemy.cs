@@ -4,31 +4,22 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject coreTarget;
-    public static GameObject currentTarget;
-    public static HP hp;
+    public int maxHealth = 1000;
     public string gameObjectName;
-    private int maxHealth = 1000;
+    private int currentHealth;
     // Start is called before the first frame update
     void Start()
     {
-        currentTarget = coreTarget;
         gameObject.name = gameObjectName;
-        hp = FindObjectOfType(typeof(HP)) as HP;
-        hp.SetMaxHealth(maxHealth);
-        hp.SetHealth(maxHealth);
+        SetCurrentHealth(maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            int resultHp = hp.GetHealth() - 100;
-            Debug.Log(resultHp);
-            hp.SetHealth(resultHp);
-        }
-        // if(Enemy_behavior.attackMode){
+
+        // if (Enemy_behavior.attackMode)
+        // {
         //     Debug.Log("Attack !!");
         // }
     }
@@ -41,5 +32,26 @@ public class Enemy : MonoBehaviour
     //         hp.takenDamage(100);
     //     }
     // }
+
+    public void SetCurrentHealth(int value)
+    {
+        currentHealth = value;
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public void TakenDamage(int value)
+    {
+        int resultHp = currentHealth - value;
+        SetCurrentHealth(resultHp);
+    }
 
 }

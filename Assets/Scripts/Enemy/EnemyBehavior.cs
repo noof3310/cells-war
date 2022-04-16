@@ -8,11 +8,13 @@ public class EnemyBehavior : MonoBehaviour
     public LayerMask raycastMask;
     public float rayCastLength;
     public float attackDistance;
+    public int damage;
     public float moveSpeed;
     public float timer;
     // public Transform player;
-    public static bool attackMode;
+    public GameObject coreTarget;
 
+    private bool attackMode;
     private Rigidbody2D rb;
     private Vector2 movement;
     private RaycastHit2D hit;
@@ -23,10 +25,14 @@ public class EnemyBehavior : MonoBehaviour
     private bool cooling;
     private bool died;
     private float intTimer;
+    private GameObject currentTarget;
+    private Enemy enemy;
 
     void Start()
     {
-        target = Enemy.currentTarget;
+        enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
+        currentTarget = coreTarget;
+        target = currentTarget;
         died = false;
         intTimer = timer;
         anim = GetComponent<Animator>();
@@ -37,7 +43,7 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Enemy.hp.GetHealth() <= 0 && !died)
+        if (enemy.GetCurrentHealth() <= 0 && !died)
         {
             died = true;
         }
@@ -50,7 +56,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             if (target == null)
             {
-                target = Enemy.currentTarget;
+                target = currentTarget;
             }
             if (inRange)
             {
@@ -83,6 +89,16 @@ public class EnemyBehavior : MonoBehaviour
     public void TriggerCooling()
     {
         cooling = true;
+        TakeDamage();
+    }
+
+    public void TakeDamage()
+    {
+        Debug.Log(target);
+        if (target.tag == "Objective")
+        {
+            target.GetComponent<Objective>().TakenDamage(damage);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D trig)

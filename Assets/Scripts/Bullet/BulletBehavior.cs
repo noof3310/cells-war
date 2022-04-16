@@ -6,9 +6,9 @@ public class BulletBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
     public int speed;
-    public int damage;
+    private int damage;
     // public float rotationOffet;
-    private static GameObject target;
+    private GameObject target;
     private Rigidbody2D rb;
     private Vector2 movement;
     private RaycastHit2D hit;
@@ -64,7 +64,18 @@ public class BulletBehavior : MonoBehaviour
     {
         if (destroy)
         {
+            TakeDamage();
             Destroy(this.gameObject);
+
+        }
+    }
+
+    public void TakeDamage()
+    {
+        Debug.Log(target);
+        if (target.tag == "Objective")
+        {
+            target.GetComponent<Objective>().TakenDamage(damage);
         }
     }
 
@@ -72,4 +83,9 @@ public class BulletBehavior : MonoBehaviour
     {
         target = currentTarget;
     }
+    public void SetDamage(int currentDamage)
+    {
+        damage = currentDamage;
+    }
+
 }

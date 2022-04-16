@@ -9,16 +9,24 @@ public class RandomSpawner : MonoBehaviour
     public float Radius = 50;
 
     public int amount = 100;
+    public float initialTimer;
+    private float timer;
     // public float updateInterval = 5f;
     //     void Start()
     //  {
     //      InvokeRepeating("SpawnObjectAtRandom",updateInterval,updateInterval);
     //     }
 
-    async void Update()
+    void Start()
     {
-        if (amount > 0)
+        timer = initialTimer;
+    }
+    void Update()
+    {
+        timer -= Time.deltaTime;
+        if (amount > 0 && timer <= 0)
         {
+            timer = initialTimer;
             SpawnObjectAtRandom();
             amount -= 1;
         }
@@ -26,7 +34,7 @@ public class RandomSpawner : MonoBehaviour
 
     void SpawnObjectAtRandom()
     {
-        Vector3 randomPos = Random.insideUnitCircle * Radius;
+        Vector3 randomPos = (Vector2)transform.position;
         Instantiate(ItemPrefab, randomPos, Quaternion.identity);
     }
 
