@@ -22,6 +22,10 @@ public class Enemy : MonoBehaviour
         // {
         //     Debug.Log("Attack !!");
         // }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SetCurrentHealth(0);
+        }
     }
 
     // For testing taken damage. It can be hidden.

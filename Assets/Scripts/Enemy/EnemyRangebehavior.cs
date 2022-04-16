@@ -196,9 +196,16 @@ public class EnemyRangebehavior : MonoBehaviour
     {
         if (died)
         {
+            RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
             Destroy(this.gameObject);
         }
     }
+
+    void RemoveFromList(GameObject gameObject)
+    {
+        SpawnerManager.enemyList.Remove(gameObject);
+    }
+
 
 
 

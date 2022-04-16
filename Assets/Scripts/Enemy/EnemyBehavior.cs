@@ -13,7 +13,7 @@ public class EnemyBehavior : MonoBehaviour
     public float timer;
     // public Transform player;
     public GameObject coreTarget;
-
+    public GameObject spawner;
     private bool attackMode;
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -37,12 +37,15 @@ public class EnemyBehavior : MonoBehaviour
         intTimer = timer;
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
+        if (spawner == null)
+            spawner = GameObject.FindWithTag("Spawner");
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (enemy.GetCurrentHealth() <= 0 && !died)
         {
             died = true;
@@ -191,8 +194,14 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (died)
         {
+            RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
             Destroy(this.gameObject);
         }
+    }
+
+    void RemoveFromList(GameObject gameObject)
+    {
+        SpawnerManager.enemyList.Remove(gameObject);
     }
 
 

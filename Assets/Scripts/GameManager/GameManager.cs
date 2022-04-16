@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static GameState State;
-    public static float restTime = 20f;
-    public float rushTime = 20f;
+    public static bool canChangeState = true;
+    public static float restTime = 5f;
+    public static float rushTime = 5f;
     // Start is called before the first frame update
 
     void Awake()
@@ -25,18 +26,19 @@ public class GameManager : MonoBehaviour
     public static void UpdateGameState(GameState newState)
     {
         State = newState;
-        Debug.Log(newState);
 
         switch (newState)
         {
             case GameState.StartState:
                 break;
             case GameState.FightState:
+                HandleFightState();
                 break;
             case GameState.RestState:
                 HandleRestState();
                 break;
             case GameState.RushState:
+                HandleRushState();
                 break;
             case GameState.Victory:
                 break;
@@ -56,6 +58,20 @@ public class GameManager : MonoBehaviour
     {
         Timer.SetCurrentTime(restTime);
     }
+    public static void HandleRushState()
+    {
+        Timer.SetCurrentTime(rushTime);
+    }
+    public static void HandleFightState()
+    {
+        SpawnerManager.whiteBloodCellList.Clear();
+    }
+
+
+    public static GameState GetCurrentGameState()
+    {
+        return State;
+    }
 
 }
 
@@ -63,6 +79,7 @@ public enum GameState
 {
     StartState,
     FightState,
+    SpawnState,
     RestState,
     RushState,
     Victory,
