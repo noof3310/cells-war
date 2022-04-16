@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/create-tower.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: c9f8a21350eb8134d9738c42da84d45f
+  - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: 5e20b706b7f782f4aa28ccf859cd6f71
   m_configObjects: {}
