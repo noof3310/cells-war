@@ -92,7 +92,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1000
+  damage: 10
+  moveSpeed: 5
+  timer: 4
   gameObjectName: Enemy_Type_2
+  chanceForBuff: 0.3
+  maximumBuffNumber: 3
 --- !u!114 &9208918897329611370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,9 +116,6 @@ MonoBehaviour:
     m_Bits: 64
   rayCastLength: 15
   attackDistance: 10
-  damage: 300
-  moveSpeed: 10
-  timer: 10
   ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
 --- !u!1 &7833236785258919434
 GameObject:

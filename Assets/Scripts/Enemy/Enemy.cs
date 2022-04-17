@@ -5,12 +5,23 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int maxHealth = 1000;
+    public int damage;
+    public float moveSpeed;
+    public float timer;
+
     public string gameObjectName;
+    public float chanceForBuff = 0.3f;
+    public int maximumBuffNumber = 3;
     private int currentHealth;
+    private bool died;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         gameObject.name = gameObjectName;
+        died = false;
         SetCurrentHealth(maxHealth);
     }
 
@@ -46,6 +57,15 @@ public class Enemy : MonoBehaviour
     {
         return currentHealth;
     }
+    public void SetDied(bool value)
+    {
+        died = value;
+    }
+
+    public bool GetDied()
+    {
+        return died;
+    }
 
     public int GetMaxHealth()
     {
@@ -58,4 +78,11 @@ public class Enemy : MonoBehaviour
         SetCurrentHealth(resultHp);
     }
 
+}
+
+public enum EnemyBuff
+{
+    Attack,
+    Speed,
+    Hp
 }

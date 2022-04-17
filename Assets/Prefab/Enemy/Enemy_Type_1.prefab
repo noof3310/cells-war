@@ -149,7 +149,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1000
+  damage: 20
+  moveSpeed: 10
+  timer: 2
   gameObjectName: Enemy_Type_1
+  chanceForBuff: 0.3
+  maximumBuffNumber: 3
 --- !u!114 &1403321708785479924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,9 +173,6 @@ MonoBehaviour:
     m_Bits: 64
   rayCastLength: 6
   attackDistance: 2
-  damage: 300
-  moveSpeed: 10
-  timer: 2
 --- !u!1 &1403321708865099607
 GameObject:
   m_ObjectHideFlags: 0
