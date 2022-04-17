@@ -1167,7 +1167,8 @@ MonoBehaviour:
   isResourceSpawner: 1
   shouldSpawnEnemy: 0
   shouldSpawnWhiteBloodCell: 0
-  amount: 20
+  amount: 0
+  totalAmount: 20
   Radius: 20
   initialTimer: 0.5
 --- !u!4 &563084611
@@ -5508,7 +5509,8 @@ MonoBehaviour:
   isResourceSpawner: 0
   shouldSpawnEnemy: 0
   shouldSpawnWhiteBloodCell: 0
-  amount: 20
+  amount: 0
+  totalAmount: 20
   Radius: 50
   initialTimer: 2
 --- !u!4 &1311006747
