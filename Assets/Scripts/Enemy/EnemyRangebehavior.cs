@@ -13,7 +13,7 @@ public class EnemyRangebehavior : MonoBehaviour
     public float timer;
     // public Transform player;
     public GameObject ItemPrefab;
-    public GameObject coreTarget;
+    private GameObject coreTarget;
 
     private bool attackMode;
     private Rigidbody2D rb;
@@ -33,7 +33,8 @@ public class EnemyRangebehavior : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
-        currentTarget = coreTarget;
+        coreTarget = GameObject.FindWithTag("Objective");
+        currentTarget = GameObject.FindWithTag("Objective");
         target = currentTarget;
         died = false;
         intTimer = timer;
@@ -196,9 +197,16 @@ public class EnemyRangebehavior : MonoBehaviour
     {
         if (died)
         {
+            RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
             Destroy(this.gameObject);
         }
     }
+
+    void RemoveFromList(GameObject gameObject)
+    {
+        SpawnerManager.enemyList.Remove(gameObject);
+    }
+
 
 
 

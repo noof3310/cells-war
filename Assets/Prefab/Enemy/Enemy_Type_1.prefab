@@ -172,6 +172,7 @@ MonoBehaviour:
   moveSpeed: 10
   timer: 2
   coreTarget: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!1 &1403321708865099607
 GameObject:
   m_ObjectHideFlags: 0
