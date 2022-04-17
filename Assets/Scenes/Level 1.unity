@@ -1161,6 +1161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToSpawn: []
+  bossToSpawn: []
   resourceToSpawn:
   - {fileID: 3822107959968587438, guid: 4752c9158ea39bb4c974c811e9a005a0, type: 3}
   isEnemySpawner: 0
@@ -5504,13 +5505,15 @@ MonoBehaviour:
   objectsToSpawn:
   - {fileID: 1403321708785479923, guid: 3faad9e7860951644bc1236630b8b9b5, type: 3}
   - {fileID: 7833236785166438830, guid: f9257ab4f644d90449f4e1d07f254cc0, type: 3}
+  bossToSpawn:
+  - {fileID: 7833236785166438830, guid: f9257ab4f644d90449f4e1d07f254cc0, type: 3}
   resourceToSpawn: []
   isEnemySpawner: 1
   isResourceSpawner: 0
   shouldSpawnEnemy: 0
   shouldSpawnWhiteBloodCell: 0
   amount: 0
-  totalAmount: 20
+  totalAmount: 2
   Radius: 50
   initialTimer: 2
 --- !u!4 &1311006747

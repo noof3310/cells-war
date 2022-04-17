@@ -7,10 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static GameState State;
-    public static int level;
+    public static int level = 1;
     public static bool canChangeState = true;
     public static float restTime = 5f;
     public static float rushTime = 5f;
+    public static int levelBossSpawn = 2;
     // Start is called before the first frame update
 
     void Awake()
@@ -20,9 +21,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        level = 1;
         UpdateGameState(GameState.StartState);
 
+    }
+
+    void Update()
+    {
     }
 
     public static void UpdateGameState(GameState newState)
