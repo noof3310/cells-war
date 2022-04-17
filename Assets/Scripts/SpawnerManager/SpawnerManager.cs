@@ -4,55 +4,91 @@ using UnityEngine;
 
 public class SpawnerManager : MonoBehaviour
 {
+    public List<GameObject> objectsToSpawn = new List<GameObject>();
+    public List<GameObject> resourceToSpawn = new List<GameObject>();
     public static List<GameObject> enemyList = new List<GameObject>();
     public static List<GameObject> whiteBloodCellList = new List<GameObject>();
-    public RandomSpawner EnemyType1Spawner;
-    public RandomSpawner EnemyType2Spawner;
-    public RandomSpawner WhiteBloodCellSpawner;
-    public int enemyAmount;
+    public bool isEnemySpawner;
+    public bool isResourceSpawner;
+    public bool shouldSpawnEnemy;
+    public bool shouldSpawnWhiteBloodCell;
+    public int amount;
+    public int totalAmount;
+    public float Radius = 50;
+
+    public float initialTimer;
+    private float timer;
     void Start()
     {
+        shouldSpawnEnemy = false;
+        shouldSpawnWhiteBloodCell = false;
+        timer = initialTimer;
+        amount = totalAmount;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(enemyList.Count);
-        Debug.Log(GameManager.State);
+        if (isResourceSpawner && GameManager.State == GameState.SpawnState)
+        {
+            foreach (var objects in whiteBloodCellList)
+            {
+                Destroy(objects);
+            }
+            amount = totalAmount;
+            GameManager.UpdateGameState(GameState.FightState);
 
-        if (enemyList.Count == 0 && GameManager.State == GameState.FightState)
+        }
+
+        if (isEnemySpawner && shouldSpawnEnemy && GameManager.State == GameState.FightState)
+        {
+            timer -= Time.deltaTime;
+            if (amount > 0 && timer <= 0)
+            {
+                timer = initialTimer;
+                SpawnObjectAtRandom();
+                amount -= 1;
+            }
+        }
+        if (isResourceSpawner && shouldSpawnWhiteBloodCell && GameManager.State == GameState.RushState)
+        {
+            timer -= Time.deltaTime;
+            if (amount > 0 && timer <= 0)
+            {
+                timer = initialTimer;
+                SpawnResourceAtRandom();
+                amount -= 1;
+            }
+        }
+
+        if (isEnemySpawner && enemyList.Count == 0 && amount == 0 && GameManager.State == GameState.FightState)
         {
             GameManager.UpdateGameState(GameState.RushState);
-            SetEnemyType1Amount(10);
-            SetEnemyType2Amount(10);
+            amount = totalAmount + GameManager.level * 5;
+            GameManager.level += 1;
         }
 
         switch (GameManager.State)
         {
             case GameState.SpawnState:
-                EnemyType1Spawner.shouldSpawn = true;
-                EnemyType2Spawner.shouldSpawn = true;
-                WhiteBloodCellSpawner.shouldSpawn = false;
+                shouldSpawnEnemy = true;
+                shouldSpawnWhiteBloodCell = false;
                 break;
             case GameState.FightState:
-                EnemyType1Spawner.shouldSpawn = true;
-                EnemyType2Spawner.shouldSpawn = true;
-                WhiteBloodCellSpawner.shouldSpawn = false;
+                shouldSpawnEnemy = true;
+                shouldSpawnWhiteBloodCell = false;
                 break;
             case GameState.RestState:
-                EnemyType1Spawner.shouldSpawn = false;
-                EnemyType2Spawner.shouldSpawn = false;
-                WhiteBloodCellSpawner.shouldSpawn = false;
+                shouldSpawnEnemy = false;
+                shouldSpawnWhiteBloodCell = false;
                 break;
             case GameState.RushState:
-                EnemyType1Spawner.shouldSpawn = false;
-                EnemyType2Spawner.shouldSpawn = false;
-                WhiteBloodCellSpawner.shouldSpawn = true;
+                shouldSpawnEnemy = false;
+                shouldSpawnWhiteBloodCell = true;
                 break;
             default:
-                EnemyType1Spawner.shouldSpawn = false;
-                EnemyType2Spawner.shouldSpawn = false;
-                WhiteBloodCellSpawner.shouldSpawn = false;
+                shouldSpawnEnemy = false;
+                shouldSpawnWhiteBloodCell = false;
                 break;
 
         }
@@ -60,17 +96,41 @@ public class SpawnerManager : MonoBehaviour
 
     }
 
-    public void SetEnemyType1Amount(int newAmount)
+    void SpawnResourceAtRandom()
     {
-        EnemyType1Spawner.amount = newAmount;
+        if (resourceToSpawn.Count > 0)
+        {
+            int index = Random.Range(0, resourceToSpawn.Count);
+
+            Vector3 randomPos = Random.insideUnitCircle * Radius;
+
+            whiteBloodCellList.Add(Instantiate(resourceToSpawn[index], randomPos, Quaternion.identity));
+        }
+
+
+
     }
-    public void SetEnemyType2Amount(int newAmount)
+
+    void SpawnObjectAtRandom()
     {
-        EnemyType2Spawner.amount = newAmount;
+        if (objectsToSpawn.Count > 0)
+        {
+            int index = Random.Range(0, objectsToSpawn.Count);
+
+            Vector3 randomPos = (Vector2)transform.position;
+
+            enemyList.Add(Instantiate(objectsToSpawn[index], randomPos, Quaternion.identity));
+        }
+
+
+
     }
-    public void SetWhiteBloodCellAmount(int newAmount)
+
+    private void OnDrawGizmos()
     {
-        WhiteBloodCellSpawner.amount = newAmount;
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawWireSphere(this.transform.position, Radius);
     }
 
 }

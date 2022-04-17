@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static GameState State;
+    public static int level;
     public static bool canChangeState = true;
     public static float restTime = 5f;
     public static float rushTime = 5f;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        level = 1;
         UpdateGameState(GameState.StartState);
 
     }
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
     public static void UpdateGameState(GameState newState)
     {
         State = newState;
+        Debug.Log(newState);
 
         switch (newState)
         {
@@ -52,7 +55,7 @@ public class GameManager : MonoBehaviour
     public static void HandleStartState()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        UpdateGameState(GameState.RestState);
+        UpdateGameState(GameState.RushState);
     }
     public static void HandleRestState()
     {
