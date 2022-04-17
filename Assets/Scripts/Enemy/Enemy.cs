@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public int maximumBuffNumber = 3;
     private int currentHealth;
     private bool died;
+    public List<EnemyBuff> enemyBuffs;
 
 
 
@@ -35,7 +36,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.M) && GetCurrentHealth() > 0)
         {
             SetCurrentHealth(GetCurrentHealth() - 10);
@@ -44,14 +44,16 @@ public class Enemy : MonoBehaviour
 
     void RandomBuff()
     {
-        float randomInt = Random.Range(0f, 1f);
-        if (randomInt <= chanceForBuff)
+
+        for (int i = 0; i < maximumBuffNumber; i++)
         {
-            for (int i = 0; i < maximumBuffNumber; i++)
+            float randomInt = Random.Range(0f, 1f);
+            if (randomInt <= chanceForBuff)
             {
 
                 EnemyBuff buff = (EnemyBuff)Random.Range(0, System.Enum.GetValues(typeof(EnemyBuff)).Length);
                 Debug.Log("Buff: " + buff);
+                enemyBuffs.Add(buff);
                 switch (buff)
                 {
                     case EnemyBuff.Attack:
