@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnerManager : MonoBehaviour
 {
     public List<GameObject> objectsToSpawn = new List<GameObject>();
+    public List<GameObject> bossToSpawn = new List<GameObject>();
     public List<GameObject> resourceToSpawn = new List<GameObject>();
     public static List<GameObject> enemyList = new List<GameObject>();
     public static List<GameObject> whiteBloodCellList = new List<GameObject>();
@@ -18,10 +19,12 @@ public class SpawnerManager : MonoBehaviour
 
     public float initialTimer;
     private float timer;
+    private bool shouldSpawnBoss;
     void Start()
     {
         shouldSpawnEnemy = false;
         shouldSpawnWhiteBloodCell = false;
+        shouldSpawnBoss = false;
         timer = initialTimer;
         amount = totalAmount;
     }
@@ -29,6 +32,15 @@ public class SpawnerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Game level: " + GameManager.level);
+
+        if (shouldSpawnBoss && GameManager.State == GameState.FightState)
+        {
+            Debug.Log("Boss spawn");
+            SpawnObjectAtRandom(bossToSpawn);
+            shouldSpawnBoss = false;
+        }
+
         if (isResourceSpawner && GameManager.State == GameState.SpawnState)
         {
             foreach (var objects in whiteBloodCellList)
@@ -46,7 +58,7 @@ public class SpawnerManager : MonoBehaviour
             if (amount > 0 && timer <= 0)
             {
                 timer = initialTimer;
-                SpawnObjectAtRandom();
+                SpawnObjectAtRandom(objectsToSpawn);
                 amount -= 1;
             }
         }
@@ -64,9 +76,14 @@ public class SpawnerManager : MonoBehaviour
         if (isEnemySpawner && enemyList.Count == 0 && amount == 0 && GameManager.State == GameState.FightState)
         {
             GameManager.UpdateGameState(GameState.RushState);
-            amount = totalAmount + GameManager.level * 5;
+            amount = totalAmount;
             GameManager.level += 1;
+            if (GameManager.level % GameManager.levelBossSpawn == 0)
+            {
+                shouldSpawnBoss = true;
+            }
         }
+
 
         switch (GameManager.State)
         {
@@ -106,12 +123,9 @@ public class SpawnerManager : MonoBehaviour
 
             whiteBloodCellList.Add(Instantiate(resourceToSpawn[index], randomPos, Quaternion.identity));
         }
-
-
-
     }
 
-    void SpawnObjectAtRandom()
+    void SpawnObjectAtRandom(List<GameObject> objectsToSpawn)
     {
         if (objectsToSpawn.Count > 0)
         {
@@ -121,10 +135,8 @@ public class SpawnerManager : MonoBehaviour
 
             enemyList.Add(Instantiate(objectsToSpawn[index], randomPos, Quaternion.identity));
         }
-
-
-
     }
+
 
     private void OnDrawGizmos()
     {
