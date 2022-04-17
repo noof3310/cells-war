@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -189,6 +190,8 @@ public class EnemyBehavior : MonoBehaviour
         {
             RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
             Destroy(this.gameObject);
+            foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
+                Destroy(img.gameObject);
         }
     }
 

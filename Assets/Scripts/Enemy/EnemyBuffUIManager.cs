@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EnemyBuffUIManager : MonoBehaviour
 {
     public List<Image> prefabUI;
-    private List<Image> uiUse = new List<Image>();
+    public List<Image> uiUse = new List<Image>();
     private Vector3 offset = new Vector3(0, 1.5f, 0);
     private bool isDraw = false;
     // Start is called before the first frame update

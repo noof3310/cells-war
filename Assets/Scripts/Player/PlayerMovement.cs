@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 20f;
+    [SerializeField] float baseMoveSpeed = 20f;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] float weightForRushState = 3;
+
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Animator animator;
@@ -16,10 +19,23 @@ public class PlayerMovement : MonoBehaviour
     Vector2 velocity;
 
     string direction = "left";
+    void Start()
+    {
+        moveSpeed = baseMoveSpeed;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.State == GameState.RushState)
+        {
+            SetMoveSpeed(baseMoveSpeed * weightForRushState);
+        }
+        else
+        {
+            SetMoveSpeed(baseMoveSpeed);
+
+        }
         xMov = Input.GetAxisRaw("Horizontal");
         yMov = Input.GetAxisRaw("Vertical");
 
@@ -40,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = false;
             direction = "left";
         }
-        
+
         if (yMov > 0)
         {
             direction = "up";
@@ -53,6 +69,14 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + velocity * Time.deltaTime);
     }
 
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
+    }
+    public void SetMoveSpeed(float newValue)
+    {
+        moveSpeed = newValue;
+    }
     public string getDirection()
     {
         return direction;
