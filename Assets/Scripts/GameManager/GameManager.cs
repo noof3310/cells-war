@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
             case GameState.Victory:
                 break;
             case GameState.Lose:
+                HandleLoseState();
                 break;
             default:
                 break;
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public static void HandleStartState()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(1);
         UpdateGameState(GameState.RushState);
     }
     public static void HandleRestState()
@@ -72,6 +73,16 @@ public class GameManager : MonoBehaviour
     public static void HandleFightState()
     {
         SpawnerManager.whiteBloodCellList.Clear();
+    }
+    public static void HandleLoseState()
+    {
+
+        level = 1;
+        canChangeState = true;
+        PlayerDetails.ResetAll();
+        Objective.ResetAll();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        UpdateGameState(GameState.StartState);
     }
 
 

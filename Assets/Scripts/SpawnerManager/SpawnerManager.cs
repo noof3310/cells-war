@@ -25,8 +25,7 @@ public class SpawnerManager : MonoBehaviour
         shouldSpawnEnemy = false;
         shouldSpawnWhiteBloodCell = false;
         shouldSpawnBoss = false;
-        timer = initialTimer;
-        amount = totalAmount;
+        ResetAll();
     }
 
     // Update is called once per frame
@@ -111,6 +110,12 @@ public class SpawnerManager : MonoBehaviour
         }
 
 
+    }
+
+    public void ResetAll()
+    {
+        amount = totalAmount;
+        timer = initialTimer;
     }
 
     void SpawnResourceAtRandom()

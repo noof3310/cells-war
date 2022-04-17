@@ -111,11 +111,10 @@ MonoBehaviour:
     m_Bits: 64
   rayCastLength: 15
   attackDistance: 10
-  damage: 0
+  damage: 300
   moveSpeed: 10
   timer: 10
   ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
-  coreTarget: {fileID: 0}
 --- !u!1 &7833236785258919434
 GameObject:
   m_ObjectHideFlags: 0

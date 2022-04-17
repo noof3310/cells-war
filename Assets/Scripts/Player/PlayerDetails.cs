@@ -16,4 +16,9 @@ public class PlayerDetails : MonoBehaviour
     {
 
     }
+
+    public static void ResetAll()
+    {
+        whiteBloodCellNumber = 0;
+    }
 }
