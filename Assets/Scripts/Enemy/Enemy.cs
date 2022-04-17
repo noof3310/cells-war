@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHealth = 1000;
-    public int damage;
+    public int baseMaxHealth = 100;
+    public int baseDamage;
+    public float baseTimer;
     public float moveSpeed;
-    public float timer;
+    private int maxHealth;
+    private int damage;
+    private float timer;
 
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
@@ -22,20 +25,47 @@ public class Enemy : MonoBehaviour
     {
         gameObject.name = gameObjectName;
         died = false;
-        SetCurrentHealth(maxHealth);
+        damage = baseDamage;
+        maxHealth = baseMaxHealth;
+        timer = baseTimer;
+        SetCurrentHealth(baseMaxHealth);
+        RandomBuff();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        // if (Enemy_behavior.attackMode)
-        // {
-        //     Debug.Log("Attack !!");
-        // }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.M) && GetCurrentHealth() > 0)
         {
-            SetCurrentHealth(0);
+            SetCurrentHealth(GetCurrentHealth() - 10);
+        }
+    }
+
+    void RandomBuff()
+    {
+        float randomInt = Random.Range(0f, 1f);
+        if (randomInt <= chanceForBuff)
+        {
+            for (int i = 0; i < maximumBuffNumber; i++)
+            {
+
+                EnemyBuff buff = (EnemyBuff)Random.Range(0, System.Enum.GetValues(typeof(EnemyBuff)).Length);
+                Debug.Log("Buff: " + buff);
+                switch (buff)
+                {
+                    case EnemyBuff.Attack:
+                        damage += baseDamage;
+                        break;
+                    case EnemyBuff.Hp:
+                        maxHealth += baseMaxHealth / 2;
+                        SetCurrentHealth(maxHealth);
+                        break;
+                    case EnemyBuff.Speed:
+                        timer += baseTimer / 3;
+                        break;
+                }
+            }
         }
     }
 
@@ -65,6 +95,24 @@ public class Enemy : MonoBehaviour
     public bool GetDied()
     {
         return died;
+    }
+    public void SetDamage(int value)
+    {
+        damage = value;
+    }
+
+    public int GetDamage()
+    {
+        return damage;
+    }
+    public void SetTimer(float value)
+    {
+        timer = value;
+    }
+
+    public float GetTimer()
+    {
+        return timer;
     }
 
     public int GetMaxHealth()

@@ -29,7 +29,7 @@ public class EnemyBehavior : MonoBehaviour
         coreTarget = GameObject.FindWithTag("Objective");
         currentTarget = GameObject.FindWithTag("Objective");
         target = GameObject.FindWithTag("Objective");
-        intTimer = enemy.timer;
+        intTimer = enemy.GetTimer();
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
 
@@ -93,7 +93,7 @@ public class EnemyBehavior : MonoBehaviour
         Debug.Log(target);
         if (target.tag == "Objective")
         {
-            target.GetComponent<Objective>().TakenDamage(enemy.damage);
+            target.GetComponent<Objective>().TakenDamage(enemy.GetDamage());
         }
     }
 
@@ -152,7 +152,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void Attack()
     {
-        enemy.timer = intTimer;
+        enemy.SetTimer(intTimer);
         attackMode = true;
         anim.SetBool("canWalk", false);
         anim.SetBool("attack", true);
@@ -166,11 +166,11 @@ public class EnemyBehavior : MonoBehaviour
 
     void CoolDown()
     {
-        enemy.timer -= Time.deltaTime;
-        if (enemy.timer <= 0 && cooling && attackMode)
+        enemy.SetTimer(enemy.GetTimer() - Time.deltaTime);
+        if (enemy.GetTimer() <= 0 && cooling && attackMode)
         {
             cooling = false;
-            enemy.timer = intTimer;
+            enemy.SetTimer(intTimer);
             attackMode = false;
 
         }

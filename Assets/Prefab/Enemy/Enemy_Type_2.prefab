@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7833236785166438828}
   - component: {fileID: 7833236785166438829}
   - component: {fileID: 9208918897329611370}
+  - component: {fileID: 1308496787}
   m_Layer: 0
   m_Name: Enemy_Type_2
   m_TagString: Enemy
@@ -91,12 +92,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe2055cca0a25148852fb8600e12b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
-  damage: 10
+  baseMaxHealth: 100
+  baseDamage: 10
+  baseTimer: 3
   moveSpeed: 5
-  timer: 4
   gameObjectName: Enemy_Type_2
-  chanceForBuff: 0.3
+  chanceForBuff: 0.7
   maximumBuffNumber: 3
 --- !u!114 &9208918897329611370
 MonoBehaviour:
@@ -117,6 +118,19 @@ MonoBehaviour:
   rayCastLength: 15
   attackDistance: 10
   ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
+--- !u!114 &1308496787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7833236785166438830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e1c8ddcd5130846b951bab62d30585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarLength: 100
 --- !u!1 &7833236785258919434
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class EnemyRangebehavior : MonoBehaviour
         coreTarget = GameObject.FindWithTag("Objective");
         currentTarget = GameObject.FindWithTag("Objective");
         target = currentTarget;
-        intTimer = enemy.timer;
+        intTimer = enemy.GetTimer();
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
 
@@ -145,7 +145,7 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void Attack()
     {
-        enemy.timer = intTimer;
+        enemy.SetTimer(intTimer);
         attackMode = true;
         anim.SetBool("canWalk", false);
         Shoot();
@@ -161,11 +161,12 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void CoolDown()
     {
-        enemy.timer -= Time.deltaTime;
-        if (enemy.timer <= 0 && cooling && attackMode)
+        enemy.SetTimer(enemy.GetTimer() - Time.deltaTime);
+
+        if (enemy.GetTimer() <= 0 && cooling && attackMode)
         {
             cooling = false;
-            enemy.timer = intTimer;
+            enemy.SetTimer(intTimer);
             attackMode = false;
 
         }
@@ -176,7 +177,7 @@ public class EnemyRangebehavior : MonoBehaviour
         // Vector3 randomPos = Random.insideUnitCircle * Radius;
         var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
         obj.GetComponent<BulletBehavior>().SetTarget(target);
-        obj.GetComponent<BulletBehavior>().SetDamage(enemy.damage);
+        obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
     }
 
     void Died()
