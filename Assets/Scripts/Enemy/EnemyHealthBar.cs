@@ -19,6 +19,11 @@ public class EnemyHealthBar : MonoBehaviour
         maxHealth = enemy.GetMaxHealth();
         healthBarLength = Screen.width / 6;
     }
+    void Update()
+    {
+        curHealth = enemy.GetCurrentHealth();
+
+    }
 
     // Update is called once per frame
     void OnGUI()

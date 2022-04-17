@@ -8,9 +8,6 @@ public class EnemyRangebehavior : MonoBehaviour
     public LayerMask raycastMask;
     public float rayCastLength;
     public float attackDistance;
-    public int damage = 50;
-    public float moveSpeed;
-    public float timer;
     // public Transform player;
     public GameObject ItemPrefab;
     private GameObject coreTarget;
@@ -24,7 +21,6 @@ public class EnemyRangebehavior : MonoBehaviour
     private float distance;
     private bool inRange;
     private bool cooling;
-    private bool died;
     private float intTimer;
     private GameObject currentTarget;
     private Enemy enemy;
@@ -36,8 +32,7 @@ public class EnemyRangebehavior : MonoBehaviour
         coreTarget = GameObject.FindWithTag("Objective");
         currentTarget = GameObject.FindWithTag("Objective");
         target = currentTarget;
-        died = false;
-        intTimer = timer;
+        intTimer = enemy.GetTimer();
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
 
@@ -46,12 +41,12 @@ public class EnemyRangebehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemy.GetCurrentHealth() <= 0 && !died)
+        if (enemy.GetCurrentHealth() <= 0 && !enemy.GetDied())
         {
-            died = true;
+            enemy.SetDied(true);
         }
 
-        if (died)
+        if (enemy.GetDied())
         {
             Died();
         }
@@ -134,7 +129,7 @@ public class EnemyRangebehavior : MonoBehaviour
         // rb.rotation = angle;
         direction.Normalize();
         movement = direction;
-        rb.MovePosition((Vector2)transform.position + (Vector2)(direction * moveSpeed * Time.deltaTime));
+        rb.MovePosition((Vector2)transform.position + (Vector2)(direction * enemy.moveSpeed * Time.deltaTime));
         // if (angle > 0 && angle < 90 || angle < 0 && angle > -90)
         // {
         //     rb.rotation = 180;
@@ -150,7 +145,7 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void Attack()
     {
-        timer = intTimer;
+        enemy.SetTimer(intTimer);
         attackMode = true;
         anim.SetBool("canWalk", false);
         Shoot();
@@ -166,11 +161,12 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void CoolDown()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0 && cooling && attackMode)
+        enemy.SetTimer(enemy.GetTimer() - Time.deltaTime);
+
+        if (enemy.GetTimer() <= 0 && cooling && attackMode)
         {
             cooling = false;
-            timer = intTimer;
+            enemy.SetTimer(intTimer);
             attackMode = false;
 
         }
@@ -181,7 +177,7 @@ public class EnemyRangebehavior : MonoBehaviour
         // Vector3 randomPos = Random.insideUnitCircle * Radius;
         var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
         obj.GetComponent<BulletBehavior>().SetTarget(target);
-        obj.GetComponent<BulletBehavior>().SetDamage(damage);
+        obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
     }
 
     void Died()
@@ -195,7 +191,7 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void TriggerDied()
     {
-        if (died)
+        if (enemy.GetDied())
         {
             RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
             Destroy(this.gameObject);

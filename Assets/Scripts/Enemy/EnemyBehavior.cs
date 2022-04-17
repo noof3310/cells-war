@@ -8,9 +8,6 @@ public class EnemyBehavior : MonoBehaviour
     public LayerMask raycastMask;
     public float rayCastLength;
     public float attackDistance;
-    public int damage;
-    public float moveSpeed;
-    public float timer;
     // public Transform player;
     private GameObject coreTarget;
     private bool attackMode;
@@ -22,7 +19,6 @@ public class EnemyBehavior : MonoBehaviour
     private float distance;
     private bool inRange;
     private bool cooling;
-    private bool died;
     private float intTimer;
     private GameObject currentTarget;
     private Enemy enemy;
@@ -33,8 +29,7 @@ public class EnemyBehavior : MonoBehaviour
         coreTarget = GameObject.FindWithTag("Objective");
         currentTarget = GameObject.FindWithTag("Objective");
         target = GameObject.FindWithTag("Objective");
-        died = false;
-        intTimer = timer;
+        intTimer = enemy.GetTimer();
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
 
@@ -44,12 +39,12 @@ public class EnemyBehavior : MonoBehaviour
     void Update()
     {
 
-        if (enemy.GetCurrentHealth() <= 0 && !died)
+        if (enemy.GetCurrentHealth() <= 0 && !enemy.GetDied())
         {
-            died = true;
+            enemy.SetDied(true);
         }
 
-        if (died)
+        if (enemy.GetDied())
         {
             Died();
         }
@@ -98,7 +93,7 @@ public class EnemyBehavior : MonoBehaviour
         Debug.Log(target);
         if (target.tag == "Objective")
         {
-            target.GetComponent<Objective>().TakenDamage(damage);
+            target.GetComponent<Objective>().TakenDamage(enemy.GetDamage());
         }
     }
 
@@ -141,7 +136,7 @@ public class EnemyBehavior : MonoBehaviour
         // rb.rotation = angle;
         direction.Normalize();
         movement = direction;
-        rb.MovePosition((Vector2)transform.position + (Vector2)(direction * moveSpeed * Time.deltaTime));
+        rb.MovePosition((Vector2)transform.position + (Vector2)(direction * enemy.moveSpeed * Time.deltaTime));
         // if (angle > 0 && angle < 90 || angle < 0 && angle > -90)
         // {
         //     rb.rotation = 180;
@@ -157,7 +152,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void Attack()
     {
-        timer = intTimer;
+        enemy.SetTimer(intTimer);
         attackMode = true;
         anim.SetBool("canWalk", false);
         anim.SetBool("attack", true);
@@ -171,11 +166,11 @@ public class EnemyBehavior : MonoBehaviour
 
     void CoolDown()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0 && cooling && attackMode)
+        enemy.SetTimer(enemy.GetTimer() - Time.deltaTime);
+        if (enemy.GetTimer() <= 0 && cooling && attackMode)
         {
             cooling = false;
-            timer = intTimer;
+            enemy.SetTimer(intTimer);
             attackMode = false;
 
         }
@@ -190,7 +185,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void TriggerDied()
     {
-        if (died)
+        if (enemy.GetDied())
         {
             RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
             Destroy(this.gameObject);
