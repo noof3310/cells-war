@@ -30,7 +30,7 @@ public class EnemyBehavior : MonoBehaviour
         coreTarget = GameObject.FindWithTag("Objective");
         currentTarget = GameObject.FindWithTag("Objective");
         target = GameObject.FindWithTag("Objective");
-        intTimer = enemy.GetTimer();
+        intTimer = enemy.baseTimer;
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
 
@@ -74,7 +74,7 @@ public class EnemyBehavior : MonoBehaviour
             EnemyLogic();
             if (inRange == false)
             {
-                anim.SetBool("canWalk", false);
+                // anim.SetBool("canWalk", false);
                 StopAttack();
             }
         }
@@ -91,7 +91,6 @@ public class EnemyBehavior : MonoBehaviour
 
     public void TakeDamage()
     {
-        Debug.Log(target);
         if (target.tag == "Objective")
         {
             target.GetComponent<Objective>().TakenDamage(enemy.GetDamage());
