@@ -7,7 +7,6 @@ public class EnemyBuffUIManager : MonoBehaviour
 {
     public List<Image> prefabUI;
     public List<Image> uiUse = new List<Image>();
-    private Vector3 offset = new Vector3(0, 1.5f, 0);
     private bool isDraw = false;
     // Start is called before the first frame update
     void Start()
@@ -40,9 +39,6 @@ public class EnemyBuffUIManager : MonoBehaviour
             isDraw = true;
             for (int i = 0; i < gameObject.GetComponent<Enemy>().enemyBuffs.Count; i++)
             {
-                Debug.Log(gameObject.GetComponent<Enemy>().enemyBuffs[i]);
-                Debug.Log(prefabUI[0]);
-                Debug.Log(FindObjectOfType<Canvas>().transform);
                 switch (gameObject.GetComponent<Enemy>().enemyBuffs[i])
                 {
                     case EnemyBuff.Attack:
@@ -62,7 +58,7 @@ public class EnemyBuffUIManager : MonoBehaviour
         for (int i = 0; i < uiUse.Count; i++)
         {
             Vector3 offsetX = new Vector3(0.5f * i, 0, 0);
-            uiUse[i].transform.position = Camera.main.WorldToScreenPoint(transform.position + offset + offsetX);
+            uiUse[i].transform.position = Camera.main.WorldToScreenPoint(transform.Find("Head").gameObject.transform.position + offsetX);
 
         }
 

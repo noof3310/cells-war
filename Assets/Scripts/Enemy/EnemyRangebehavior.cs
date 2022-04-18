@@ -32,7 +32,7 @@ public class EnemyRangebehavior : MonoBehaviour
         coreTarget = GameObject.FindWithTag("Objective");
         currentTarget = GameObject.FindWithTag("Objective");
         target = currentTarget;
-        intTimer = enemy.GetTimer();
+        intTimer = enemy.baseTimer;
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
 
@@ -109,6 +109,7 @@ public class EnemyRangebehavior : MonoBehaviour
         }
         else if (distance <= attackDistance && !cooling)
         {
+            Debug.Log("Attack!!");
             Attack();
         }
 
