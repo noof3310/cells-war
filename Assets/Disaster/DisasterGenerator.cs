@@ -5,7 +5,10 @@ using UnityEngine;
 public class DisasterGenerator : MonoBehaviour
 {
     public GameObject rainPreFab;
-    public GameObject thunderPreFab;
+    public GameObject firePreFab;
+    public int fireAmount = 50;
+    public int Radius = 50;
+    public List<GameObject> fireList = new List<GameObject>();
     public GameObject typhoonPreFab;
     public Vector3 position = new Vector3(-1.5f, 39f, -2f);
     public float chanceForDisaster = 0.3f;
@@ -21,7 +24,7 @@ public class DisasterGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.State == GameState.RushState && selectedDisasterObject == null && !generateSuccess)
+        if (GameManager.State == GameState.RushState && !generateSuccess)
         {
             generateSuccess = true;
             Disaster disaster = (Disaster)Random.Range(0, System.Enum.GetValues(typeof(Disaster)).Length);
@@ -32,10 +35,21 @@ public class DisasterGenerator : MonoBehaviour
                 DisasterGenerate(disaster);
             }
         }
-        else if (GameManager.State != GameState.RushState && selectedDisasterObject != null && generateSuccess)
+        else if (GameManager.State != GameState.RushState && GameManager.State != GameState.RestState && generateSuccess)
         {
             generateSuccess = false;
-            Destroy(GameObject.Find("Disaster"));
+            if (selectedDisaster == Disaster.Rain)
+            {
+                Destroy(GameObject.Find("Disaster"));
+            }
+            else if (selectedDisaster == Disaster.Fire)
+            {
+                foreach (GameObject obj in fireList)
+                {
+                    Destroy(obj);
+                }
+                fireList.Clear();
+            }
         }
         else if (GameManager.State != GameState.RushState)
         {
@@ -54,14 +68,18 @@ public class DisasterGenerator : MonoBehaviour
                 selectedDisasterObject = Instantiate(rainPreFab, position, Quaternion.identity);
                 selectedDisasterObject.name = "Disaster";
                 break;
-            case Disaster.Thunder:
-                selectedDisasterObject = Instantiate(thunderPreFab, position, Quaternion.identity);
-                selectedDisasterObject.name = "Disaster";
+            case Disaster.Fire:
+
+                for (int i = 0; i < fireAmount; i++)
+                {
+                    Vector3 randomPos = Random.insideUnitCircle * Radius;
+                    fireList.Add(Instantiate(firePreFab, randomPos, Quaternion.Euler(new Vector3(-90, 0, 0))));
+                }
                 break;
-            case Disaster.Typhoon:
-                selectedDisasterObject = Instantiate(typhoonPreFab, position, Quaternion.identity);
-                selectedDisasterObject.name = "Disaster";
-                break;
+                // case Disaster.Typhoon:
+                //     selectedDisasterObject = Instantiate(typhoonPreFab, position, Quaternion.identity);
+                //     selectedDisasterObject.name = "Disaster";
+                //     break;
         }
 
     }
@@ -71,6 +89,6 @@ public enum Disaster
 {
     Unknown,
     Rain,
-    Thunder,
+    Fire,
     Typhoon
 }

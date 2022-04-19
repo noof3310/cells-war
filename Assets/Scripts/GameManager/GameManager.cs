@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static int level = 1;
     public static bool canChangeState = true;
     public static float restTime = 5f;
-    public static float rushTime = 10f;
+    public static float rushTime = 5f;
     public static int levelBossSpawn = 2;
     // Start is called before the first frame update
 
