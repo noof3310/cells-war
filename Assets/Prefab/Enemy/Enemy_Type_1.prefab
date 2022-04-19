@@ -128,7 +128,6 @@ GameObject:
   - component: {fileID: 5165835850817550737}
   - component: {fileID: 5165835850817550736}
   - component: {fileID: 2184908921799132110}
-  - component: {fileID: 1705618254770655797}
   m_Layer: 0
   m_Name: Enemy_Type_1
   m_TagString: Enemy
@@ -233,6 +232,9 @@ MonoBehaviour:
     m_Bits: 64
   rayCastLength: 6
   attackDistance: 4
+  speed: 200
+  nextWaypointDistance: 3
+  keepDistance: 5
 --- !u!114 &5165835850817550737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,23 +293,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &1705618254770655797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5165835850817550751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 254607872f9f6be4f8ff0a93edcbd6a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 5165835850817550742}
-  target: {fileID: 0}
-  speed: 200
-  nextWaypointDistance: 1
-  keepDistance: 5
 --- !u!1 &5165835850863050419
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class EnemyRangebehavior : MonoBehaviour
 {
@@ -25,6 +26,17 @@ public class EnemyRangebehavior : MonoBehaviour
     private GameObject currentTarget;
     private Enemy enemy;
 
+    public float speed = 200f;
+    public float nextWaypointDistance = 3f;
+
+    public float keepDistance = 10f;
+
+    Path path;
+    int currentWaypoint = 0;
+    bool reachedEndOfPath = false;
+
+    Seeker seeker;
+
 
     void Start()
     {
@@ -36,10 +48,31 @@ public class EnemyRangebehavior : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
 
+        target = GameObject.FindWithTag("Player"); // change to objective
+
+        seeker = GetComponent<Seeker>();
+
+        InvokeRepeating("UpdatePath", 3f, 2f);
+    }
+
+    void UpdatePath()
+    {
+        if (seeker.IsDone())
+        {
+            seeker.StartPath(rb.position, target.transform.position, OnPathComplete);
+        }
+    }
+    void OnPathComplete(Path p)
+    {
+        if (!p.error)
+        {
+            path = p;
+            currentWaypoint = 0;
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (enemy.GetCurrentHealth() <= 0 && !enemy.GetDied())
         {
@@ -59,17 +92,17 @@ public class EnemyRangebehavior : MonoBehaviour
             if (inRange)
             {
                 float angle = getAngle();
-                string direction = "right";
+                string facing = "right";
                 if (angle > 0 && angle < 90 || angle < 0 && angle > -90)
                 {
                     hit = Physics2D.Raycast(rayCast.position, Vector2.right, rayCastLength, raycastMask);
-                    RaycastDebugger(direction);
+                    RaycastDebugger(facing);
                 }
                 else
                 {
-                    direction = "left";
+                    facing = "left";
                     hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, raycastMask);
-                    RaycastDebugger(direction);
+                    RaycastDebugger(facing);
                 }
             }
 
@@ -79,6 +112,50 @@ public class EnemyRangebehavior : MonoBehaviour
                 anim.SetBool("canWalk", false);
                 StopAttack();
             }
+        }
+
+        //Pathfinding Move
+
+        if (path == null)
+        {
+            return;
+        }
+
+        Debug.Log(path.vectorPath.Count);
+
+        if (currentWaypoint >= path.vectorPath.Count)
+        {
+            reachedEndOfPath = true;
+            return;
+        } else
+        {
+            reachedEndOfPath = false;
+        }
+
+        if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
+        {
+            Debug.Log("stop");
+            return;
+        }
+
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+        Vector2 force = direction * speed * Time.deltaTime;
+
+        rb.AddForce(force);
+
+        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+
+        if (distance < nextWaypointDistance)
+        {
+            currentWaypoint++;
+        }
+
+        if (rb.velocity.x >= 0.01f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        } else if (rb.velocity.x <= -0.01f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
 
 
@@ -104,7 +181,7 @@ public class EnemyRangebehavior : MonoBehaviour
         distance = Vector2.Distance(transform.position, target.transform.position);
         if (distance > attackDistance && !cooling)
         {
-            Move();
+            //Move();
             StopAttack();
         }
         else if (distance <= attackDistance && !cooling)

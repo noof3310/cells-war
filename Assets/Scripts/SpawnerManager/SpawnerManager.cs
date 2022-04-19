@@ -22,7 +22,7 @@ public class SpawnerManager : MonoBehaviour
     private bool shouldSpawnBoss;
     void Start()
     {
-        shouldSpawnEnemy = false;
+        //shouldSpawnEnemy = false;
         shouldSpawnWhiteBloodCell = false;
         shouldSpawnBoss = false;
         ResetAll();
@@ -136,7 +136,13 @@ public class SpawnerManager : MonoBehaviour
         {
             int index = Random.Range(0, objectsToSpawn.Count);
 
-            Vector3 randomPos = (Vector2)transform.position;
+            Vector3 randomPos = new Vector2(Random.Range(30.0f, 40.0f), Random.Range(20.0f, 30.0f));
+            if (Random.Range(0, 2) == 1) {
+                randomPos.x = -randomPos.x;
+            }
+            if (Random.Range(0, 2) == 1) {
+                randomPos.y = -randomPos.y;
+            }
 
             enemyList.Add(Instantiate(objectsToSpawn[index], randomPos, Quaternion.identity));
         }
