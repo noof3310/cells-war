@@ -18,12 +18,9 @@ public class BossAlert : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GameManager.level);
-        Debug.Log(levelBossSpawn);
 
         if (textObject == null && (GameManager.level + 1) % levelBossSpawn == 0)
         {
-            Debug.Log("Spawn");
             textObject = (GameObject)Instantiate(bossAlert, FindObjectOfType<Canvas>().transform);
         }
         else if (textObject != null && (GameManager.level + 1) % levelBossSpawn != 0)

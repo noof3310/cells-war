@@ -51,7 +51,7 @@ public class DisasterGenerator : MonoBehaviour
                 fireList.Clear();
             }
         }
-        else if (GameManager.State != GameState.RushState)
+        else if (GameManager.State != GameState.RushState && GameManager.State != GameState.RestState)
         {
             generateSuccess = false;
 
@@ -62,7 +62,7 @@ public class DisasterGenerator : MonoBehaviour
     {
         selectedDisaster = disaster;
         Debug.Log("Disaster: " + disaster);
-        switch (disaster)
+        switch (Disaster.Fire)
         {
             case Disaster.Rain:
                 selectedDisasterObject = Instantiate(rainPreFab, position, Quaternion.identity);
