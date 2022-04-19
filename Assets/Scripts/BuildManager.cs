@@ -107,8 +107,9 @@ public class BuildManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            Collider2D collider = Physics2D.OverlapCircle(player.getPosition(), 0.1f);
+            Collider2D collider = Physics2D.OverlapCircle(player.getPosition(), 0.5f);
             var go = collider.gameObject;
+            Debug.Log(go);
             if (go.tag == "Tower") Destroy(go);
             updatePath(bounds);
         }
