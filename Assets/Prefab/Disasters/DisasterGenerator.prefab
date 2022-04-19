@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3187145845934419518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3187145845934419512}
+  - component: {fileID: 3187145845934419519}
+  m_Layer: 0
+  m_Name: DisasterGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3187145845934419512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3187145845934419518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.9180207, y: 0.4886367, z: 0.5743268}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3187145845934419519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3187145845934419518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd059cb0f408bab47b67f9ad16ca4236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rainPreFab: {fileID: 7156573683158253947, guid: 84d89ec811679a7459654085550a3d67, type: 3}
+  thunderPreFab: {fileID: 7156573683158253947, guid: 84d89ec811679a7459654085550a3d67, type: 3}
+  typhoonPreFab: {fileID: 7156573683158253947, guid: 84d89ec811679a7459654085550a3d67, type: 3}
+  position: {x: -1.5, y: 39, z: -2}
+  chanceForDisaster: 0.3

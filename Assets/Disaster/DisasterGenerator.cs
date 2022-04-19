@@ -16,7 +16,6 @@ public class DisasterGenerator : MonoBehaviour
     void Start()
     {
         generateSuccess = false;
-        Debug.Log(selectedDisaster);
     }
 
     // Update is called once per frame
