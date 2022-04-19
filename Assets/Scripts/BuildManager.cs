@@ -9,9 +9,7 @@ public class BuildManager : MonoBehaviour
 {
     public AstarPath astarPath;
 
-    public Tilemap tilemap;
-    public Tilemap targetTilemap;
-    public Tile[] towers;
+    public List<GameObject> towers;
     public Tile[] towerIcons;
     public List<GameObject> UITowers;
 
@@ -20,9 +18,6 @@ public class BuildManager : MonoBehaviour
     public Transform tileGridUI;
 
     public PlayerMovement player;
-
-    public Tile target;
-    Vector3 targetPos;
 
     public bool isSelected = false;
 
@@ -78,17 +73,9 @@ public class BuildManager : MonoBehaviour
     // Update is called once per frame
     async void Update()
     {
-        targetTilemap.SetTile(targetTilemap.WorldToCell(targetPos), null);
-
         Vector3 towerPos = GetTowerPos();
-        Vector3Int centerTowerPosInt = Vector3Int.FloorToInt(towerPos);
-        Vector3 centerTowerPos = tilemap.GetCellCenterLocal(centerTowerPosInt);
-        Bounds bounds = new Bounds(centerTowerPos, new Vector3(3f, 3f, 3f));
-
-        if (isSelected || inHand){
-            targetTilemap.SetTile(targetTilemap.WorldToCell(towerPos), target);
-        }
-        targetPos = towerPos;
+        Vector3Int centerTowerPos = Vector3Int.FloorToInt(towerPos);
+        Bounds bounds = new Bounds(centerTowerPos, new Vector3(5f, 5f, 5f));
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -110,22 +97,25 @@ public class BuildManager : MonoBehaviour
         {
             RenderUITowers(4);
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && isTileAvailable(towerPos))
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isSelected)
             {
-                tilemap.SetTile(tilemap.WorldToCell(towerPos), towers[selectedTower]);
+                Instantiate(towers[selectedTower], centerTowerPos, Quaternion.identity);
                 updatePath(bounds);
             }
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            tilemap.SetTile(tilemap.WorldToCell(towerPos), null);
+            Collider2D collider = Physics2D.OverlapCircle(player.getPosition(), 0.5f);
+            var go = collider.gameObject;
+            Debug.Log(go);
+            if (go.tag == "Tower") Destroy(go);
             updatePath(bounds);
         }
-        else if (Input.GetKeyDown(KeyCode.Z))
+        /*else if (Input.GetKeyDown(KeyCode.Z))
         {
-            if(!isTileAvailable(towerPos) && isSelected) {
+            if(isSelected) {
                 for (int i = 0; i < 5; i++) {
                     if (tilemap.GetTile(centerTowerPosInt) == towers[i])
                     {
@@ -136,16 +126,17 @@ public class BuildManager : MonoBehaviour
                 isSelected = false;
                 RenderUITowers(0);
                 RenderUIHand();
-                tilemap.SetTile(tilemap.WorldToCell(towerPos), null);
+                // tilemap.SetTile(tilemap.WorldToCell(towerPos), null);
                 updatePath(bounds);
             }
             else if(inHand) {
                 inHand = false;
                 RenderUIHand();
-                tilemap.SetTile(tilemap.WorldToCell(towerPos), towers[handItem]);
+                // tilemap.SetTile(tilemap.WorldToCell(towerPos), towers[handItem]);
+                Instantiate(towers[selectedTower], centerTowerPos, Quaternion.identity);
                 updatePath(bounds);
             }
-        }
+        }*/
 
     }
 
@@ -222,13 +213,6 @@ public class BuildManager : MonoBehaviour
 
         return towerPos;
     }
-
-    bool isTileAvailable(Vector3 towerPos)
-    {
-        if (tilemap.GetTile(Vector3Int.FloorToInt(towerPos)) == null) return true;
-        return false;
-    }
-
     void updatePath(Bounds bounds)
     {
         var guo = new GraphUpdateObject(bounds);

@@ -120,7 +120,7 @@ public class EnemyBehavior : MonoBehaviour
             return;
         }
 
-        Debug.Log(path.vectorPath.Count);
+        // Debug.Log(path.vectorPath.Count);
 
         if (currentWaypoint >= path.vectorPath.Count)
         {
