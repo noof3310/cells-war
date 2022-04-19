@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
+using Pathfinding;
 
 public class BuildManager : MonoBehaviour
 {
+    public AstarPath astarPath;
+
     public Tilemap tilemap;
     public Tilemap targetTilemap;
     public Tile[] towers;
@@ -76,8 +79,13 @@ public class BuildManager : MonoBehaviour
     async void Update()
     {
         targetTilemap.SetTile(targetTilemap.WorldToCell(targetPos), null);
+
         Vector3 towerPos = GetTowerPos();
-        if(isSelected || inHand){
+        Vector3Int centerTowerPosInt = Vector3Int.FloorToInt(towerPos);
+        Vector3 centerTowerPos = tilemap.GetCellCenterLocal(centerTowerPosInt);
+        Bounds bounds = new Bounds(centerTowerPos, new Vector3(3f, 3f, 3f));
+
+        if (isSelected || inHand){
             targetTilemap.SetTile(targetTilemap.WorldToCell(towerPos), target);
         }
         targetPos = towerPos;
@@ -105,17 +113,21 @@ public class BuildManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) && isTileAvailable(towerPos))
         {
             if (isSelected)
+            {
                 tilemap.SetTile(tilemap.WorldToCell(towerPos), towers[selectedTower]);
+                updatePath(bounds);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
             tilemap.SetTile(tilemap.WorldToCell(towerPos), null);
+            updatePath(bounds);
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
             if(!isTileAvailable(towerPos) && isSelected) {
                 for (int i = 0; i < 5; i++) {
-                    if (tilemap.GetTile(Vector3Int.FloorToInt(towerPos)) == towers[i])
+                    if (tilemap.GetTile(centerTowerPosInt) == towers[i])
                     {
                         handItem = i;
                     }
@@ -125,11 +137,13 @@ public class BuildManager : MonoBehaviour
                 RenderUITowers(0);
                 RenderUIHand();
                 tilemap.SetTile(tilemap.WorldToCell(towerPos), null);
+                updatePath(bounds);
             }
             else if(inHand) {
                 inHand = false;
                 RenderUIHand();
                 tilemap.SetTile(tilemap.WorldToCell(towerPos), towers[handItem]);
+                updatePath(bounds);
             }
         }
 
@@ -213,5 +227,12 @@ public class BuildManager : MonoBehaviour
     {
         if (tilemap.GetTile(Vector3Int.FloorToInt(towerPos)) == null) return true;
         return false;
+    }
+
+    void updatePath(Bounds bounds)
+    {
+        var guo = new GraphUpdateObject(bounds);
+        guo.updatePhysics = true;
+        astarPath.UpdateGraphs(guo);
     }
 }
