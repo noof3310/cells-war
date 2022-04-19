@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float baseMoveSpeed = 20f;
+    [SerializeField] float thresholdDebuffMoveSpeedFromRain = 0.2f;
     [SerializeField] private float moveSpeed;
-    [SerializeField] float weightForRushState = 3;
+    [SerializeField] float thresholdForRushState = 3;
 
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Rigidbody2D rb;
@@ -27,9 +28,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.State == GameState.RushState)
+        if (GameManager.State == GameState.RushState && DisasterGenerator.selectedDisaster != Disaster.Rain)
         {
-            SetMoveSpeed(baseMoveSpeed * weightForRushState);
+            SetMoveSpeed(baseMoveSpeed * thresholdForRushState);
+        }
+        else if (GameManager.State == GameState.RushState && DisasterGenerator.selectedDisaster == Disaster.Rain)
+        {
+            Debug.Log("Call debuff rain decrease speed: " + thresholdDebuffMoveSpeedFromRain * 100 + "%");
+            SetMoveSpeed(baseMoveSpeed * thresholdForRushState * (1 - thresholdDebuffMoveSpeedFromRain));
         }
         else
         {
