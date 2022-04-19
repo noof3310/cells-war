@@ -5509,7 +5509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1059dc4bf94cb4143817da37435ee3a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossAlert: {fileID: 7285681094901586005, guid: 63e848335c99f9e42afbb31a47036d03, type: 3}
+  bossAlert: {fileID: 2203328095430895437, guid: 63e848335c99f9e42afbb31a47036d03, type: 3}
 --- !u!4 &1379345949
 Transform:
   m_ObjectHideFlags: 0
