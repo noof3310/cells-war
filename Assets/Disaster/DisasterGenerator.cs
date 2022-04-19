@@ -8,6 +8,7 @@ public class DisasterGenerator : MonoBehaviour
     public GameObject thunderPreFab;
     public GameObject typhoonPreFab;
     public Vector3 position = new Vector3(-1.5f, 39f, -2f);
+    public float chanceForDisaster = 0.3f;
     public static Disaster selectedDisaster;
     public static GameObject selectedDisasterObject;
     private bool generateSuccess;
@@ -15,6 +16,7 @@ public class DisasterGenerator : MonoBehaviour
     void Start()
     {
         generateSuccess = false;
+        Debug.Log(selectedDisaster);
     }
 
     // Update is called once per frame
@@ -24,12 +26,22 @@ public class DisasterGenerator : MonoBehaviour
         {
             generateSuccess = true;
             Disaster disaster = (Disaster)Random.Range(0, System.Enum.GetValues(typeof(Disaster)).Length);
-            DisasterGenerate(disaster);
+            float rand = Random.Range(0f, 1f);
+            Debug.Log("Disaster random: " + rand);
+            if (chanceForDisaster > rand)
+            {
+                DisasterGenerate(disaster);
+            }
         }
         else if (GameManager.State != GameState.RushState && selectedDisasterObject != null && generateSuccess)
         {
             generateSuccess = false;
             Destroy(GameObject.Find("Disaster"));
+        }
+        else if (GameManager.State != GameState.RushState)
+        {
+            generateSuccess = false;
+
         }
     }
 
@@ -58,6 +70,7 @@ public class DisasterGenerator : MonoBehaviour
 
 public enum Disaster
 {
+    Unknown,
     Rain,
     Thunder,
     Typhoon
