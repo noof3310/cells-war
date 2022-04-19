@@ -5,10 +5,6 @@ using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
-
-    public Transform enemy;
-    public Transform target;
-
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
 
@@ -18,12 +14,18 @@ public class EnemyAI : MonoBehaviour
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
 
+    Transform enemy;
+    Transform target;
+
     Seeker seeker;
     Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        enemy = GetComponent<Transform>();
+        target = GameObject.FindWithTag("Player").transform; // change to objective
+
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
