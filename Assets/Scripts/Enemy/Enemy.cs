@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
     private bool died;
     public List<EnemyBuff> enemyBuffs;
 
+    public float hpLevelUpRatio = 0.2f;
+    public float damageLevelUpRatio = 0.2f;
+    public float timerLevelUpRatio = 0.2f;
 
 
     // Start is called before the first frame update
@@ -30,6 +33,7 @@ public class Enemy : MonoBehaviour
         maxHealth = baseMaxHealth;
         timer = baseTimer;
         SetCurrentHealth(baseMaxHealth);
+        LevelPowerUp();
         RandomBuff();
     }
 
@@ -69,6 +73,14 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+    }
+
+    void LevelPowerUp()
+    {
+        currentLevel = GameManager.level;
+        SetDamage(damage + Math.Pow(1 + damageLevelUpRatio, currentLevel) * baseDamage);
+        SetCurrentHealth(Math.Pow(1 + hpLevelUpRatio, currentLevel) * baseMaxHealth);
+        SetTimer(Math.Pow(1 + timerLevelUpRatio, currentLevel) * baseTimer);
     }
 
     // For testing taken damage. It can be hidden.
