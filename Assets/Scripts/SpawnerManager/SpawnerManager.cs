@@ -31,7 +31,6 @@ public class SpawnerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Game level: " + GameManager.level);
 
         if (shouldSpawnBoss && GameManager.State == GameState.FightState)
         {

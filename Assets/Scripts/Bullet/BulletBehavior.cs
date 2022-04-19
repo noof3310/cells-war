@@ -25,10 +25,15 @@ public class BulletBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!destroy)
+        if (target == null && !destroy)
+        {
+            Destroy(this.gameObject);
+        }
+        else if (!destroy)
         {
             Move();
         }
+
     }
 
     void Move()
@@ -62,11 +67,16 @@ public class BulletBehavior : MonoBehaviour
 
     void TriggerDestroy()
     {
-        if (destroy)
+        if (destroy && target != null)
         {
             TakeDamage();
             Destroy(this.gameObject);
 
+        }
+        else if (target == null)
+        {
+
+            Destroy(this.gameObject);
         }
     }
 
@@ -76,6 +86,10 @@ public class BulletBehavior : MonoBehaviour
         if (target.tag == "Objective")
         {
             target.GetComponent<Objective>().TakenDamage(damage);
+        }
+        else if (target.tag == "Enemy")
+        {
+            target.transform.parent.GetComponent<Enemy>().TakenDamage(damage);
         }
     }
 

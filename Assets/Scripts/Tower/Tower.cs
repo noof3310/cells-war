@@ -7,7 +7,6 @@ public class Tower : MonoBehaviour
     public int baseMaxHealth = 100;
     public int baseDamage;
     public float baseTimer;
-    public float moveSpeed;
     private int maxHealth;
     private int damage;
     private float timer;
@@ -17,7 +16,7 @@ public class Tower : MonoBehaviour
     public int maximumBuffNumber = 3;
     private int currentHealth;
     private bool died;
-    public List<EnemyBuff> enemyBuffs;
+    public List<TowerBuff> towerBuffs;
 
 
 
@@ -51,19 +50,19 @@ public class Tower : MonoBehaviour
             if (randomInt <= chanceForBuff)
             {
 
-                EnemyBuff buff = (EnemyBuff)Random.Range(0, System.Enum.GetValues(typeof(EnemyBuff)).Length);
+                TowerBuff buff = (TowerBuff)Random.Range(0, System.Enum.GetValues(typeof(TowerBuff)).Length);
                 Debug.Log("Buff: " + buff);
-                enemyBuffs.Add(buff);
+                towerBuffs.Add(buff);
                 switch (buff)
                 {
-                    case EnemyBuff.Attack:
+                    case TowerBuff.Attack:
                         damage += baseDamage;
                         break;
-                    case EnemyBuff.Hp:
+                    case TowerBuff.Hp:
                         maxHealth += baseMaxHealth / 2;
                         SetCurrentHealth(maxHealth);
                         break;
-                    case EnemyBuff.Speed:
+                    case TowerBuff.Speed:
                         timer += baseTimer / 3;
                         break;
                 }
@@ -129,7 +128,7 @@ public class Tower : MonoBehaviour
     }
 }
 
-public enum EnemyBuff
+public enum TowerBuff
 {
     Attack,
     Speed,

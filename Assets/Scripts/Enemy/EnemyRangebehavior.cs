@@ -122,7 +122,7 @@ public class EnemyRangebehavior : MonoBehaviour
             return;
         }
 
-        Debug.Log(path.vectorPath.Count);
+        // Debug.Log(path.vectorPath.Count);
 
         if (currentWaypoint >= path.vectorPath.Count)
         {
@@ -135,7 +135,7 @@ public class EnemyRangebehavior : MonoBehaviour
 
         if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
         {
-            Debug.Log("stop");
+            // Debug.Log("stop");
             return;
         }
 

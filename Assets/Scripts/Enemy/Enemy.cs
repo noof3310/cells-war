@@ -125,8 +125,10 @@ public class Enemy : MonoBehaviour
     public void TakenDamage(int value)
     {
         int resultHp = currentHealth - value;
+        Debug.Log("Enemy HP: " + resultHp);
         SetCurrentHealth(resultHp);
     }
+
 
 }
 
