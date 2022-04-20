@@ -6,7 +6,7 @@ public class Objective : MonoBehaviour
 {
     // Start is called before the first frame update
     public static HealthBar healthBar;
-    public static int maxHealth = 1000;
+    public static int maxHealth = 10000;
     private static int currentHealth;
     private static bool died;
     void Start()

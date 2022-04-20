@@ -235,7 +235,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3187145845934419512, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3187145845934419512, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -657,7 +657,7 @@ Transform:
   m_GameObject: {fileID: 398293705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1516, y: 2.1516, z: 2.1516}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -675,9 +675,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03265194, y: -0.30556872}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.9398513
+  m_Radius: 1.1066592
 --- !u!50 &398293710
 Rigidbody2D:
   serializedVersion: 4
@@ -854,9 +854,9 @@ MonoBehaviour:
   shouldSpawnEnemy: 0
   shouldSpawnWhiteBloodCell: 0
   amount: 0
-  totalAmount: 20
+  totalAmount: 100
   Radius: 20
-  initialTimer: 0.5
+  initialTimer: 0.1
 --- !u!4 &563084611
 Transform:
   m_ObjectHideFlags: 0
@@ -5151,7 +5151,7 @@ MonoBehaviour:
   - {fileID: 7743207906975284183, guid: f9257ab4f644d90449f4e1d07f254cc0, type: 3}
   - {fileID: 4995787525098049564, guid: 977090ecb2d5b4943b151586b1e90e2c, type: 3}
   bossToSpawn:
-  - {fileID: 3995756668049795069, guid: 977090ecb2d5b4943b151586b1e90e2c, type: 3}
+  - {fileID: 4995787525098049564, guid: 977090ecb2d5b4943b151586b1e90e2c, type: 3}
   resourceToSpawn: []
   isEnemySpawner: 1
   isResourceSpawner: 0
@@ -5173,7 +5173,7 @@ Transform:
   m_LocalScale: {x: 0.9607889, y: 0.9607889, z: 0.9607889}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1379345947
 GameObject:
@@ -82698,11 +82698,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astarPath: {fileID: 1929236135}
   towers:
-  - {fileID: 337068423731503729, guid: 3824b88a73ce679468edc42d885da2e0, type: 3}
+  - {fileID: 2660242977574174831, guid: 3824b88a73ce679468edc42d885da2e0, type: 3}
   - {fileID: 666191636440127340, guid: 22c900076fd425d4782eb58e3e662df4, type: 3}
   - {fileID: 8221600887576459428, guid: bc067fc7c5ace5640a9caec42951bfb5, type: 3}
   - {fileID: 4461725371697267928, guid: c93cac7ee55adf644a09a9140822e983, type: 3}
   - {fileID: 979115392174711135, guid: 13237cf04285a7f4b9096787b202f22b, type: 3}
+  towerCost: 0100000001000000010000000100000001000000
   towerIcons:
   - {fileID: 11400000, guid: d7a5669cf2f60974385a9c29af5a42a3, type: 2}
   - {fileID: 11400000, guid: 731d31bccd95e2143ae8930cde5313eb, type: 2}

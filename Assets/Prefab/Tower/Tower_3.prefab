@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4461725371697267931}
   - component: {fileID: 4461725371697267930}
   - component: {fileID: 4461725371697267933}
+  - component: {fileID: 9059522092315605066}
   m_Layer: 7
   m_Name: Tower_3
   m_TagString: Tower
@@ -166,9 +167,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMaxHealth: 100
-  baseDamage: 10
+  baseDamage: 2
   baseTimer: 1
-  gameObjectName: Tower_0
+  gameObjectName: Tower_3
   chanceForBuff: 0.3
   maximumBuffNumber: 3
   towerBuffs: 
+--- !u!114 &9059522092315605066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4461725371697267928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1754464c0ec1c640a1050e58bd56c0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarLength: 100

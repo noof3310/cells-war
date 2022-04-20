@@ -29,7 +29,7 @@ public class Tower : MonoBehaviour
         maxHealth = baseMaxHealth;
         timer = baseTimer;
         SetCurrentHealth(baseMaxHealth);
-        RandomBuff();
+        // RandomBuff();
     }
 
     // Update is called once per frame

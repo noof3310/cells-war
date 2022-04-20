@@ -234,12 +234,13 @@ MonoBehaviour:
   raycastMask:
     serializedVersion: 2
     m_Bits: 64
-  rayCastLength: 15
-  attackDistance: 10
+  rayCastLength: 8
+  attackDistance: 8
   ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
+  target: {fileID: 0}
   speed: 200
   nextWaypointDistance: 3
-  keepDistance: 9
+  keepDistance: 8
 --- !u!114 &7743207906975284180
 MonoBehaviour:
   m_ObjectHideFlags: 0

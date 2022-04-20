@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMaxHealth: 100
-  baseDamage: 20
+  baseDamage: 50
   baseTimer: 2
   moveSpeed: 10
   gameObjectName: Enemy_Type_3
@@ -119,6 +119,7 @@ MonoBehaviour:
     m_Bits: 64
   rayCastLength: 6
   attackDistance: 5
+  target: {fileID: 0}
   speed: 200
   nextWaypointDistance: 3
   keepDistance: 5

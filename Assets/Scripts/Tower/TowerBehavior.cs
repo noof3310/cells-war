@@ -9,13 +9,11 @@ public class TowerBehavior : MonoBehaviour
     public float attackDistance;
     public GameObject ItemPrefab;
     public string targetTagName = "Enemy";
-    private GameObject target;
-    private float distance;
+    [SerializeField] private GameObject target;
     private bool inRange;
     private bool attackMode;
     private bool cooling = false;
     private float intTimer;
-    private GameObject currentTarget;
     private Tower tower;
 
     void Start()
@@ -54,28 +52,20 @@ public class TowerBehavior : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D trig)
+    // void OnTriggerEnter2D(Collider2D trig)
+    // {
+    //     if (trig.CompareTag(targetTagName) && !cooling)
+    //     {
+    //         target = trig.gameObject;
+    //     }
+    // }
+    void OnTriggerStay2D(Collider2D trig)
     {
         if (trig.CompareTag(targetTagName) && !cooling)
         {
             target = trig.gameObject;
         }
     }
-    // void OnTriggerStay2D(Collider2D trig)
-    // {
-    //     // Debug.Log("GameObject tag" + trig.gameObject.tag);
-    //     // Debug.Log("target" + target);
-    //     // Debug.Log("cooling" + cooling);
-    //     Debug.Log("GameObject tag->>" + (string)trig.gameObject.tag == (string)targetTagName);
-    //     Debug.Log("trig.gameObject.tag->>" + trig.gameObject.tag);
-    //     Debug.Log("targetTagName tag->>" + targetTagName);
-    //     Debug.Log("cooling->>" + !cooling);
-    //     if (trig.CompareTag(targetTagName) && !cooling)
-    //     {
-    //         Debug.Log("Set!");
-    //         target = trig.gameObject;
-    //     }
-    // }
     void TowerLogic()
     {
         float distance = Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position);
@@ -129,8 +119,8 @@ public class TowerBehavior : MonoBehaviour
     {
         RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
         Destroy(this.gameObject);
-        foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
-            Destroy(img.gameObject);
+        // foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
+        //     Destroy(img.gameObject);
     }
 
     void RemoveFromList(GameObject gameObject)

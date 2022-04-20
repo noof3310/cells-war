@@ -82,7 +82,6 @@ public class BulletBehavior : MonoBehaviour
 
     public void TakeDamage()
     {
-        Debug.Log(target);
         if (target.tag == "Objective")
         {
             target.GetComponent<Objective>().TakenDamage(damage);
@@ -91,6 +90,12 @@ public class BulletBehavior : MonoBehaviour
         {
             target.transform.parent.GetComponent<Enemy>().TakenDamage(damage);
         }
+        else if (target.tag == "Tower")
+        {
+            target.GetComponent<Tower>().TakenDamage(damage);
+
+        }
+
     }
 
     public void SetTarget(GameObject currentTarget)
