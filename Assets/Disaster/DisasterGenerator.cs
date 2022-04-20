@@ -62,7 +62,7 @@ public class DisasterGenerator : MonoBehaviour
     {
         selectedDisaster = disaster;
         Debug.Log("Disaster: " + disaster);
-        switch (Disaster.Fire)
+        switch (disaster)
         {
             case Disaster.Rain:
                 selectedDisasterObject = Instantiate(rainPreFab, position, Quaternion.identity);

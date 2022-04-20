@@ -31,7 +31,6 @@ public class SpawnerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Game level: " + GameManager.level);
 
         if (shouldSpawnBoss && GameManager.State == GameState.FightState)
         {
@@ -40,12 +39,13 @@ public class SpawnerManager : MonoBehaviour
             shouldSpawnBoss = false;
         }
 
-        if (isResourceSpawner && GameManager.State == GameState.SpawnState)
+        if (isResourceSpawner && GameManager.State == GameState.RestState && whiteBloodCellList.Count > 0)
         {
             foreach (var objects in whiteBloodCellList)
             {
                 Destroy(objects);
             }
+            whiteBloodCellList.Clear();
             amount = totalAmount;
             GameManager.UpdateGameState(GameState.FightState);
 

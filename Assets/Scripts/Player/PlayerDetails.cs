@@ -17,6 +17,11 @@ public class PlayerDetails : MonoBehaviour
 
     }
 
+    public static void BuyTower(int cost)
+    {
+        whiteBloodCellNumber -= cost;
+    }
+
     public static void ResetAll()
     {
         whiteBloodCellNumber = 0;

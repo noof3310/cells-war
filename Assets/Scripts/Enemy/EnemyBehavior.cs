@@ -16,7 +16,9 @@ public class EnemyBehavior : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
     private RaycastHit2D hit;
-    private GameObject target;
+
+    [SerializeField] private GameObject target;
+
     private Animator anim;
     private float distance;
     private bool inRange;
@@ -46,7 +48,7 @@ public class EnemyBehavior : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
 
-        target = GameObject.FindWithTag("Player"); // change to objective
+        // target = GameObject.FindWithTag("Player"); // change to objective
 
         seeker = GetComponent<Seeker>();
 
@@ -87,8 +89,9 @@ public class EnemyBehavior : MonoBehaviour
         {
             if (target == null)
             {
-                target = currentTarget;
+                target = coreTarget;
             }
+
             if (inRange)
             {
                 float angle = getAngle();
@@ -120,8 +123,6 @@ public class EnemyBehavior : MonoBehaviour
             return;
         }
 
-        // Debug.Log(path.vectorPath.Count);
-
         if (currentWaypoint >= path.vectorPath.Count)
         {
             reachedEndOfPath = true;
@@ -133,7 +134,7 @@ public class EnemyBehavior : MonoBehaviour
 
         if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
         {
-            Debug.Log("stop");
+            // Debug.Log("stop");
             return;
         }
 
@@ -173,14 +174,24 @@ public class EnemyBehavior : MonoBehaviour
         {
             target.GetComponent<Objective>().TakenDamage(enemy.GetDamage());
         }
+        else if (target.tag == "Tower")
+        {
+            target.GetComponent<Tower>().TakenDamage(enemy.GetDamage());
+
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D trig)
+    void OnTriggerStay2D(Collider2D trig)
     {
-        if (trig.gameObject.name == target.name && !cooling)
+        if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling)
         {
-            // target = trig.gameObject;
+            target = trig.gameObject;
             inRange = true;
+        }
+        else if (trig.CompareTag("Objective") && !cooling)
+        {
+            inRange = true;
+
         }
     }
 
@@ -266,10 +277,13 @@ public class EnemyBehavior : MonoBehaviour
         if (enemy.GetDied())
         {
             RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
-            Destroy(this.gameObject);
             foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
                 Destroy(img.gameObject);
+            gameObject.GetComponent<EnemyBuffUIManager>().uiUse.Clear();
+            Destroy(this.gameObject);
+
         }
+
     }
 
     void RemoveFromList(GameObject gameObject)

@@ -18,7 +18,8 @@ public class EnemyRangebehavior : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
     private RaycastHit2D hit;
-    private GameObject target;
+    [SerializeField] private GameObject target;
+
     private Animator anim;
     private float distance;
     private bool inRange;
@@ -49,7 +50,7 @@ public class EnemyRangebehavior : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
 
-        target = GameObject.FindWithTag("Player"); // change to objective
+        // target = GameObject.FindWithTag("Player"); // change to objective
 
         seeker = GetComponent<Seeker>();
 
@@ -122,7 +123,7 @@ public class EnemyRangebehavior : MonoBehaviour
             return;
         }
 
-        Debug.Log(path.vectorPath.Count);
+        // Debug.Log(path.vectorPath.Count);
 
         if (currentWaypoint >= path.vectorPath.Count)
         {
@@ -135,7 +136,7 @@ public class EnemyRangebehavior : MonoBehaviour
 
         if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
         {
-            Debug.Log("stop");
+            // Debug.Log("stop");
             return;
         }
 
@@ -168,14 +169,20 @@ public class EnemyRangebehavior : MonoBehaviour
         cooling = true;
     }
 
-    void OnTriggerEnter2D(Collider2D trig)
+    void OnTriggerStay2D(Collider2D trig)
     {
-        if (trig.gameObject.name == target.name && !cooling)
+        if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling)
         {
-            // target = trig.gameObject;
+            target = trig.gameObject;
             inRange = true;
         }
+        else if (trig.CompareTag("Objective") && !cooling)
+        {
+            inRange = true;
+
+        }
     }
+
 
     void EnemyLogic()
     {
@@ -273,9 +280,11 @@ public class EnemyRangebehavior : MonoBehaviour
         if (enemy.GetDied())
         {
             RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
-            Destroy(this.gameObject);
             foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
                 Destroy(img.gameObject);
+            gameObject.GetComponent<EnemyBuffUIManager>().uiUse.Clear();
+            Destroy(this.gameObject);
+
         }
     }
 

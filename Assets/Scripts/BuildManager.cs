@@ -10,6 +10,8 @@ public class BuildManager : MonoBehaviour
     public AstarPath astarPath;
 
     public List<GameObject> towers;
+    public List<int> towerCost;
+
     public Tile[] towerIcons;
     public List<GameObject> UITowers;
 
@@ -99,9 +101,10 @@ public class BuildManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isSelected)
+            if (isSelected && PlayerDetails.whiteBloodCellNumber - towerCost[selectedTower] >= 0)
             {
                 Instantiate(towers[selectedTower], centerTowerPos, Quaternion.identity);
+                PlayerDetails.BuyTower(towerCost[selectedTower]);
                 updatePath(bounds);
             }
         }
