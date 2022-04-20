@@ -6,8 +6,8 @@ public class Objective : MonoBehaviour
 {
     // Start is called before the first frame update
     public static HealthBar healthBar;
-    public static int maxHealth = 10000;
-    private static int currentHealth;
+    public static float maxHealth = 10000;
+    private static float currentHealth;
     private static bool died;
     void Start()
     {
@@ -31,19 +31,19 @@ public class Objective : MonoBehaviour
         // }
     }
 
-    public static void SetCurrentHealth(int value)
+    public static void SetCurrentHealth(float value)
     {
         currentHealth = value;
     }
 
-    public int GetCurrentHealth()
+    public float GetCurrentHealth()
     {
         return currentHealth;
     }
 
-    public void TakenDamage(int value)
+    public void TakenDamage(float value)
     {
-        int resultHp = currentHealth - value;
+        float resultHp = currentHealth - value;
         healthBar.SetHealthBar(resultHp);
         Debug.Log(value);
         Debug.Log(resultHp);

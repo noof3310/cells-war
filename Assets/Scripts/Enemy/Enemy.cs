@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int baseMaxHealth = 100;
-    public int baseDamage;
+    public float baseMaxHealth = 100;
+    public float baseDamage;
     public float baseTimer;
     public float moveSpeed;
-    private int maxHealth;
-    private int damage;
+    private float maxHealth;
+    private float damage;
     private float timer;
 
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
     public int maximumBuffNumber = 3;
-    private int currentHealth;
+    private float currentHealth;
     private bool died;
     public List<EnemyBuff> enemyBuffs;
 
@@ -77,10 +77,10 @@ public class Enemy : MonoBehaviour
 
     void LevelPowerUp()
     {
-        currentLevel = GameManager.level;
-        SetDamage(damage + Math.Pow(1 + damageLevelUpRatio, currentLevel) * baseDamage);
-        SetCurrentHealth(Math.Pow(1 + hpLevelUpRatio, currentLevel) * baseMaxHealth);
-        SetTimer(Math.Pow(1 + timerLevelUpRatio, currentLevel) * baseTimer);
+        int currentLevel = GameManager.level;
+        SetDamage(damage + Mathf.Pow(1 + damageLevelUpRatio, currentLevel) * baseDamage);
+        SetCurrentHealth(Mathf.Pow(1 + hpLevelUpRatio, currentLevel) * baseMaxHealth);
+        SetTimer(Mathf.Pow(1 + timerLevelUpRatio, currentLevel) * baseTimer);
     }
 
     // For testing taken damage. It can be hidden.
@@ -92,12 +92,12 @@ public class Enemy : MonoBehaviour
     //     }
     // }
 
-    public void SetCurrentHealth(int value)
+    public void SetCurrentHealth(float value)
     {
         currentHealth = value;
     }
 
-    public int GetCurrentHealth()
+    public float GetCurrentHealth()
     {
         return currentHealth;
     }
@@ -110,12 +110,12 @@ public class Enemy : MonoBehaviour
     {
         return died;
     }
-    public void SetDamage(int value)
+    public void SetDamage(float value)
     {
         damage = value;
     }
 
-    public int GetDamage()
+    public float GetDamage()
     {
         return damage;
     }
@@ -129,14 +129,14 @@ public class Enemy : MonoBehaviour
         return timer;
     }
 
-    public int GetMaxHealth()
+    public float GetMaxHealth()
     {
         return maxHealth;
     }
 
-    public void TakenDamage(int value)
+    public void TakenDamage(float value)
     {
-        int resultHp = currentHealth - value;
+        float resultHp = currentHealth - value;
         Debug.Log("Enemy HP: " + resultHp);
         SetCurrentHealth(resultHp);
     }

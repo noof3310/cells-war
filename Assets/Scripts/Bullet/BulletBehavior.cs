@@ -5,8 +5,8 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int speed;
-    private int damage;
+    public float speed;
+    private float damage;
     // public float rotationOffet;
     private GameObject target;
     private Rigidbody2D rb;
@@ -102,7 +102,7 @@ public class BulletBehavior : MonoBehaviour
     {
         target = currentTarget;
     }
-    public void SetDamage(int currentDamage)
+    public void SetDamage(float currentDamage)
     {
         damage = currentDamage;
     }

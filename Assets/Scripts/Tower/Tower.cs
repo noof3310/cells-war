@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    public int baseMaxHealth = 100;
-    public int baseDamage;
+    public float baseMaxHealth = 100;
+    public float baseDamage;
     public float baseTimer;
-    private int maxHealth;
-    private int damage;
+    private float maxHealth;
+    private float damage;
     private float timer;
 
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
     public int maximumBuffNumber = 3;
-    private int currentHealth;
+    private float currentHealth;
     private bool died;
     public List<TowerBuff> towerBuffs;
 
@@ -79,12 +79,12 @@ public class Tower : MonoBehaviour
     //     }
     // }
 
-    public void SetCurrentHealth(int value)
+    public void SetCurrentHealth(float value)
     {
         currentHealth = value;
     }
 
-    public int GetCurrentHealth()
+    public float GetCurrentHealth()
     {
         return currentHealth;
     }
@@ -97,12 +97,12 @@ public class Tower : MonoBehaviour
     {
         return died;
     }
-    public void SetDamage(int value)
+    public void SetDamage(float value)
     {
         damage = value;
     }
 
-    public int GetDamage()
+    public float GetDamage()
     {
         return damage;
     }
@@ -116,14 +116,14 @@ public class Tower : MonoBehaviour
         return timer;
     }
 
-    public int GetMaxHealth()
+    public float GetMaxHealth()
     {
         return maxHealth;
     }
 
-    public void TakenDamage(int value)
+    public void TakenDamage(float value)
     {
-        int resultHp = currentHealth - value;
+        float resultHp = currentHealth - value;
         SetCurrentHealth(resultHp);
     }
 }
