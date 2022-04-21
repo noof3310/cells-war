@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SpawnerManager : MonoBehaviour
 {
+    // public static ObjectPooling currentResources;
+    public GameObject poolObject;
+    public int resourcePoolAmount = 20;
+    public bool willGrow = false;
+
     public List<GameObject> objectsToSpawn = new List<GameObject>();
     public List<GameObject> bossToSpawn = new List<GameObject>();
     public List<GameObject> resourceToSpawn = new List<GameObject>();
@@ -26,6 +31,19 @@ public class SpawnerManager : MonoBehaviour
         shouldSpawnWhiteBloodCell = false;
         shouldSpawnBoss = false;
         ResetAll();
+
+         if (resourceToSpawn.Count > 0) 
+        {
+            int index = Random.Range(0, objectsToSpawn.Count);
+            Vector3 randomPos = Random.insideUnitCircle * Radius;
+            for (int i = 0; i < resourcePoolAmount; i++) 
+            {    
+                GameObject obj = Instantiate(resourceToSpawn[index], randomPos ,Quaternion.identity);
+                obj.SetActive(false);
+                whiteBloodCellList.Add(obj);
+            
+            }
+        }
     }
 
     // Update is called once per frame
@@ -111,23 +129,50 @@ public class SpawnerManager : MonoBehaviour
 
 
     }
+    public GameObject GetPoolObject() 
+    {
+        for (int i = 0; i < whiteBloodCellList.Count; i++) 
+        {
+            if (!whiteBloodCellList[i].activeInHierarchy) 
+            {
+                return whiteBloodCellList[i];
+            }
+        }
+        if (willGrow) 
+        {
+            int index2 = Random.Range(0, resourceToSpawn.Count);
+
+            Vector3 randomPos = Random.insideUnitCircle * Radius;
+
+            GameObject obj = Instantiate(resourceToSpawn[index2], randomPos, Quaternion.identity);
+            whiteBloodCellList.Add(obj);
+
+            return obj;
+        }
+        return null;
+    }
 
     public void ResetAll()
     {
         amount = totalAmount;
         timer = initialTimer;
     }
-
+    
     void SpawnResourceAtRandom()
     {
-        if (resourceToSpawn.Count > 0)
-        {
-            int index = Random.Range(0, resourceToSpawn.Count);
+        // if (resourceToSpawn.Count > 0)
+        // {
+        // int index = Random.Range(0, resourceToSpawn.Count);
 
-            Vector3 randomPos = Random.insideUnitCircle * Radius;
+        Vector3 randomPos = Random.insideUnitCircle * Radius;
 
-            whiteBloodCellList.Add(Instantiate(resourceToSpawn[index], randomPos, Quaternion.identity));
-        }
+        //     whiteBloodCellList.Add(Instantiate(resourceToSpawn[index], randomPos, Quaternion.identity));
+        // }
+        GameObject obj = GetPoolObject();
+        if (obj==null) return;
+        obj.transform.position = randomPos;
+        obj.SetActive(true);
+
     }
 
     void SpawnObjectAtRandom(List<GameObject> objectsToSpawn)

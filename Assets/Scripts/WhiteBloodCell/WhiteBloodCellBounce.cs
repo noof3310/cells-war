@@ -9,6 +9,21 @@ public class WhiteBloodCellBounce : MonoBehaviour
 
     int randomRatio;
 
+    // public float distroyTime = 3.0f;
+
+    // void OnEnable()
+    // {
+    //     Invoke("Distroy", distroyTime);
+    // }
+    void Distroy()
+    {
+        gameObject.SetActive(false);
+    }
+    // void OnDisable()
+    // {
+    //     CancelInvoke();
+    // }
+
     // Update is called once per frame
     void Start()
     {
