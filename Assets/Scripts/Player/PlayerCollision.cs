@@ -20,7 +20,8 @@ public class PlayerCollision : MonoBehaviour
     {
         if (collider.gameObject.name == "whitebloodcell")
         {
-            Destroy(collider.gameObject);
+            // Destroy(collider.gameObject);
+            collider.gameObject.SetActive(false);
             PlayerDetails.whiteBloodCellNumber += 1;
         }
     }
