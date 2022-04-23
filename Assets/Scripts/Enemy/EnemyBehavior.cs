@@ -135,7 +135,7 @@ public class EnemyBehavior : MonoBehaviour
 
         if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
         {
-            // Debug.Log("stop");
+            Debug.Log("stop");
             return;
         }
 
@@ -214,6 +214,7 @@ public class EnemyBehavior : MonoBehaviour
         if (reachedEndOfPath && trig.CompareTag("Tower") && trig.name.Contains("Tower") && !cooling && isBoss)
         {
             inRange = true;
+            target = trig.gameObject;
             if (!colliders.Contains(trig)) { colliders.Add(trig); }
         }
         else if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling)
