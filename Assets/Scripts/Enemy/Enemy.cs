@@ -10,12 +10,12 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
     private float maxHealth;
     [SerializeField] private float damage;
+    [SerializeField] private float currentHealth = 100f;
     private float timer;
 
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
     public int maximumBuffNumber = 3;
-    [SerializeField] private float currentHealth;
     private bool died;
     public List<EnemyBuff> enemyBuffs;
 
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gameObject.name = gameObjectName;
         healthBar = gameObject.GetComponent(typeof(EnemyHealthBar)) as EnemyHealthBar;
@@ -67,8 +67,8 @@ public class Enemy : MonoBehaviour
                         damage += baseDamage;
                         break;
                     case EnemyBuff.Hp:
-                        SetMaxHealth(maxHealth + baseMaxHealth / 2);
-                        SetCurrentHealth(maxHealth);
+                        SetMaxHealth(maxHealth + (baseMaxHealth / 2));
+                        SetCurrentHealth(maxHealth + (baseMaxHealth / 2));
                         break;
                     case EnemyBuff.Speed:
                         timer += baseTimer / 3;

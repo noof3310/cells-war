@@ -14,7 +14,7 @@ public class Tower : MonoBehaviour
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
     public int maximumBuffNumber = 3;
-    private float currentHealth;
+    [SerializeField] private float currentHealth;
     private bool died;
     public List<TowerBuff> towerBuffs;
 

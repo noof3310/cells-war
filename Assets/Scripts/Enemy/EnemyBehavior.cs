@@ -10,6 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     public LayerMask raycastMask;
     public float rayCastLength;
     public float attackDistance;
+    public bool isBoss;
     // public Transform player;
     private GameObject coreTarget;
     private bool attackMode;
@@ -37,18 +38,18 @@ public class EnemyBehavior : MonoBehaviour
     bool reachedEndOfPath = false;
 
     Seeker seeker;
+    [SerializeField] private List<Collider2D> colliders = new List<Collider2D>();
+    public List<Collider2D> GetColliders() { return colliders; }
 
     void Start()
     {
         enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
-        Debug.Log(enemy);
         coreTarget = GameObject.FindWithTag("Objective");
         currentTarget = GameObject.FindWithTag("Objective");
         target = GameObject.FindWithTag("Objective");
         intTimer = enemy.baseTimer;
         anim = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
-
         // target = GameObject.FindWithTag("Player"); // change to objective
 
         seeker = GetComponent<Seeker>();
@@ -56,7 +57,6 @@ public class EnemyBehavior : MonoBehaviour
         InvokeRepeating("UpdatePath", 3f, 2f);
 
     }
-
     void UpdatePath()
     {
         if (seeker.IsDone())
@@ -153,20 +153,27 @@ public class EnemyBehavior : MonoBehaviour
 
         if (rb.velocity.x >= 0.01f)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            if (transform.localScale.x < 0)
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         } else if (rb.velocity.x <= -0.01f)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            if (transform.localScale.x > 0)
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
-
-
 
     }
 
     public void TriggerCooling()
     {
         cooling = true;
-        TakeDamage();
+        if (isBoss)
+        {
+            BossTakeDamage();
+        }
+        else
+        {
+            TakeDamage();
+        }
     }
 
     public void TakeDamage()
@@ -181,10 +188,35 @@ public class EnemyBehavior : MonoBehaviour
 
         }
     }
+    public void BossTakeDamage()
+    {
+        if (target.tag == "Objective")
+        {
+            target.GetComponent<Objective>().TakenDamage(enemy.GetDamage());
+        }
+        else if (target.tag == "Tower")
+        {
+            foreach (Collider2D col in colliders)
+            {
+                distance = Vector2.Distance(transform.position, col.transform.position);
+                if (distance <= attackDistance)
+                {
+                    col.GetComponent<Tower>().TakenDamage(enemy.GetDamage());
+                }
+            }
+
+        }
+    }
+
 
     void OnTriggerStay2D(Collider2D trig)
     {
-        if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling)
+        if (reachedEndOfPath && trig.CompareTag("Tower") && trig.name.Contains("Tower") && !cooling && isBoss)
+        {
+            inRange = true;
+            if (!colliders.Contains(trig)) { colliders.Add(trig); }
+        }
+        else if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling)
         {
             target = trig.gameObject;
             inRange = true;
@@ -216,29 +248,6 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    void Move()
-    {
-        anim.SetBool("canWalk", true);
-        // if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_Type_1_attack"))
-        // {
-        Vector3 direction = target.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        // rb.rotation = angle;
-        direction.Normalize();
-        movement = direction;
-        rb.MovePosition((Vector2)transform.position + (Vector2)(direction * enemy.moveSpeed * Time.deltaTime));
-        // if (angle > 0 && angle < 90 || angle < 0 && angle > -90)
-        // {
-        //     rb.rotation = 180;
-
-        // }
-        // else
-        // {
-        //     rb.rotation = 0;
-
-        // }
-        // }
-    }
 
     void Attack()
     {
