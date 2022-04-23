@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gameObject.name = gameObjectName;
         healthBar = gameObject.GetComponent(typeof(EnemyHealthBar)) as EnemyHealthBar;
@@ -67,8 +67,8 @@ public class Enemy : MonoBehaviour
                         damage += baseDamage;
                         break;
                     case EnemyBuff.Hp:
-                        SetMaxHealth(maxHealth + baseMaxHealth / 2);
-                        SetCurrentHealth(maxHealth);
+                        SetMaxHealth(maxHealth + (baseMaxHealth / 2));
+                        SetCurrentHealth(maxHealth + (baseMaxHealth / 2));
                         break;
                     case EnemyBuff.Speed:
                         timer += baseTimer / 3;

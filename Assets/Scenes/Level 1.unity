@@ -5152,7 +5152,7 @@ MonoBehaviour:
   - {fileID: 8435394190036620235, guid: f9257ab4f644d90449f4e1d07f254cc0, type: 3}
   - {fileID: 8343257849107774169, guid: 977090ecb2d5b4943b151586b1e90e2c, type: 3}
   bossToSpawn:
-  - {fileID: 6044853576119062048, guid: d0bad1f19e3682f4697ca8272cf8a251, type: 3}
+  - {fileID: 8213084628568458557, guid: d0bad1f19e3682f4697ca8272cf8a251, type: 3}
   resourceToSpawn: []
   isEnemySpawner: 1
   isResourceSpawner: 0
