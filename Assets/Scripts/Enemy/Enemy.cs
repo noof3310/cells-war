@@ -10,12 +10,12 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
     private float maxHealth;
     [SerializeField] private float damage;
+    [SerializeField] private float currentHealth = 100f;
     private float timer;
 
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
     public int maximumBuffNumber = 3;
-    [SerializeField] private float currentHealth;
     private bool died;
     public List<EnemyBuff> enemyBuffs;
 

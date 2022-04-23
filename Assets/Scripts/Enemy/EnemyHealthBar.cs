@@ -41,12 +41,18 @@ public class EnemyHealthBar : MonoBehaviour
 
     public void SetMaxHealthBar(float health)
     {
-        uiUse.maxValue = health;
+        if (uiUse != null)
+        {
+            uiUse.maxValue = health;
+        }
     }
 
     public void SetHealthBar(float health)
     {
-        uiUse.value = health;
+        if (uiUse != null)
+        {
+            uiUse.value = health;
+        }
     }
 
 }

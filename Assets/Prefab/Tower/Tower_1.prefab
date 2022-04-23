@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 666191636440127350}
   - component: {fileID: 666191636440127337}
-  - component: {fileID: 666191636440127336}
   - component: {fileID: 666191636440127341}
   - component: {fileID: 666191636440127338}
   - component: {fileID: 666191636440127339}
@@ -87,32 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &666191636440127336
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666191636440127340}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.05, y: 1.1916667}
-    newSize: {x: 1.2, y: 1.1583333}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.6}
-  m_EdgeRadius: 0
 --- !u!61 &666191636440127341
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -154,6 +127,7 @@ MonoBehaviour:
   attackDistance: 10
   ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
   targetTagName: Enemy
+  target: {fileID: 0}
 --- !u!114 &666191636440127339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +146,7 @@ MonoBehaviour:
   gameObjectName: Tower_1
   chanceForBuff: 0.3
   maximumBuffNumber: 3
+  currentHealth: 0
   towerBuffs: 
 --- !u!114 &4306755702213478664
 MonoBehaviour:
