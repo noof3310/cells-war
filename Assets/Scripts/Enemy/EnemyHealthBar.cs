@@ -1,54 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealthBar : MonoBehaviour
 {
+    public Slider healthBar;
+    public Vector3 offsetY = new Vector3(0f, 0f, 0);
     private float maxHealth;
     private float curHealth;
+    private Slider uiUse;
 
     public float healthBarLength;
-    private Enemy enemy;
+    // private Enemy enemy;
 
 
     // Use this for initialization
     void Start()
     {
-        enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
-        curHealth = enemy.GetCurrentHealth();
-        maxHealth = enemy.GetMaxHealth();
+        // enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
+        // curHealth = enemy.GetCurrentHealth();
+        // maxHealth = enemy.GetMaxHealth();
+        // SetMaxHealthBar(100);
+        // SetHealthBar(50);
         healthBarLength = Screen.width / 6;
+        HpBarGenerator();
     }
     void Update()
     {
-        curHealth = enemy.GetCurrentHealth();
+        if (uiUse != null)
+            uiUse.transform.position = Camera.main.WorldToScreenPoint(transform.Find("Head").gameObject.transform.position + offsetY);
 
     }
 
-    // Update is called once per frame
-    void OnGUI()
+    void HpBarGenerator()
     {
-
-        Vector2 targetPos;
-        targetPos = Camera.main.WorldToScreenPoint(transform.position);
-
-        GUI.Box(new Rect(targetPos.x, Screen.height - targetPos.y, 60, 20), curHealth + "/" + maxHealth);
-
+        uiUse = Instantiate(healthBar, FindObjectOfType<Canvas>().transform);
+        uiUse.transform.position = Camera.main.WorldToScreenPoint(transform.Find("Head").gameObject.transform.position + offsetY);
     }
 
-    public void AddjustCurrentHealth(int adj)
+    public void SetMaxHealthBar(float health)
     {
-        curHealth += adj;
-
-        if (curHealth < 0)
-            curHealth = 0;
-
-        if (curHealth > maxHealth)
-            curHealth = maxHealth;
-
-        if (maxHealth < 1)
-            maxHealth = 1;
-
-        healthBarLength = (Screen.width / 6) * (curHealth / (float)maxHealth);
+        uiUse.maxValue = health;
     }
+
+    public void SetHealthBar(float health)
+    {
+        uiUse.value = health;
+    }
+
 }
