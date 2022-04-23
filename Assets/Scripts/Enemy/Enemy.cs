@@ -30,7 +30,6 @@ public class Enemy : MonoBehaviour
     {
         gameObject.name = gameObjectName;
         healthBar = gameObject.GetComponent(typeof(EnemyHealthBar)) as EnemyHealthBar;
-        Debug.Log(healthBar);
 
         died = false;
         damage = baseDamage;
@@ -61,7 +60,6 @@ public class Enemy : MonoBehaviour
             {
 
                 EnemyBuff buff = (EnemyBuff)Random.Range(0, System.Enum.GetValues(typeof(EnemyBuff)).Length);
-                Debug.Log("Buff: " + buff);
                 enemyBuffs.Add(buff);
                 switch (buff)
                 {
@@ -100,7 +98,6 @@ public class Enemy : MonoBehaviour
 
     public void SetCurrentHealth(float value)
     {
-        Debug.Log("set value: " + value);
         healthBar.SetHealthBar(value);
         currentHealth = value;
     }
@@ -150,7 +147,6 @@ public class Enemy : MonoBehaviour
     public void TakenDamage(float value)
     {
         float resultHp = currentHealth - value;
-        Debug.Log("Enemy HP: " + resultHp);
         SetCurrentHealth(resultHp);
     }
 

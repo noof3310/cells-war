@@ -28,18 +28,6 @@ public class EnemyHealthBar : MonoBehaviour
     }
     void Update()
     {
-        // if (maxHealth != enemy.GetMaxHealth())
-        // {
-        //     maxHealth = enemy.GetMaxHealth();
-        //     SetMaxHealthBar(enemy.GetMaxHealth());
-        // }
-        // if (curHealth != enemy.GetCurrentHealth())
-        // {
-        //     Debug.Log(enemy.GetCurrentHealth());
-        //     Debug.Log(healthBar.value);
-        //     curHealth = enemy.GetCurrentHealth();
-        //     SetHealthBar(enemy.GetCurrentHealth());
-        // }
         if (uiUse != null)
             uiUse.transform.position = Camera.main.WorldToScreenPoint(transform.Find("Head").gameObject.transform.position + offsetY);
 
@@ -58,7 +46,6 @@ public class EnemyHealthBar : MonoBehaviour
 
     public void SetHealthBar(float health)
     {
-        Debug.Log(health);
         uiUse.value = health;
     }
 
