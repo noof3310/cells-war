@@ -41,6 +41,7 @@ public class EnemyBehavior : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
+        Debug.Log(enemy);
         coreTarget = GameObject.FindWithTag("Objective");
         currentTarget = GameObject.FindWithTag("Objective");
         target = GameObject.FindWithTag("Objective");

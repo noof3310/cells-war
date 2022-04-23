@@ -22,19 +22,23 @@ public class Enemy : MonoBehaviour
     public float hpLevelUpRatio = 0.2f;
     public float damageLevelUpRatio = 0.2f;
     public float timerLevelUpRatio = 0.2f;
+    private EnemyHealthBar healthBar;
 
 
     // Start is called before the first frame update
     void Start()
     {
         gameObject.name = gameObjectName;
+        healthBar = gameObject.GetComponent(typeof(EnemyHealthBar)) as EnemyHealthBar;
+        Debug.Log(healthBar);
+
         died = false;
         damage = baseDamage;
         maxHealth = baseMaxHealth;
         timer = baseTimer;
-        SetCurrentHealth(baseMaxHealth);
         LevelPowerUp();
         RandomBuff();
+        SetCurrentHealth(baseMaxHealth);
     }
 
     // Update is called once per frame
@@ -64,7 +68,7 @@ public class Enemy : MonoBehaviour
                         damage += baseDamage;
                         break;
                     case EnemyBuff.Hp:
-                        maxHealth += baseMaxHealth / 2;
+                        SetMaxHealth(maxHealth + baseMaxHealth / 2);
                         SetCurrentHealth(maxHealth);
                         break;
                     case EnemyBuff.Speed:
@@ -80,6 +84,7 @@ public class Enemy : MonoBehaviour
         int currentLevel = GameManager.level;
         SetDamage(damage + Mathf.Pow(1 + damageLevelUpRatio, currentLevel) * baseDamage);
         SetCurrentHealth(Mathf.Pow(1 + hpLevelUpRatio, currentLevel) * baseMaxHealth);
+        SetMaxHealth(Mathf.Pow(1 + hpLevelUpRatio, currentLevel) * baseMaxHealth);
         SetTimer(Mathf.Pow(1 + timerLevelUpRatio, currentLevel) * baseTimer);
     }
 
@@ -94,6 +99,7 @@ public class Enemy : MonoBehaviour
 
     public void SetCurrentHealth(float value)
     {
+        healthBar.SetHealthBar(value);
         currentHealth = value;
     }
 
@@ -132,6 +138,11 @@ public class Enemy : MonoBehaviour
     public float GetMaxHealth()
     {
         return maxHealth;
+    }
+    public void SetMaxHealth(float value)
+    {
+        healthBar.SetMaxHealthBar(value);
+        maxHealth = value;
     }
 
     public void TakenDamage(float value)
