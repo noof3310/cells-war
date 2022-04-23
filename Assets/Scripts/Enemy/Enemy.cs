@@ -9,13 +9,13 @@ public class Enemy : MonoBehaviour
     public float baseTimer;
     public float moveSpeed;
     private float maxHealth;
-    private float damage;
+    [SerializeField] private float damage;
     private float timer;
 
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
     public int maximumBuffNumber = 3;
-    private float currentHealth;
+    [SerializeField] private float currentHealth;
     private bool died;
     public List<EnemyBuff> enemyBuffs;
 
@@ -36,9 +36,10 @@ public class Enemy : MonoBehaviour
         damage = baseDamage;
         maxHealth = baseMaxHealth;
         timer = baseTimer;
-        LevelPowerUp();
-        RandomBuff();
+        // LevelPowerUp();
         SetCurrentHealth(baseMaxHealth);
+        SetMaxHealth(baseMaxHealth);
+        RandomBuff();
     }
 
     // Update is called once per frame
@@ -99,6 +100,7 @@ public class Enemy : MonoBehaviour
 
     public void SetCurrentHealth(float value)
     {
+        Debug.Log("set value: " + value);
         healthBar.SetHealthBar(value);
         currentHealth = value;
     }
