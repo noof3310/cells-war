@@ -27,7 +27,8 @@ public class BulletBehavior : MonoBehaviour
     {
         if (target == null && !destroy)
         {
-            Destroy(this.gameObject);
+            // Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
         else if (!destroy)
         {
@@ -70,13 +71,15 @@ public class BulletBehavior : MonoBehaviour
         if (destroy && target != null)
         {
             TakeDamage();
-            Destroy(this.gameObject);
+            // Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
 
         }
         else if (target == null)
         {
 
-            Destroy(this.gameObject);
+            // Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -106,5 +109,8 @@ public class BulletBehavior : MonoBehaviour
     {
         damage = currentDamage;
     }
-
+    public void Reuse(){
+        destroy = false;
+        // GetComponent<Animator>();
+    }
 }

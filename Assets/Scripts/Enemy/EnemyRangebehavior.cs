@@ -261,9 +261,10 @@ public class EnemyRangebehavior : MonoBehaviour
     void Shoot()
     {
         // Vector3 randomPos = Random.insideUnitCircle * Radius;
-        var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
-        obj.GetComponent<BulletBehavior>().SetTarget(target);
-        obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
+        // var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+        // obj.GetComponent<BulletBehavior>().SetTarget(target);
+        // obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
+        BulletController.current.GetBullet(ItemPrefab,transform.position,target,enemy.GetDamage());
     }
 
     void Died()

@@ -93,9 +93,10 @@ public class TowerBehavior : MonoBehaviour
     void Shoot()
     {
         // Vector3 randomPos = Random.insideUnitCircle * Radius;
-        var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
-        obj.GetComponent<BulletBehavior>().SetTarget(target);
-        obj.GetComponent<BulletBehavior>().SetDamage(tower.GetDamage());
+        // var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+        // obj.GetComponent<BulletBehavior>().SetTarget(target);
+        // obj.GetComponent<BulletBehavior>().SetDamage(tower.GetDamage());
+        BulletController.current.GetBullet(ItemPrefab,transform.position,target,tower.GetDamage());
     }
 
     void StopAttack()
