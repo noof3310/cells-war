@@ -114,6 +114,7 @@ public class BuildManager : MonoBehaviour
                 Instantiate(towers[selectedTower], centerTowerPos, Quaternion.identity);
                 PlayerDetails.BuyTower(towerCost[selectedTower]);
                 updatePath(centerTowerPos);
+                SoundManager.playSound("place");
             }
         }
         else if (Input.GetKeyDown(KeyCode.X))
