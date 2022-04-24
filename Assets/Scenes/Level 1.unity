@@ -235,7 +235,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3187145845934419512, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3187145845934419512, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -660,7 +660,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &398293709
 CircleCollider2D:
@@ -856,8 +856,9 @@ MonoBehaviour:
   isResourceSpawner: 1
   shouldSpawnEnemy: 0
   shouldSpawnWhiteBloodCell: 0
+  shouldSpawnBoss: 0
   amount: 0
-  totalAmount: 100
+  totalAmount: 20
   Radius: 20
   initialTimer: 0.1
 --- !u!4 &563084611
@@ -872,7 +873,7 @@ Transform:
   m_LocalScale: {x: 0.9413962, y: 0.9413962, z: 0.9413962}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &864766380
 GameObject:
@@ -1084,7 +1085,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1541390841}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -1196,7 +1197,7 @@ Transform:
   - {fileID: 2040466474}
   - {fileID: 1230183165}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1101208109
 PrefabInstance:
@@ -1215,7 +1216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5386266020808553608, guid: c104a1b62f7a9cd479ef739d3687a207, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5386266020808553608, guid: c104a1b62f7a9cd479ef739d3687a207, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5153,16 +5154,17 @@ MonoBehaviour:
   resourcePoolAmount: 100
   willGrow: 0
   objectsToSpawn:
-  - {fileID: 3923741292230685067, guid: 3faad9e7860951644bc1236630b8b9b5, type: 3}
-  - {fileID: 7743207906975284183, guid: f9257ab4f644d90449f4e1d07f254cc0, type: 3}
-  - {fileID: 4995787525098049564, guid: 977090ecb2d5b4943b151586b1e90e2c, type: 3}
+  - {fileID: 5549424709031567242, guid: 3faad9e7860951644bc1236630b8b9b5, type: 3}
+  - {fileID: 8435394190036620235, guid: f9257ab4f644d90449f4e1d07f254cc0, type: 3}
+  - {fileID: 8343257849107774169, guid: 977090ecb2d5b4943b151586b1e90e2c, type: 3}
   bossToSpawn:
-  - {fileID: 4995787525098049564, guid: 977090ecb2d5b4943b151586b1e90e2c, type: 3}
+  - {fileID: 8213084628568458557, guid: d0bad1f19e3682f4697ca8272cf8a251, type: 3}
   resourceToSpawn: []
   isEnemySpawner: 1
   isResourceSpawner: 0
   shouldSpawnEnemy: 0
   shouldSpawnWhiteBloodCell: 0
+  shouldSpawnBoss: 1
   amount: 0
   totalAmount: 10
   Radius: 50
@@ -5175,7 +5177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311006745}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 0, z: -0.19310941}
+  m_LocalPosition: {x: 0, y: 0, z: -0.19310941}
   m_LocalScale: {x: 0.9607889, y: 0.9607889, z: 0.9607889}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5316,14 +5318,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1050364965}
   - {fileID: 546393040}
   - {fileID: 1101208110}
-  - {fileID: 1050364965}
   - {fileID: 520901961}
   - {fileID: 867134000}
   - {fileID: 5386266021157413667}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -82760,7 +82762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2582138679622060769, guid: 1464b04ef28e34645aa2cb84148a356c, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2582138679622060769, guid: 1464b04ef28e34645aa2cb84148a356c, type: 3}
       propertyPath: m_AnchorMax.x

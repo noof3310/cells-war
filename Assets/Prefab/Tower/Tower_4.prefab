@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 979115392174711121}
   - component: {fileID: 979115392174711122}
-  - component: {fileID: 979115392174711123}
   - component: {fileID: 979115392174711134}
   - component: {fileID: 979115392174711133}
   - component: {fileID: 979115392174711132}
   - component: {fileID: -4501055492458061707}
+  - component: {fileID: 2780438335471163541}
   m_Layer: 7
   m_Name: Tower_4
   m_TagString: Tower
@@ -87,32 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &979115392174711123
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979115392174711135}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.3}
-    newSize: {x: 1.2, y: 1.1583333}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.6}
-  m_EdgeRadius: 0
 --- !u!61 &979115392174711134
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &979115392174711133
 MonoBehaviour:
@@ -154,6 +128,7 @@ MonoBehaviour:
   attackDistance: 10
   ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
   targetTagName: Enemy
+  target: {fileID: 0}
 --- !u!114 &979115392174711132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +147,7 @@ MonoBehaviour:
   gameObjectName: Tower_4
   chanceForBuff: 0.3
   maximumBuffNumber: 3
+  currentHealth: 0
   towerBuffs: 
 --- !u!114 &-4501055492458061707
 MonoBehaviour:
@@ -186,3 +162,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarLength: 100
+--- !u!58 &2780438335471163541
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979115392174711135}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4461725371697267934}
   - component: {fileID: 4461725371697267935}
   - component: {fileID: 4461725371697267932}
-  - component: {fileID: 4461725371697267931}
   - component: {fileID: 4461725371697267930}
   - component: {fileID: 4461725371697267933}
   - component: {fileID: 9059522092315605066}
+  - component: {fileID: -2601754167542630698}
   m_Layer: 7
   m_Name: Tower_3
   m_TagString: Tower
@@ -111,33 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.6}
-  m_EdgeRadius: 0
---- !u!61 &4461725371697267931
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4461725371697267928}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.96666664, y: 1.1166667}
-    newSize: {x: 1.2, y: 1.1583333}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &4461725371697267930
 MonoBehaviour:
@@ -154,6 +128,7 @@ MonoBehaviour:
   attackDistance: 10
   ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
   targetTagName: Enemy
+  target: {fileID: 0}
 --- !u!114 &4461725371697267933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +147,7 @@ MonoBehaviour:
   gameObjectName: Tower_3
   chanceForBuff: 0.3
   maximumBuffNumber: 3
+  currentHealth: 0
   towerBuffs: 
 --- !u!114 &9059522092315605066
 MonoBehaviour:
@@ -186,3 +162,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarLength: 100
+--- !u!58 &-2601754167542630698
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4461725371697267928}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5

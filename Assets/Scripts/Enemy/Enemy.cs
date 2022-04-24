@@ -9,31 +9,35 @@ public class Enemy : MonoBehaviour
     public float baseTimer;
     public float moveSpeed;
     private float maxHealth;
-    private float damage;
+    [SerializeField] private float damage;
+    [SerializeField] private float currentHealth = 100f;
     private float timer;
 
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
     public int maximumBuffNumber = 3;
-    private float currentHealth;
     private bool died;
     public List<EnemyBuff> enemyBuffs;
 
     public float hpLevelUpRatio = 0.2f;
     public float damageLevelUpRatio = 0.2f;
     public float timerLevelUpRatio = 0.2f;
+    private EnemyHealthBar healthBar;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gameObject.name = gameObjectName;
+        healthBar = gameObject.GetComponent(typeof(EnemyHealthBar)) as EnemyHealthBar;
+
         died = false;
         damage = baseDamage;
         maxHealth = baseMaxHealth;
         timer = baseTimer;
+        // LevelPowerUp();
         SetCurrentHealth(baseMaxHealth);
-        LevelPowerUp();
+        SetMaxHealth(baseMaxHealth);
         RandomBuff();
     }
 
@@ -56,7 +60,6 @@ public class Enemy : MonoBehaviour
             {
 
                 EnemyBuff buff = (EnemyBuff)Random.Range(0, System.Enum.GetValues(typeof(EnemyBuff)).Length);
-                Debug.Log("Buff: " + buff);
                 enemyBuffs.Add(buff);
                 switch (buff)
                 {
@@ -64,8 +67,8 @@ public class Enemy : MonoBehaviour
                         damage += baseDamage;
                         break;
                     case EnemyBuff.Hp:
-                        maxHealth += baseMaxHealth / 2;
-                        SetCurrentHealth(maxHealth);
+                        SetMaxHealth(maxHealth + (baseMaxHealth / 2));
+                        SetCurrentHealth(maxHealth + (baseMaxHealth / 2));
                         break;
                     case EnemyBuff.Speed:
                         timer += baseTimer / 3;
@@ -80,6 +83,7 @@ public class Enemy : MonoBehaviour
         int currentLevel = GameManager.level;
         SetDamage(damage + Mathf.Pow(1 + damageLevelUpRatio, currentLevel) * baseDamage);
         SetCurrentHealth(Mathf.Pow(1 + hpLevelUpRatio, currentLevel) * baseMaxHealth);
+        SetMaxHealth(Mathf.Pow(1 + hpLevelUpRatio, currentLevel) * baseMaxHealth);
         SetTimer(Mathf.Pow(1 + timerLevelUpRatio, currentLevel) * baseTimer);
     }
 
@@ -94,6 +98,7 @@ public class Enemy : MonoBehaviour
 
     public void SetCurrentHealth(float value)
     {
+        healthBar.SetHealthBar(value);
         currentHealth = value;
     }
 
@@ -133,11 +138,15 @@ public class Enemy : MonoBehaviour
     {
         return maxHealth;
     }
+    public void SetMaxHealth(float value)
+    {
+        healthBar.SetMaxHealthBar(value);
+        maxHealth = value;
+    }
 
     public void TakenDamage(float value)
     {
         float resultHp = currentHealth - value;
-        Debug.Log("Enemy HP: " + resultHp);
         SetCurrentHealth(resultHp);
     }
 

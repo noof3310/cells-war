@@ -22,7 +22,8 @@ public class Objective : MonoBehaviour
             died = true;
             GameManager.UpdateGameState(GameState.Lose);
         }
-        // if(Input.GetKeyDown(KeyCode.Space)){
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
         //     TakenDamage(100);
         // }
         // hp.SetHealth(currentHealth);

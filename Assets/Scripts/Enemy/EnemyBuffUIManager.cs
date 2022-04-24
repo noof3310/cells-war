@@ -57,7 +57,7 @@ public class EnemyBuffUIManager : MonoBehaviour
         }
         for (int i = 0; i < uiUse.Count; i++)
         {
-            Vector3 offsetX = new Vector3(0.5f * i, 0, 0);
+            Vector3 offsetX = new Vector3(0.5f * i, 0.5f, 0);
             uiUse[i].transform.position = Camera.main.WorldToScreenPoint(transform.Find("Head").gameObject.transform.position + offsetX);
 
         }

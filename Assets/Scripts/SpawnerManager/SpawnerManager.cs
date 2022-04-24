@@ -18,18 +18,19 @@ public class SpawnerManager : MonoBehaviour
     public bool isResourceSpawner;
     public bool shouldSpawnEnemy;
     public bool shouldSpawnWhiteBloodCell;
+    public bool shouldSpawnBoss;
+
     public int amount;
     public int totalAmount;
     public float Radius = 50;
 
     public float initialTimer;
     private float timer;
-    private bool shouldSpawnBoss;
     void Start()
     {
         //shouldSpawnEnemy = false;
         shouldSpawnWhiteBloodCell = false;
-        shouldSpawnBoss = false;
+
         ResetAll();
 
          if (resourceToSpawn.Count > 0) 
@@ -52,7 +53,6 @@ public class SpawnerManager : MonoBehaviour
 
         if (shouldSpawnBoss && GameManager.State == GameState.FightState)
         {
-            Debug.Log("Boss spawn");
             SpawnObjectAtRandom(bossToSpawn);
             shouldSpawnBoss = false;
         }
