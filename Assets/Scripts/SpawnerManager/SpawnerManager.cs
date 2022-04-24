@@ -6,7 +6,7 @@ public class SpawnerManager : MonoBehaviour
 {
     // public static ObjectPooling currentResources;
     public GameObject poolObject;
-    public int resourcePoolAmount = 50;
+    public int resourcePoolAmount;
     public bool willGrow = false;
 
     public List<GameObject> objectsToSpawn = new List<GameObject>();
@@ -37,7 +37,7 @@ public class SpawnerManager : MonoBehaviour
         {
             int index = Random.Range(0, objectsToSpawn.Count);
             Vector3 randomPos = Random.insideUnitCircle * Radius;
-            for (int i = 0; i < totalAmount; i++) 
+            for (int i = 0; i < resourcePoolAmount; i++) 
             {    
                 GameObject obj = Instantiate(resourceToSpawn[index], randomPos ,Quaternion.identity);
                 obj.SetActive(false);

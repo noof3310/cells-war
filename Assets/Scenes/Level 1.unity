@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObject: {fileID: 0}
-  resourcePoolAmount: 100
+  resourcePoolAmount: 10
   willGrow: 0
   objectsToSpawn: []
   bossToSpawn: []
