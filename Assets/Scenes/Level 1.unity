@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5598b5abf52332e488d0611ba4272639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 60
+  baseMoveSpeed: 10
   thresholdDebuffMoveSpeedFromRain: 0.2
   moveSpeed: 60
   thresholdForRushState: 3
@@ -845,6 +845,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676224912431ea24bab46afd93e72dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolObject: {fileID: 0}
+  resourcePoolAmount: 100
+  willGrow: 0
   objectsToSpawn: []
   bossToSpawn: []
   resourceToSpawn:
@@ -5146,6 +5149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676224912431ea24bab46afd93e72dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolObject: {fileID: 0}
+  resourcePoolAmount: 100
+  willGrow: 0
   objectsToSpawn:
   - {fileID: 3923741292230685067, guid: 3faad9e7860951644bc1236630b8b9b5, type: 3}
   - {fileID: 7743207906975284183, guid: f9257ab4f644d90449f4e1d07f254cc0, type: 3}

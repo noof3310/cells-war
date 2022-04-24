@@ -6,7 +6,7 @@ public class SpawnerManager : MonoBehaviour
 {
     // public static ObjectPooling currentResources;
     public GameObject poolObject;
-    public int resourcePoolAmount = 15;
+    public int resourcePoolAmount = 50;
     public bool willGrow = false;
 
     public List<GameObject> objectsToSpawn = new List<GameObject>();
