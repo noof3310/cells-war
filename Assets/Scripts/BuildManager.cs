@@ -68,7 +68,7 @@ public class BuildManager : MonoBehaviour
 
             UIImage.color = tileColor;
             UIHands.Add(UIHand);
-            if(i==5) break;
+            if (i == 5) break;
         }
     }
 
@@ -145,10 +145,12 @@ public class BuildManager : MonoBehaviour
 
     void RenderUITowers(int selecter)
     {
-        if((selectedTower == selecter && isSelected) || inHand) {
+        if ((selectedTower == selecter && isSelected) || inHand)
+        {
             this.isSelected = false;
         }
-        else {
+        else
+        {
             this.selectedTower = selecter;
             this.isSelected = true;
         }
@@ -169,7 +171,8 @@ public class BuildManager : MonoBehaviour
 
     void RenderUIHand()
     {
-        if (inHand) {
+        if (inHand)
+        {
             int i = 0;
             foreach (GameObject UIhand in UIHands)
             {
@@ -181,7 +184,8 @@ public class BuildManager : MonoBehaviour
                 i++;
             }
         }
-        else {
+        else
+        {
             foreach (GameObject UIhand in UIHands)
             {
                 Image UIImage = UIhand.GetComponent<Image>();
