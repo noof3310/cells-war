@@ -158,8 +158,8 @@ MonoBehaviour:
   camera: {fileID: 46937601}
   bound_x: 2.5
   bound_y: 1
-  min_fov: 4
-  max_fov: 10
+  min_fov: 2.5
+  max_fov: 5
   sensitivity: 5
 --- !u!81 &46937600
 AudioListener:
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5598b5abf52332e488d0611ba4272639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 60
+  baseMoveSpeed: 10
   thresholdDebuffMoveSpeedFromRain: 0.2
   moveSpeed: 60
   thresholdForRushState: 3
@@ -815,7 +815,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 80, y: 80}
@@ -895,7 +895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObject: {fileID: 0}
-  resourcePoolAmount: 20
+  resourcePoolAmount: 10
   willGrow: 0
   objectsToSpawn: []
   bossToSpawn: []
@@ -5215,7 +5215,7 @@ MonoBehaviour:
   shouldSpawnWhiteBloodCell: 0
   shouldSpawnBoss: 0
   amount: 0
-  totalAmount: 3
+  totalAmount: 10
   Radius: 50
   initialTimer: 1
 --- !u!4 &1311006747
@@ -82759,7 +82759,11 @@ MonoBehaviour:
   - {fileID: 666191636440127340, guid: 22c900076fd425d4782eb58e3e662df4, type: 3}
   - {fileID: 8221600887576459428, guid: bc067fc7c5ace5640a9caec42951bfb5, type: 3}
   - {fileID: 4461725371697267928, guid: c93cac7ee55adf644a09a9140822e983, type: 3}
-  towerCost: 02000000020000000100000004000000
+  towerCost:
+  - 4
+  - 6
+  - 1
+  - 10
   towerIcons:
   - {fileID: 11400000, guid: d7a5669cf2f60974385a9c29af5a42a3, type: 2}
   - {fileID: 11400000, guid: 731d31bccd95e2143ae8930cde5313eb, type: 2}
