@@ -23,6 +23,5 @@ public class GhostDie : MonoBehaviour
         }
 
         count--;
-        Debug.Log("Count: " + count);
     }
 }

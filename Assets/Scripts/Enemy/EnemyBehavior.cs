@@ -136,7 +136,7 @@ public class EnemyBehavior : MonoBehaviour
 
         if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
         {
-            Debug.Log("stop");
+            // Debug.Log("stop");
             return;
         }
 

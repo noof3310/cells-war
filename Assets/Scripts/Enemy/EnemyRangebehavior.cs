@@ -194,7 +194,6 @@ public class EnemyRangebehavior : MonoBehaviour
         }
         else if (distance <= attackDistance && !cooling)
         {
-            Debug.Log("Attack!!");
             Attack();
         }
 
