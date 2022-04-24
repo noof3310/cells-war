@@ -85,8 +85,8 @@ public class SpawnerManager : MonoBehaviour
             if (amount > 0 && timer <= 0)
             {
                 timer = initialTimer;
-                SpawnResourceAtRandom();
-                amount -= 1;
+                if(SpawnResourceAtRandom())
+                    amount -= 1;
             }
         }
 
@@ -158,7 +158,7 @@ public class SpawnerManager : MonoBehaviour
         timer = initialTimer;
     }
     
-    void SpawnResourceAtRandom()
+    bool SpawnResourceAtRandom()
     {
         // if (resourceToSpawn.Count > 0)
         // {
@@ -169,9 +169,10 @@ public class SpawnerManager : MonoBehaviour
         //     whiteBloodCellList.Add(Instantiate(resourceToSpawn[index], randomPos, Quaternion.identity));
         // }
         GameObject obj = GetPoolObject();
-        if (obj==null) return;
+        if (obj==null) return false;
         obj.transform.position = randomPos;
         obj.SetActive(true);
+        return true;
 
     }
 
