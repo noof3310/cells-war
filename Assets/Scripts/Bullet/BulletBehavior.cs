@@ -27,7 +27,6 @@ public class BulletBehavior : MonoBehaviour
     {
         if (target == null && !destroy)
         {
-            // Destroy(this.gameObject);
             this.gameObject.SetActive(false);
         }
         else if (!destroy)
@@ -71,14 +70,12 @@ public class BulletBehavior : MonoBehaviour
         if (destroy && target != null)
         {
             TakeDamage();
-            // Destroy(this.gameObject);
             this.gameObject.SetActive(false);
 
         }
         else if (target == null)
         {
 
-            // Destroy(this.gameObject);
             this.gameObject.SetActive(false);
         }
     }
