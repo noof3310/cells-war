@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5598b5abf52332e488d0611ba4272639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 10
+  baseMoveSpeed: 60
   thresholdDebuffMoveSpeedFromRain: 0.2
   moveSpeed: 60
   thresholdForRushState: 3
@@ -895,7 +895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObject: {fileID: 0}
-  resourcePoolAmount: 10
+  resourcePoolAmount: 20
   willGrow: 0
   objectsToSpawn: []
   bossToSpawn: []
@@ -5215,7 +5215,7 @@ MonoBehaviour:
   shouldSpawnWhiteBloodCell: 0
   shouldSpawnBoss: 0
   amount: 0
-  totalAmount: 10
+  totalAmount: 3
   Radius: 50
   initialTimer: 1
 --- !u!4 &1311006747
@@ -82760,10 +82760,10 @@ MonoBehaviour:
   - {fileID: 8221600887576459428, guid: bc067fc7c5ace5640a9caec42951bfb5, type: 3}
   - {fileID: 4461725371697267928, guid: c93cac7ee55adf644a09a9140822e983, type: 3}
   towerCost:
-  - 4
-  - 6
+  - 2
+  - 2
   - 1
-  - 10
+  - 4
   towerIcons:
   - {fileID: 11400000, guid: d7a5669cf2f60974385a9c29af5a42a3, type: 2}
   - {fileID: 11400000, guid: 731d31bccd95e2143ae8930cde5313eb, type: 2}
