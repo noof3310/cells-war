@@ -286,6 +286,10 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3187145845934419519, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
+      propertyPath: textAlert
+      value: 
+      objectReference: {fileID: 1790622958977399724, guid: 297362f69777cc840b083151d6d60315, type: 3}
+    - target: {fileID: 3187145845934419519, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
       propertyPath: firePreFab
       value: 
       objectReference: {fileID: 611067059142909746, guid: 4eb55f60a6884374d96f12114fc0fd99, type: 3}

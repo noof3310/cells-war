@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DisasterGenerator : MonoBehaviour
 {
+    public Text textAlert;
     public GameObject rainPreFab;
     public GameObject firePreFab;
     public int fireAmount = 50;
@@ -14,7 +16,9 @@ public class DisasterGenerator : MonoBehaviour
     public float chanceForDisaster = 0.3f;
     public static Disaster selectedDisaster;
     public static GameObject selectedDisasterObject;
+    public float percentOfTowerDestroyOnFire = 0.2f;
     private bool generateSuccess;
+    private Text displayText;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,12 +48,17 @@ public class DisasterGenerator : MonoBehaviour
             }
             else if (selectedDisaster == Disaster.Fire)
             {
-                foreach (GameObject obj in fireList)
+                GameObject[] tower;
+                tower = GameObject.FindGameObjectsWithTag("Tower");
+                int amount = (int)Mathf.Floor(percentOfTowerDestroyOnFire * tower.Length);
+                for (int i = 0; i < amount; i++)
                 {
-                    Destroy(obj);
+                    GameObject to = tower[Random.Range(0, tower.Length)];
+                    Destroy(to);
                 }
                 fireList.Clear();
             }
+            selectedDisaster = Disaster.Unknown;
         }
         else if (GameManager.State != GameState.RushState && GameManager.State != GameState.RestState)
         {
@@ -60,15 +69,19 @@ public class DisasterGenerator : MonoBehaviour
 
     public void DisasterGenerate(Disaster disaster)
     {
-        selectedDisaster = disaster;
+        selectedDisaster = Disaster.Fire;
         Debug.Log("Disaster: " + disaster);
-        switch (disaster)
+        switch (Disaster.Fire)
         {
             case Disaster.Rain:
+                textAlert.text = "Decrease Player's speed !!!";
                 selectedDisasterObject = Instantiate(rainPreFab, position, Quaternion.identity);
+                displayText = (Text)Instantiate(textAlert, FindObjectOfType<Canvas>().transform);
                 selectedDisasterObject.name = "Disaster";
                 break;
             case Disaster.Fire:
+                textAlert.text = "Tower will be destroyed !!!";
+                displayText = (Text)Instantiate(textAlert, FindObjectOfType<Canvas>().transform);
 
                 for (int i = 0; i < fireAmount; i++)
                 {
@@ -76,10 +89,14 @@ public class DisasterGenerator : MonoBehaviour
                     fireList.Add(Instantiate(firePreFab, randomPos, Quaternion.Euler(new Vector3(-90, 0, 0))));
                 }
                 break;
-                // case Disaster.Typhoon:
-                //     selectedDisasterObject = Instantiate(typhoonPreFab, position, Quaternion.identity);
-                //     selectedDisasterObject.name = "Disaster";
-                //     break;
+            // case Disaster.Typhoon:
+            //     selectedDisasterObject = Instantiate(typhoonPreFab, position, Quaternion.identity);
+            //     selectedDisasterObject.name = "Disaster";
+            //     break;
+            default:
+                if (displayText != null)
+                    Destroy(displayText);
+                break;
         }
 
     }
