@@ -33,11 +33,11 @@ public class SpawnerManager : MonoBehaviour
 
         ResetAll();
 
-         if (resourceToSpawn.Count > 0) 
+         if (resourceToSpawn.Count > 0 && isResourceSpawner) 
         {
             int index = Random.Range(0, objectsToSpawn.Count);
             Vector3 randomPos = Random.insideUnitCircle * Radius;
-            for (int i = 0; i < resourcePoolAmount; i++) 
+            for (int i = 0; i < totalAmount; i++) 
             {    
                 GameObject obj = Instantiate(resourceToSpawn[index], randomPos ,Quaternion.identity);
                 obj.SetActive(false);
@@ -138,7 +138,7 @@ public class SpawnerManager : MonoBehaviour
                 return whiteBloodCellList[i];
             }
         }
-        if (willGrow) 
+        if (willGrow || whiteBloodCellList.Count < resourcePoolAmount) 
         {
             int index2 = Random.Range(0, resourceToSpawn.Count);
 
