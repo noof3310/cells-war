@@ -335,6 +335,7 @@ public class EnemyBehavior : MonoBehaviour
             foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
                 Destroy(img.gameObject);
             gameObject.GetComponent<EnemyBuffUIManager>().uiUse.Clear();
+            Destroy(gameObject.GetComponent<EnemyHealthBar>().uiUse.gameObject);
             Destroy(this.gameObject);
 
         }
@@ -345,8 +346,8 @@ public class EnemyBehavior : MonoBehaviour
             foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
                 Destroy(img.gameObject);
             gameObject.GetComponent<EnemyBuffUIManager>().uiUse.Clear();
-
-            Destroy(gameObject.GetComponent<BossUIManager>().uiUse);
+            Destroy(gameObject.GetComponent<EnemyHealthBar>().uiUse.gameObject);
+            Destroy(gameObject.GetComponent<BossUIManager>().uiUse.gameObject);
             Destroy(this.gameObject);
         }
 

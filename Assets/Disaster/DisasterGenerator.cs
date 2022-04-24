@@ -38,6 +38,7 @@ public class DisasterGenerator : MonoBehaviour
             {
                 DisasterGenerate(disaster);
             }
+
         }
         else if (GameManager.State != GameState.RushState && GameManager.State != GameState.RestState && generateSuccess)
         {
@@ -56,9 +57,13 @@ public class DisasterGenerator : MonoBehaviour
                     GameObject to = tower[Random.Range(0, tower.Length)];
                     Destroy(to);
                 }
+                foreach (GameObject fire in fireList)
+                {
+                    Destroy(fire);
+                }
                 fireList.Clear();
             }
-            selectedDisaster = Disaster.Unknown;
+            DisasterGenerate(Disaster.Unknown);
         }
         else if (GameManager.State != GameState.RushState && GameManager.State != GameState.RestState)
         {

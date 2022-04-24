@@ -46,6 +46,7 @@ public class Objective : MonoBehaviour
     {
         float resultHp = currentHealth - value;
         healthBar.SetHealthBar(resultHp);
+        Debug.Log("Objective Taken damange: " + resultHp);
         SetCurrentHealth(resultHp);
     }
 

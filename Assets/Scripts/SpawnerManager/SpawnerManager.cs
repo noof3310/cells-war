@@ -33,16 +33,16 @@ public class SpawnerManager : MonoBehaviour
 
         ResetAll();
 
-         if (resourceToSpawn.Count > 0 && isResourceSpawner) 
+        if (resourceToSpawn.Count > 0 && isResourceSpawner)
         {
             int index = Random.Range(0, objectsToSpawn.Count);
             Vector3 randomPos = Random.insideUnitCircle * Radius;
-            for (int i = 0; i < resourcePoolAmount; i++) 
-            {    
+            for (int i = 0; i < resourcePoolAmount; i++)
+            {
                 GameObject obj = Instantiate(resourceToSpawn[index], randomPos ,Quaternion.identity);
                 obj.SetActive(false);
                 whiteBloodCellList.Add(obj);
-            
+
             }
         }
     }
@@ -64,7 +64,7 @@ public class SpawnerManager : MonoBehaviour
                 Destroy(objects);
             }
             whiteBloodCellList.Clear();
-            amount = totalAmount;
+            amount = totalAmount + GameManager.level * 2;
             // GameManager.UpdateGameState(GameState.FightState);
 
         }
@@ -129,16 +129,16 @@ public class SpawnerManager : MonoBehaviour
 
 
     }
-    public GameObject GetPoolObject() 
+    public GameObject GetPoolObject()
     {
-        for (int i = 0; i < whiteBloodCellList.Count; i++) 
+        for (int i = 0; i < whiteBloodCellList.Count; i++)
         {
-            if (!whiteBloodCellList[i].activeInHierarchy) 
+            if (!whiteBloodCellList[i].activeInHierarchy)
             {
                 return whiteBloodCellList[i];
             }
         }
-        if (willGrow || whiteBloodCellList.Count < resourcePoolAmount) 
+        if (willGrow || whiteBloodCellList.Count < resourcePoolAmount)
         {
             int index2 = Random.Range(0, resourceToSpawn.Count);
 
@@ -157,7 +157,7 @@ public class SpawnerManager : MonoBehaviour
         amount = totalAmount;
         timer = initialTimer;
     }
-    
+
     bool SpawnResourceAtRandom()
     {
         // if (resourceToSpawn.Count > 0)

@@ -240,12 +240,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe2055cca0a25148852fb8600e12b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHealth: 100
+  baseMaxHealth: 10
   baseDamage: 20
   baseTimer: 2
   moveSpeed: 10
+  maxHealth: 0
   damage: 0
-  currentHealth: 100
+  currentHealth: 0
   gameObjectName: Enemy_Type_1
   chanceForBuff: 0.3
   maximumBuffNumber: 3
@@ -336,6 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 330624310642200814, guid: c90e3da9e6cc76342a3f38762cc4404f, type: 3}
   offsetY: {x: 0, y: 0, z: 0}
+  uiUse: {fileID: 0}
   healthBarLength: 100
 --- !u!1 &5549424709150502596
 GameObject:

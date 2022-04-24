@@ -32,7 +32,7 @@ public class TowerHealthBar : MonoBehaviour
         Vector2 targetPos;
         targetPos = Camera.main.WorldToScreenPoint(transform.position);
 
-        GUI.Box(new Rect(targetPos.x, Screen.height - targetPos.y, 60, 20), curHealth + "/" + maxHealth);
+        GUI.Box(new Rect(targetPos.x, Screen.height - targetPos.y, 60, 20), (int)curHealth + "/" + (int)maxHealth);
 
     }
 }

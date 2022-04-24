@@ -7,8 +7,8 @@ public class Tower : MonoBehaviour
     public float baseMaxHealth = 100;
     public float baseDamage;
     public float baseTimer;
-    private float maxHealth;
-    private float damage;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float damage;
     private float buffedTimer;
     private float timer;
 
