@@ -158,8 +158,8 @@ MonoBehaviour:
   camera: {fileID: 46937601}
   bound_x: 2.5
   bound_y: 1
-  min_fov: 2.5
-  max_fov: 5
+  min_fov: 4
+  max_fov: 10
   sensitivity: 5
 --- !u!81 &46937600
 AudioListener:
