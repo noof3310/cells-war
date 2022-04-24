@@ -262,22 +262,29 @@ public class EnemyRangebehavior : MonoBehaviour
         // Vector3 randomPos = Random.insideUnitCircle * Radius;
         if (target.tag == "Tower" && target.transform.parent.gameObject.GetComponent<Tower>().GetCurrentHealth() > 0)
         {
-            var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
-            obj.GetComponent<BulletBehavior>().SetTarget(target);
-            obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
+            // var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+            // obj.GetComponent<BulletBehavior>().SetTarget(target);
+            // obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
+            BulletController.current.GetBullet(ItemPrefab,transform.position,target,enemy.GetDamage());
         }
         else if (target.tag == "Objective" && target.GetComponent<Objective>().GetCurrentHealth() > 0)
         {
-            var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
-            obj.GetComponent<BulletBehavior>().SetTarget(target);
-            obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
+            // var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+            // obj.GetComponent<BulletBehavior>().SetTarget(target);
+            // obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
+            BulletController.current.GetBullet(ItemPrefab,transform.position,target,enemy.GetDamage());
         }
         else if (target.tag == "Enemy" && target.transform.parent.gameObject.GetComponent<Enemy>().GetCurrentHealth() > 0)
         {
-            var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
-            obj.GetComponent<BulletBehavior>().SetTarget(target);
-            obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
+            // var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+            // obj.GetComponent<BulletBehavior>().SetTarget(target);
+            // obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
+            BulletController.current.GetBullet(ItemPrefab,transform.position,target,enemy.GetDamage());
         }
+        // var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+        // obj.GetComponent<BulletBehavior>().SetTarget(target);
+        // obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
+        // BulletController.current.GetBullet(ItemPrefab,transform.position,target,enemy.GetDamage());
     }
 
     void Died()
