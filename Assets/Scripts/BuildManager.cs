@@ -10,7 +10,7 @@ public class BuildManager : MonoBehaviour
     public AstarPath astarPath;
 
     public List<GameObject> towers;
-    public List<int> towerCost;
+    public List<float> towerCost;
 
     public Tile[] towerIcons;
     public List<GameObject> UITowers;
@@ -30,8 +30,6 @@ public class BuildManager : MonoBehaviour
     public Transform handGridUI;
 
     private GameObject UIHand;
-
-    private GameObject targetTower;
 
     // Start is called before the first frame update
     void Start()
@@ -97,19 +95,8 @@ public class BuildManager : MonoBehaviour
             RenderUITowers(4);
         }
         else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            bool isAvailable = true;
-            Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector3)centerTowerPos, 0.01f);
-            foreach (var collider in colliders)
-            {
-                var go = collider.gameObject;
-                if (go.tag == "Tower" && !collider.isTrigger)
-                {
-                    isAvailable = false;
-                    break;
-                }
-            }
-            if (isAvailable && isSelected && PlayerDetails.whiteBloodCellNumber - towerCost[selectedTower] >= 0)
+        {            
+            if (isTileAvailable(centerTowerPos) && isSelected && PlayerDetails.whiteBloodCellNumber - towerCost[selectedTower] >= 0)
             {
                 Instantiate(towers[selectedTower], centerTowerPos, Quaternion.identity);
                 PlayerDetails.BuyTower(towerCost[selectedTower]);
@@ -123,43 +110,45 @@ public class BuildManager : MonoBehaviour
             foreach (var collider in colliders)
             {
                 var go = collider.gameObject;
-                if (go.tag == "Tower" && !collider.isTrigger) go.GetComponent<Tower>().SetDied(true);
-                updatePath(centerTowerPos);
+                if (go.tag == "Tower" && !collider.isTrigger)
+                {
+                    go.GetComponent<Tower>().SetDied(true);
+                    PlayerDetails.SellTower(towerCost[int.Parse(go.name.Substring(6, 1))]);
+                }
             }
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (inHand)
+            if (isTileAvailable(centerTowerPos))
             {
-                inHand = false;
-                RenderUIHand();
-                Instantiate(towers[handItem], centerTowerPos, Quaternion.identity);
-                updatePath(centerTowerPos);
+                if (inHand)
+                {
+                    inHand = false;
+                    RenderUIHand();
+                    Instantiate(towers[handItem], centerTowerPos, Quaternion.identity);
+                    updatePath(centerTowerPos);
+                }
             }
             else
             {
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPos, 0.1f);
-                foreach (var collider in colliders)
+                if (!inHand)
                 {
-                    var go = collider.gameObject;
-                    if (go.tag == "Tower" && !collider.isTrigger)
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPos, 0.1f);
+                    foreach (var collider in colliders)
                     {
-                        targetTower = go;
-                        break;
+                        var go = collider.gameObject;
+                        if (go.tag == "Tower" && !collider.isTrigger)
+                        {
+                            go.GetComponent<Tower>().SetDied(true);
+                            handItem = int.Parse(go.name.Substring(6, 1));
+                            break;
+                        }
                     }
+                    inHand = true;
+                    isSelected = false;
+                    RenderUITowers(0);
+                    RenderUIHand();
                 }
-                for (int i = 0; i < 4; i++) {
-                    if (targetTower.name == towers[i].name)
-                    {
-                        handItem = i;
-                    }
-                }
-                inHand = true;
-                isSelected = false;
-                RenderUITowers(0);
-                RenderUIHand();
-                targetTower.GetComponent<Tower>().SetDied(true);
-                updatePath(centerTowerPos);
             }
         }
 
@@ -228,6 +217,19 @@ public class BuildManager : MonoBehaviour
         }
 
         return towerPos;
+    }
+    bool isTileAvailable(Vector3Int centerTowerPos)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector3)centerTowerPos, 0.01f);
+        foreach (var collider in colliders)
+        {
+            var go = collider.gameObject;
+            if (go.tag == "Tower" && !collider.isTrigger)
+            {
+                return false;
+            }
+        }
+        return true;
     }
     public void updatePath(Vector3Int centerTowerPos)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDetails : MonoBehaviour
 {
-    public static int whiteBloodCellNumber;
+    public static float whiteBloodCellNumber;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +17,13 @@ public class PlayerDetails : MonoBehaviour
 
     }
 
-    public static void BuyTower(int cost)
+    public static void BuyTower(float cost)
     {
         whiteBloodCellNumber -= cost;
+    }
+    public static void SellTower(float cost)
+    {
+        whiteBloodCellNumber += cost / 2;
     }
 
     public static void ResetAll()
