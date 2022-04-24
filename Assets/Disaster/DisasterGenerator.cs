@@ -69,9 +69,9 @@ public class DisasterGenerator : MonoBehaviour
 
     public void DisasterGenerate(Disaster disaster)
     {
-        selectedDisaster = Disaster.Fire;
+        selectedDisaster = disaster;
         Debug.Log("Disaster: " + disaster);
-        switch (Disaster.Fire)
+        switch (disaster)
         {
             case Disaster.Rain:
                 textAlert.text = "Decrease Player's speed !!!";
