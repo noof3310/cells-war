@@ -329,7 +329,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void TriggerDied()
     {
-        if (enemy.GetDied())
+        if (enemy.GetDied() && !isBoss)
         {
             RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
             foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
@@ -337,6 +337,17 @@ public class EnemyBehavior : MonoBehaviour
             gameObject.GetComponent<EnemyBuffUIManager>().uiUse.Clear();
             Destroy(this.gameObject);
 
+        }
+        else if (enemy.GetDied() && isBoss)
+        {
+            RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
+
+            foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
+                Destroy(img.gameObject);
+            gameObject.GetComponent<EnemyBuffUIManager>().uiUse.Clear();
+
+            Destroy(gameObject.GetComponent<BossUIManager>().uiUse);
+            Destroy(this.gameObject);
         }
 
     }
