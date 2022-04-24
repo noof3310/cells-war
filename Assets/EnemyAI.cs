@@ -56,7 +56,6 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        Debug.Log(path.vectorPath.Count);
 
         if (currentWaypoint >= path.vectorPath.Count)
         {
@@ -69,7 +68,7 @@ public class EnemyAI : MonoBehaviour
 
         if ((path.vectorPath[currentWaypoint] - target.position).magnitude <= keepDistance)
         {
-            Debug.Log("stop");
+            // Debug.Log("stop");
             return;
         }
 

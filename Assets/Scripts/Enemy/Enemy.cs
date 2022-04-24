@@ -147,7 +147,15 @@ public class Enemy : MonoBehaviour
     public void TakenDamage(float value)
     {
         float resultHp = currentHealth - value;
-        SetCurrentHealth(resultHp);
+        if (resultHp >= 0)
+        {
+            SetCurrentHealth(resultHp);
+        }
+
+        else
+        {
+            SetCurrentHealth(0);
+        }
     }
 
 

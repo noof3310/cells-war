@@ -65,7 +65,7 @@ public class SpawnerManager : MonoBehaviour
             }
             whiteBloodCellList.Clear();
             amount = totalAmount;
-            GameManager.UpdateGameState(GameState.FightState);
+            // GameManager.UpdateGameState(GameState.FightState);
 
         }
 

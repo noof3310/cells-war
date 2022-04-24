@@ -19,11 +19,11 @@ public class BossAlert : MonoBehaviour
     void Update()
     {
 
-        if (textObject == null && (GameManager.level + 1) % levelBossSpawn == 0)
+        if (textObject == null && (GameManager.level) % levelBossSpawn == 0)
         {
             textObject = (GameObject)Instantiate(bossAlert, FindObjectOfType<Canvas>().transform);
         }
-        else if (textObject != null && (GameManager.level + 1) % levelBossSpawn != 0)
+        else if (textObject != null && (GameManager.level) % levelBossSpawn != 0)
         {
             Destroy(textObject);
         }
