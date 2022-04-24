@@ -29,11 +29,25 @@ public class BuildManager : MonoBehaviour
 
     public Transform handGridUI;
 
-    public List<GameObject> UIHands;
+    private GameObject UIHand;
+
+    private GameObject targetTower;
 
     // Start is called before the first frame update
     void Start()
     {
+        UIHand = new GameObject("UI Tower");
+        UIHand.transform.parent = handGridUI;
+        UIHand.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        Image UIImage = UIHand.AddComponent<Image>();
+        UIImage.sprite = towerIcons[0].sprite;
+
+        Color tileColor = UIImage.color;
+        tileColor.a = 0f;
+
+        UIImage.color = tileColor;
+
         int i = 0;
         foreach (Tile towerIcon in towerIcons)
         {
@@ -41,10 +55,10 @@ public class BuildManager : MonoBehaviour
             UITower.transform.parent = tileGridUI;
             UITower.transform.localScale = new Vector3(1f, 1f, 1f);
 
-            Image UIImage = UITower.AddComponent<Image>();
+            UIImage = UITower.AddComponent<Image>();
             UIImage.sprite = towerIcon.sprite;
 
-            Color tileColor = UIImage.color;
+            tileColor = UIImage.color;
             tileColor.a = 0.5f;
 
             if (i == selectedTower && isSelected) tileColor.a = 1f;
@@ -54,30 +68,13 @@ public class BuildManager : MonoBehaviour
 
             i++;
         }
-        foreach (Tile towerIcon in towerIcons)
-        {
-            GameObject UIHand = new GameObject("UI Tower");
-            UIHand.transform.parent = handGridUI;
-            UIHand.transform.localScale = new Vector3(1f, 1f, 1f);
-
-            Image UIImage = UIHand.AddComponent<Image>();
-            UIImage.sprite = towerIcon.sprite;
-
-            Color tileColor = UIImage.color;
-            tileColor.a = 0f;
-
-            UIImage.color = tileColor;
-            UIHands.Add(UIHand);
-            if(i==5) break;
-        }
     }
 
     // Update is called once per frame
     async void Update()
     {
-        Vector3 towerPos = GetTowerPos();
-        Vector3Int centerTowerPos = Vector3Int.FloorToInt(towerPos);
-        Bounds bounds = new Bounds(centerTowerPos, new Vector3(5f, 5f, 5f));
+        Vector3 playerPos = player.getPosition();
+        Vector3Int centerTowerPos = Vector3Int.FloorToInt(playerPos);
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -101,26 +98,57 @@ public class BuildManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isSelected && PlayerDetails.whiteBloodCellNumber - towerCost[selectedTower] >= 0)
+            bool isAvailable = true;
+            Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector3)centerTowerPos, 0.01f);
+            foreach (var collider in colliders)
+            {
+                var go = collider.gameObject;
+                if (go.tag == "Tower" && !collider.isTrigger)
+                {
+                    isAvailable = false;
+                    break;
+                }
+            }
+            if (isAvailable && isSelected && PlayerDetails.whiteBloodCellNumber - towerCost[selectedTower] >= 0)
             {
                 Instantiate(towers[selectedTower], centerTowerPos, Quaternion.identity);
                 PlayerDetails.BuyTower(towerCost[selectedTower]);
-                updatePath(bounds);
+                updatePath(centerTowerPos);
             }
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            Collider2D collider = Physics2D.OverlapCircle(player.getPosition(), 0.5f);
-            var go = collider.gameObject;
-            Debug.Log(go);
-            if (go.tag == "Tower") Destroy(go);
-            updatePath(bounds);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPos, 0.1f);
+            foreach (var collider in colliders)
+            {
+                var go = collider.gameObject;
+                if (go.tag == "Tower" && !collider.isTrigger) go.GetComponent<Tower>().SetDied(true);
+                updatePath(centerTowerPos);
+            }
         }
-        /*else if (Input.GetKeyDown(KeyCode.Z))
+        else if (Input.GetKeyDown(KeyCode.Z))
         {
-            if(isSelected) {
-                for (int i = 0; i < 5; i++) {
-                    if (tilemap.GetTile(centerTowerPosInt) == towers[i])
+            if (inHand)
+            {
+                inHand = false;
+                RenderUIHand();
+                Instantiate(towers[handItem], centerTowerPos, Quaternion.identity);
+                updatePath(centerTowerPos);
+            }
+            else
+            {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPos, 0.1f);
+                foreach (var collider in colliders)
+                {
+                    var go = collider.gameObject;
+                    if (go.tag == "Tower" && !collider.isTrigger)
+                    {
+                        targetTower = go;
+                        break;
+                    }
+                }
+                for (int i = 0; i < 4; i++) {
+                    if (targetTower.name == towers[i].name)
                     {
                         handItem = i;
                     }
@@ -129,17 +157,10 @@ public class BuildManager : MonoBehaviour
                 isSelected = false;
                 RenderUITowers(0);
                 RenderUIHand();
-                // tilemap.SetTile(tilemap.WorldToCell(towerPos), null);
-                updatePath(bounds);
+                targetTower.GetComponent<Tower>().SetDied(true);
+                updatePath(centerTowerPos);
             }
-            else if(inHand) {
-                inHand = false;
-                RenderUIHand();
-                // tilemap.SetTile(tilemap.WorldToCell(towerPos), towers[handItem]);
-                Instantiate(towers[selectedTower], centerTowerPos, Quaternion.identity);
-                updatePath(bounds);
-            }
-        }*/
+        }
 
     }
 
@@ -169,27 +190,18 @@ public class BuildManager : MonoBehaviour
 
     void RenderUIHand()
     {
+        Image UIImage = UIHand.GetComponent<Image>();
+        Color tileColor = UIImage.color;
+
         if (inHand) {
-            int i = 0;
-            foreach (GameObject UIhand in UIHands)
-            {
-                Image UIImage = UIhand.GetComponent<Image>();
-                Color tileColor = UIImage.color;
-                tileColor.a = 1f;
-                UIImage.sprite = towerIcons[handItem].sprite;
-                UIImage.color = tileColor;
-                i++;
-            }
+            tileColor.a = 1f;
+            UIImage.sprite = towerIcons[handItem].sprite;
         }
         else {
-            foreach (GameObject UIhand in UIHands)
-            {
-                Image UIImage = UIhand.GetComponent<Image>();
-                Color tileColor = UIImage.color;
-                tileColor.a = 0f;
-                UIImage.color = tileColor;
-            }
+            tileColor.a = 0f;
         }
+
+        UIImage.color = tileColor;
     }
 
     Vector3 GetTowerPos()
@@ -216,8 +228,9 @@ public class BuildManager : MonoBehaviour
 
         return towerPos;
     }
-    void updatePath(Bounds bounds)
+    public void updatePath(Vector3Int centerTowerPos)
     {
+        Bounds bounds = new Bounds(centerTowerPos, new Vector3(5f, 5f, 5f));
         var guo = new GraphUpdateObject(bounds);
         guo.updatePhysics = true;
         astarPath.UpdateGraphs(guo);

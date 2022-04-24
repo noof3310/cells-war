@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8221600887576459434}
   - component: {fileID: 8221600887576459435}
-  - component: {fileID: 8221600887576459432}
-  - component: {fileID: 8221600887576459431}
   - component: {fileID: 8221600887576459430}
+  - component: {fileID: 8221600887576459431}
   - component: {fileID: 8094517219860477054}
-  - component: {fileID: 8465189145238517150}
+  - component: {fileID: 8221600887576459432}
+  - component: {fileID: 597354253620250984}
   m_Layer: 7
   m_Name: Tower_2
   m_TagString: Tower
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 1304221267
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8140174274467912094, guid: a10db78b4df9e974a8b6e36be4e4968e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b4e576dcf065ead44ada00b9b284cbcb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,6 +87,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8221600887576459430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8221600887576459428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878cbaa2f481e724783fad09756e8f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMaxHealth: 500
+  baseDamage: 0
+  baseTimer: 0
+  gameObjectName: Tower_2
+  chanceForBuff: 0.3
+  maximumBuffNumber: 3
+  currentHealth: 0
+  towerBuffs: 
+--- !u!114 &8221600887576459431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8221600887576459428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c018c8880f8144f81e248fb9f2ebdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDistance: 0
+  ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
+  targetTagName: Enemy
+  target: {fileID: 0}
+--- !u!114 &8094517219860477054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8221600887576459428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1754464c0ec1c640a1050e58bd56c0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarLength: 100
 --- !u!61 &8221600887576459432
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -104,7 +153,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9916667, y: 1.1333333}
+    oldSize: {x: 1.0666667, y: 1.2666667}
     newSize: {x: 1.2, y: 1.1583333}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -113,56 +162,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8221600887576459431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8221600887576459428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02c018c8880f8144f81e248fb9f2ebdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDistance: 10
-  ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
-  targetTagName: Enemy
-  target: {fileID: 0}
---- !u!114 &8221600887576459430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8221600887576459428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 878cbaa2f481e724783fad09756e8f1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseMaxHealth: 100
-  baseDamage: 2
-  baseTimer: 1
-  gameObjectName: Tower_2
-  chanceForBuff: 0.3
-  maximumBuffNumber: 3
-  currentHealth: 0
-  towerBuffs: 
---- !u!114 &8094517219860477054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8221600887576459428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1754464c0ec1c640a1050e58bd56c0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBarLength: 100
---- !u!58 &8465189145238517150
+--- !u!58 &597354253620250984
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,4 +177,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 0.0001

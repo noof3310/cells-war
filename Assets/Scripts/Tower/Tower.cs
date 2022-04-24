@@ -9,7 +9,10 @@ public class Tower : MonoBehaviour
     public float baseTimer;
     private float maxHealth;
     private float damage;
+    private float buffedTimer;
     private float timer;
+
+    public bool isBuffTower = false;
 
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
@@ -18,8 +21,6 @@ public class Tower : MonoBehaviour
     private bool died;
     public List<TowerBuff> towerBuffs;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class Tower : MonoBehaviour
         died = false;
         damage = baseDamage;
         maxHealth = baseMaxHealth;
+        buffedTimer = baseTimer;
         timer = baseTimer;
         SetCurrentHealth(baseMaxHealth);
         // RandomBuff();
@@ -125,6 +127,42 @@ public class Tower : MonoBehaviour
     {
         float resultHp = currentHealth - value;
         SetCurrentHealth(resultHp);
+    }
+
+    public float GetBuffedTimer()
+    {
+        return buffedTimer;
+    }
+
+    public void GetBuffed(TowerBuff buff)
+    {
+        towerBuffs.Add(buff);
+        switch (buff)
+        {
+            case TowerBuff.Attack:
+                damage = baseDamage * 2;
+                break;
+            case TowerBuff.Speed:
+                buffedTimer = baseTimer / 2;
+                break;
+        }
+    }
+
+    public void CancleBuff(TowerBuff buff)
+    {
+        towerBuffs.Remove(buff);
+        if (!towerBuffs.Contains(buff))
+        {
+            switch (buff)
+            {
+                case TowerBuff.Attack:
+                    damage = baseDamage;
+                    break;
+                case TowerBuff.Speed:
+                    buffedTimer = baseTimer;
+                    break;
+            }
+        }
     }
 }
 

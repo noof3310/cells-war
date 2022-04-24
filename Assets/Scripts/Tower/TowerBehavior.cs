@@ -1,3 +1,4 @@
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,27 +7,44 @@ using UnityEngine.UI;
 public class TowerBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
+    public TowerBuff buffEffect;
+    public float buffRange = 2f;
     public float attackDistance;
     public GameObject ItemPrefab;
     public string targetTagName = "Enemy";
     [SerializeField] private GameObject target;
+    private BuildManager buildManager;
     private bool inRange;
     private bool attackMode;
     private bool cooling = false;
     private float intTimer;
     private Tower tower;
+    public List<Tower> towerInRange = new List<Tower>();
 
     void Start()
     {
+        buildManager = GameObject.Find("BuildManager").GetComponent<BuildManager>();
         tower = gameObject.GetComponent(typeof(Tower)) as Tower;
         intTimer = tower.baseTimer;
         attackMode = false;
         target = null;
+
+        if (tower.isBuffTower)
+        {
+            BuffTowerInRange();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        intTimer = tower.GetBuffedTimer();
+
+        if (tower.isBuffTower)
+        {
+            BuffTowerInRange();
+        }
+
         if (tower.GetCurrentHealth() <= 0 && !tower.GetDied())
         {
             tower.SetDied(true);
@@ -133,6 +151,8 @@ public class TowerBehavior : MonoBehaviour
 
     void Died()
     {
+        buildManager.updatePath(Vector3Int.FloorToInt(transform.position));
+        if (tower.isBuffTower) CancleBuff();
         RemoveFromList(this.gameObject);  //I made it 28 just to give it leeway so the gameObject doesnt get destroyed before it invokes the method
         Destroy(this.gameObject);
         // foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
@@ -144,7 +164,40 @@ public class TowerBehavior : MonoBehaviour
         SpawnerManager.enemyList.Remove(gameObject);
     }
 
+    void BuffTowerInRange()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, buffRange);
+        foreach (var collider in colliders)
+        {
+            var go = collider.gameObject;
+            if (!(go == gameObject) && go.tag == "Tower" && !collider.isTrigger)
+            {
+                Tower tower = go.GetComponent<Tower>();
+                if (!towerInRange.Contains(tower))
+                {
+                    towerInRange.Add(tower);
+                    tower.GetBuffed(buffEffect);
+                    Debug.Log("Buff " + tower + " " + buffEffect);
+                }
+            }
+        }
+    }
 
-
-
+    void CancleBuff()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, buffRange);
+        foreach (var collider in colliders)
+        {
+            var go = collider.gameObject;
+            if (!(go == gameObject) && go.tag == "Tower" && !collider.isTrigger)
+            {
+                Tower tower = go.GetComponent<Tower>();
+                if (towerInRange.Contains(tower))
+                {
+                    tower.CancleBuff(buffEffect);
+                    Debug.Log("Cancle Buff " + tower + " " + buffEffect);
+                }
+            }
+        }
+    }
 }

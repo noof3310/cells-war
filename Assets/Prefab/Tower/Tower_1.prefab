@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 666191636440127350}
   - component: {fileID: 666191636440127337}
-  - component: {fileID: 666191636440127341}
-  - component: {fileID: 666191636440127338}
   - component: {fileID: 666191636440127339}
+  - component: {fileID: 666191636440127338}
   - component: {fileID: 4306755702213478664}
-  - component: {fileID: -871864731692736641}
+  - component: {fileID: 666191636440127341}
+  - component: {fileID: 2126115498838822518}
   m_Layer: 7
   m_Name: Tower_1
   m_TagString: Tower
@@ -87,6 +87,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &666191636440127339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666191636440127340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878cbaa2f481e724783fad09756e8f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMaxHealth: 100
+  baseDamage: 5
+  baseTimer: 0.25
+  gameObjectName: Tower_1
+  chanceForBuff: 0.3
+  maximumBuffNumber: 3
+  currentHealth: 0
+  towerBuffs: 
+--- !u!114 &666191636440127338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666191636440127340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c018c8880f8144f81e248fb9f2ebdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDistance: 3
+  ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
+  targetTagName: Enemy
+  target: {fileID: 0}
+--- !u!114 &4306755702213478664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666191636440127340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1754464c0ec1c640a1050e58bd56c0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarLength: 100
 --- !u!61 &666191636440127341
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -113,56 +162,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &666191636440127338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666191636440127340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02c018c8880f8144f81e248fb9f2ebdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDistance: 10
-  ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
-  targetTagName: Enemy
-  target: {fileID: 0}
---- !u!114 &666191636440127339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666191636440127340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 878cbaa2f481e724783fad09756e8f1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseMaxHealth: 100
-  baseDamage: 2
-  baseTimer: 1
-  gameObjectName: Tower_1
-  chanceForBuff: 0.3
-  maximumBuffNumber: 3
-  currentHealth: 0
-  towerBuffs: 
---- !u!114 &4306755702213478664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666191636440127340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1754464c0ec1c640a1050e58bd56c0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBarLength: 100
---- !u!58 &-871864731692736641
+--- !u!58 &2126115498838822518
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,4 +177,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 1.5
