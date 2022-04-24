@@ -83,7 +83,6 @@ public class TowerBehavior : MonoBehaviour
     void Attack()
     {
         Shoot();
-        Debug.Log("Tower Shoot!!");
         attackMode = true;
         cooling = true;
         tower.SetTimer(intTimer);
@@ -93,9 +92,26 @@ public class TowerBehavior : MonoBehaviour
     void Shoot()
     {
         // Vector3 randomPos = Random.insideUnitCircle * Radius;
-        var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
-        obj.GetComponent<BulletBehavior>().SetTarget(target);
-        obj.GetComponent<BulletBehavior>().SetDamage(tower.GetDamage());
+        if (target.tag == "Tower" && target.transform.parent.gameObject.GetComponent<Tower>().GetCurrentHealth() > 0)
+        {
+            var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+            obj.GetComponent<BulletBehavior>().SetTarget(target);
+            obj.GetComponent<BulletBehavior>().SetDamage(tower.GetDamage());
+        }
+        else if (target.tag == "Objective" && target.GetComponent<Objective>().GetCurrentHealth() > 0)
+        {
+            var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+            obj.GetComponent<BulletBehavior>().SetTarget(target);
+            obj.GetComponent<BulletBehavior>().SetDamage(tower.GetDamage());
+        }
+        else if (target.tag == "Enemy" && target.transform.parent.gameObject.GetComponent<Enemy>().GetCurrentHealth() > 0)
+        {
+            var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
+            obj.GetComponent<BulletBehavior>().SetTarget(target);
+            obj.GetComponent<BulletBehavior>().SetDamage(tower.GetDamage());
+        }
+
+
     }
 
     void StopAttack()

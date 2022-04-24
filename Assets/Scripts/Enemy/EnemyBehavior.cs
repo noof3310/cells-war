@@ -11,9 +11,10 @@ public class EnemyBehavior : MonoBehaviour
     public float rayCastLength;
     public float attackDistance;
     public bool isBoss;
-    // public Transform player;
+    // public Transform Objective;
     private GameObject coreTarget;
     private bool attackMode;
+    private bool shouldAttack;
     private Rigidbody2D rb;
     private Vector2 movement;
     private RaycastHit2D hit;
@@ -163,6 +164,13 @@ public class EnemyBehavior : MonoBehaviour
 
     }
 
+    public float GetDistanceWithCoreTarget()
+    {
+
+        float distance = Vector2.Distance(transform.position, coreTarget.transform.position);
+        return distance;
+    }
+
     public void TriggerCooling()
     {
         cooling = true;
@@ -196,6 +204,7 @@ public class EnemyBehavior : MonoBehaviour
         }
         else if (target.tag == "Tower")
         {
+
             foreach (Collider2D col in colliders)
             {
                 distance = Vector2.Distance(transform.position, col.transform.position);
@@ -205,25 +214,60 @@ public class EnemyBehavior : MonoBehaviour
                 }
             }
 
+            List<Collider2D> tempColliders = new List<Collider2D>();
+
+            foreach (Collider2D col in colliders)
+            {
+                if (!col.name.Contains("Tower"))
+                {
+                    tempColliders.Add(col);
+                }
+            }
+
+            colliders = tempColliders;
+
         }
     }
 
-
-    void OnTriggerStay2D(Collider2D trig)
+    private void OnTriggerExit2D(Collider2D trig)
     {
         if (reachedEndOfPath && trig.CompareTag("Tower") && trig.name.Contains("Tower") && !cooling && isBoss)
         {
             inRange = true;
-            target = trig.gameObject;
-            if (!colliders.Contains(trig)) { colliders.Add(trig); }
+
+            if (!colliders.Contains(trig)) { colliders.Remove(trig); }
         }
-        else if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling)
+    }
+
+    void OnTriggerStay2D(Collider2D trig)
+    {
+        if (reachedEndOfPath && trig.CompareTag("Tower") && trig.name.Contains("Tower") && !cooling && isBoss && GetDistanceWithCoreTarget() > attackDistance)
+        {
+            inRange = true;
+            if (!colliders.Contains(trig)) { colliders.Add(trig); }
+            float minDistance = 1000f;
+            Collider2D selectedCol = new Collider2D();
+            foreach (Collider2D col in colliders)
+            {
+                distance = Vector2.Distance(transform.position, col.transform.position);
+                if (distance <= minDistance)
+                {
+                    minDistance = distance;
+                    selectedCol = col;
+                }
+            }
+            target = selectedCol.gameObject;
+
+        }
+        else if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling && GetDistanceWithCoreTarget() > attackDistance)
         {
             target = trig.gameObject;
             inRange = true;
         }
-        else if (trig.CompareTag("Objective") && !cooling)
+        else if (trig.CompareTag("Objective") && !cooling && GetDistanceWithCoreTarget() <= attackDistance)
         {
+            colliders.Clear();
+            target = coreTarget;
             inRange = true;
 
         }
