@@ -108,8 +108,8 @@ public class EnemyRangebehavior : MonoBehaviour
                 }
             }
 
-            if (!enemy.GetDied())
-                EnemyLogic();
+
+            EnemyLogic();
             if (inRange == false)
             {
                 anim.SetBool("canWalk", false);
@@ -118,47 +118,52 @@ public class EnemyRangebehavior : MonoBehaviour
         }
 
         //Pathfinding Move
-
-        if (path == null)
+        if (!enemy.GetDied())
         {
-            return;
-        }
+            if (path == null)
+            {
+                return;
+            }
 
-        // Debug.Log(path.vectorPath.Count);
+            // Debug.Log(path.vectorPath.Count);
 
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            reachedEndOfPath = true;
-            return;
-        } else
-        {
-            reachedEndOfPath = false;
-        }
+            if (currentWaypoint >= path.vectorPath.Count)
+            {
+                reachedEndOfPath = true;
+                return;
+            }
+            else
+            {
+                reachedEndOfPath = false;
+            }
 
-        if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
-        {
-            // Debug.Log("stop");
-            return;
-        }
+            if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
+            {
+                // Debug.Log("stop");
+                return;
+            }
 
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
+            Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+            Vector2 force = direction * speed * Time.deltaTime;
 
-        rb.AddForce(force);
+            rb.AddForce(force);
 
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
-        if (distance < nextWaypointDistance)
-        {
-            currentWaypoint++;
-        }
+            if (distance < nextWaypointDistance)
+            {
+                currentWaypoint++;
+            }
 
-        if (rb.velocity.x >= 0.01f)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        } else if (rb.velocity.x <= -0.01f)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            if (rb.velocity.x >= 0.01f)
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+            else if (rb.velocity.x <= -0.01f)
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
+
         }
 
 
@@ -263,15 +268,15 @@ public class EnemyRangebehavior : MonoBehaviour
         // Vector3 randomPos = Random.insideUnitCircle * Radius;
         if (target.tag == "Tower" && target.transform.parent.gameObject.GetComponent<Tower>().GetCurrentHealth() > 0)
         {
-            BulletController.current.GetBullet(ItemPrefab,transform.position,target,enemy.GetDamage());
+            BulletController.current.GetBullet(ItemPrefab, transform.position, target, enemy.GetDamage());
         }
         else if (target.tag == "Objective" && target.GetComponent<Objective>().GetCurrentHealth() > 0)
         {
-            BulletController.current.GetBullet(ItemPrefab,transform.position,target,enemy.GetDamage());
+            BulletController.current.GetBullet(ItemPrefab, transform.position, target, enemy.GetDamage());
         }
         else if (target.tag == "Enemy" && target.transform.parent.gameObject.GetComponent<Enemy>().GetCurrentHealth() > 0)
         {
-            BulletController.current.GetBullet(ItemPrefab,transform.position,target,enemy.GetDamage());
+            BulletController.current.GetBullet(ItemPrefab, transform.position, target, enemy.GetDamage());
         }
         // var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
         // obj.GetComponent<BulletBehavior>().SetTarget(target);

@@ -123,9 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe2055cca0a25148852fb8600e12b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHealth: 20
-  baseDamage: 50
-  baseTimer: 7
+  baseMaxHealth: 30
+  baseDamage: 30
+  baseTimer: 10
   moveSpeed: 10
   maxHealth: 0
   damage: 0

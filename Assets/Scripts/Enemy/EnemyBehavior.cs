@@ -120,48 +120,54 @@ public class EnemyBehavior : MonoBehaviour
         }
 
         //Pathfinding Move
-
-        if (path == null)
+        if (!enemy.GetDied())
         {
-            return;
+            if (path == null)
+            {
+                return;
+            }
+
+            if (currentWaypoint >= path.vectorPath.Count)
+            {
+                reachedEndOfPath = true;
+                return;
+            }
+            else
+            {
+                reachedEndOfPath = false;
+            }
+
+            if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
+            {
+                // Debug.Log("stop");
+                return;
+            }
+
+            Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+            Vector2 force = direction * speed * Time.deltaTime;
+
+            rb.AddForce(force);
+
+            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+
+            if (distance < nextWaypointDistance)
+            {
+                currentWaypoint++;
+            }
+
+            if (rb.velocity.x >= 0.01f)
+            {
+                if (transform.localScale.x < 0)
+                    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            }
+            else if (rb.velocity.x <= -0.01f)
+            {
+                if (transform.localScale.x > 0)
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            }
         }
 
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            reachedEndOfPath = true;
-            return;
-        } else
-        {
-            reachedEndOfPath = false;
-        }
 
-        if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
-        {
-            // Debug.Log("stop");
-            return;
-        }
-
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
-
-        rb.AddForce(force);
-
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-
-        if (distance < nextWaypointDistance)
-        {
-            currentWaypoint++;
-        }
-
-        if (rb.velocity.x >= 0.01f)
-        {
-            if (transform.localScale.x < 0)
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        } else if (rb.velocity.x <= -0.01f)
-        {
-            if (transform.localScale.x > 0)
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        }
 
     }
 
@@ -246,7 +252,20 @@ public class EnemyBehavior : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D trig)
     {
-        if (reachedEndOfPath && trig.CompareTag("Tower") && trig.name.Contains("Tower") && !cooling && isBoss)
+
+        if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling && !isBoss && GetDistanceWithCoreTarget() > attackDistance)
+        {
+            target = trig.gameObject;
+            inRange = true;
+        }
+        else if (trig.CompareTag("Objective") && !cooling && GetDistanceWithCoreTarget() <= attackDistance)
+        {
+            colliders.Clear();
+            target = coreTarget;
+            inRange = true;
+
+        }
+        else if (reachedEndOfPath && trig.CompareTag("Tower") && trig.name.Contains("Tower") && !cooling && isBoss && GetDistanceWithCoreTarget() > attackDistance)
         {
             inRange = true;
 
@@ -263,18 +282,6 @@ public class EnemyBehavior : MonoBehaviour
                 }
             }
             target = selectedCol.gameObject;
-
-        }
-        else if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling)
-        {
-            target = trig.gameObject;
-            inRange = true;
-        }
-        else if (trig.CompareTag("Objective") && !cooling && GetDistanceWithCoreTarget() <= attackDistance)
-        {
-            colliders.Clear();
-            target = coreTarget;
-            inRange = true;
 
         }
     }

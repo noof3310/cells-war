@@ -147,7 +147,7 @@ public class TowerBehavior : MonoBehaviour
         }
     }
 
-    void Died()
+    public void Died()
     {
         buildManager.updatePath(Vector3Int.FloorToInt(transform.position));
         if (tower.isBuffTower) CancleBuff();

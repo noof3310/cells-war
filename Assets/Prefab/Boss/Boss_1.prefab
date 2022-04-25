@@ -319,7 +319,7 @@ MonoBehaviour:
   moveSpeed: 5
   maxHealth: 0
   damage: 0
-  currentHealth: 1000
+  currentHealth: 300
   gameObjectName: Boss_1
   chanceForBuff: 0.3
   maximumBuffNumber: 3
