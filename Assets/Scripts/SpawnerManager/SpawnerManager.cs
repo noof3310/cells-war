@@ -22,6 +22,7 @@ public class SpawnerManager : MonoBehaviour
 
     public int amount;
     public int totalAmount;
+    public int ratioForEnemyAmountPerLevel;
     public float Radius = 50;
 
     public float initialTimer;
@@ -53,10 +54,14 @@ public class SpawnerManager : MonoBehaviour
 
         if (shouldSpawnBoss && GameManager.State == GameState.FightState)
         {
-            SpawnObjectAtRandom(bossToSpawn);
+            int bossAmount = (int)GameManager.level / GameManager.levelBossSpawn;
+            for (int i = 0; i < bossAmount; i++)
+            {
+                SpawnObjectAtRandom(bossToSpawn);
+            }
             shouldSpawnBoss = false;
         }
-
+        // For resource spawning
         if (isResourceSpawner && GameManager.State == GameState.RestState && whiteBloodCellList.Count > 0)
         {
             foreach (var objects in whiteBloodCellList)
@@ -64,7 +69,7 @@ public class SpawnerManager : MonoBehaviour
                 Destroy(objects);
             }
             whiteBloodCellList.Clear();
-            amount = totalAmount + GameManager.level * 2;
+            amount = totalAmount;
             // GameManager.UpdateGameState(GameState.FightState);
 
         }
@@ -89,11 +94,11 @@ public class SpawnerManager : MonoBehaviour
                     amount -= 1;
             }
         }
-
+        // For Enemy spawning
         if (isEnemySpawner && enemyList.Count == 0 && amount == 0 && GameManager.State == GameState.FightState)
         {
             GameManager.UpdateGameState(GameState.RushState);
-            amount = totalAmount;
+            amount = totalAmount + GameManager.level * ratioForEnemyAmountPerLevel;
             GameManager.level += 1;
             if (GameManager.level % GameManager.levelBossSpawn == 0)
             {

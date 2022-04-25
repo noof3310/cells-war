@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     }
     public static void HandleFightState()
     {
+        Timer.SetCurrentTime(0);
     }
     public static void HandleLoseState()
     {

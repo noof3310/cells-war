@@ -17,6 +17,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (currentTime <= 0 && GameManager.canChangeState)
         {
             GameManager.canChangeState = false;
@@ -31,6 +32,9 @@ public class Timer : MonoBehaviour
                 case GameState.SpawnState:
                     countdownText.text = "Fight!!";
                     GameManager.UpdateGameState(GameState.FightState);
+                    break;
+                case GameState.FightState:
+                    countdownText.text = "Fight!!";
                     break;
                 default:
                     break;
