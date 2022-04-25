@@ -7,6 +7,7 @@ public class WhiteBloodCell : MonoBehaviour
 {
     // Start is called before the first frame update
     public float numberOfWhiteBloodCell;
+    public static int valueOfWhiteBloodCell = 10;
     public Text countText;
 
     // public Text whiteBloodCell = "test";

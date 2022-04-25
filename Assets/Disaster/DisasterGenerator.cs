@@ -35,7 +35,7 @@ public class DisasterGenerator : MonoBehaviour
             float rand = Random.Range(0f, 1f);
             if (chanceForDisaster > rand)
             {
-                DisasterGenerate(disaster);
+                DisasterGenerate(Disaster.Fire);
             }
 
         }
@@ -48,14 +48,7 @@ public class DisasterGenerator : MonoBehaviour
             }
             else if (selectedDisaster == Disaster.Fire)
             {
-                GameObject[] tower;
-                tower = GameObject.FindGameObjectsWithTag("Tower");
-                int amount = (int)Mathf.Floor(percentOfTowerDestroyOnFire * tower.Length);
-                for (int i = 0; i < amount; i++)
-                {
-                    GameObject to = tower[Random.Range(0, tower.Length)];
-                    to.GetComponent<TowerBehavior>().Died();
-                }
+
                 foreach (GameObject fire in fireList)
                 {
                     Destroy(fire);
@@ -84,13 +77,22 @@ public class DisasterGenerator : MonoBehaviour
                 selectedDisasterObject.name = "Disaster";
                 break;
             case Disaster.Fire:
-                textAlert.text = "Tower will be destroyed !!!";
+                textAlert.text = "Tower was destroyed !!!";
                 displayText = (Text)Instantiate(textAlert, FindObjectOfType<Canvas>().transform);
 
                 for (int i = 0; i < fireAmount; i++)
                 {
                     Vector3 randomPos = Random.insideUnitCircle * Radius;
                     fireList.Add(Instantiate(firePreFab, randomPos, Quaternion.Euler(new Vector3(-90, 0, 0))));
+                }
+
+                GameObject[] tower;
+                tower = GameObject.FindGameObjectsWithTag("Tower");
+                int amount = (int)Mathf.Floor(percentOfTowerDestroyOnFire * tower.Length);
+                for (int i = 0; i < amount; i++)
+                {
+                    GameObject to = tower[Random.Range(0, tower.Length)];
+                    to.GetComponent<TowerBehavior>().Died();
                 }
                 break;
             // case Disaster.Typhoon:
