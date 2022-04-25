@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DisasterGenerator : MonoBehaviour
 {
+    public Text textAlert;
     public GameObject rainPreFab;
     public GameObject firePreFab;
     public int fireAmount = 50;
@@ -14,7 +16,9 @@ public class DisasterGenerator : MonoBehaviour
     public float chanceForDisaster = 0.3f;
     public static Disaster selectedDisaster;
     public static GameObject selectedDisasterObject;
+    public float percentOfTowerDestroyOnFire = 0.2f;
     private bool generateSuccess;
+    private Text displayText;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,13 +33,13 @@ public class DisasterGenerator : MonoBehaviour
             generateSuccess = true;
             Disaster disaster = (Disaster)Random.Range(0, System.Enum.GetValues(typeof(Disaster)).Length);
             float rand = Random.Range(0f, 1f);
-            Debug.Log("Disaster random: " + rand);
             if (chanceForDisaster > rand)
             {
-                DisasterGenerate(disaster);
+                DisasterGenerate(Disaster.Fire);
             }
+
         }
-        else if (GameManager.State != GameState.RushState && GameManager.State != GameState.RestState && generateSuccess)
+        else if (GameManager.State != GameState.RushState && generateSuccess)
         {
             generateSuccess = false;
             if (selectedDisaster == Disaster.Rain)
@@ -44,12 +48,14 @@ public class DisasterGenerator : MonoBehaviour
             }
             else if (selectedDisaster == Disaster.Fire)
             {
-                foreach (GameObject obj in fireList)
+
+                foreach (GameObject fire in fireList)
                 {
-                    Destroy(obj);
+                    Destroy(fire);
                 }
                 fireList.Clear();
             }
+            DisasterGenerate(Disaster.Unknown);
         }
         else if (GameManager.State != GameState.RushState && GameManager.State != GameState.RestState)
         {
@@ -65,21 +71,38 @@ public class DisasterGenerator : MonoBehaviour
         switch (disaster)
         {
             case Disaster.Rain:
+                textAlert.text = "Decrease Player's speed !!!";
                 selectedDisasterObject = Instantiate(rainPreFab, position, Quaternion.identity);
+                displayText = (Text)Instantiate(textAlert, FindObjectOfType<Canvas>().transform);
                 selectedDisasterObject.name = "Disaster";
                 break;
             case Disaster.Fire:
+                textAlert.text = "Tower was destroyed !!!";
+                displayText = (Text)Instantiate(textAlert, FindObjectOfType<Canvas>().transform);
 
                 for (int i = 0; i < fireAmount; i++)
                 {
                     Vector3 randomPos = Random.insideUnitCircle * Radius;
                     fireList.Add(Instantiate(firePreFab, randomPos, Quaternion.Euler(new Vector3(-90, 0, 0))));
                 }
+
+                GameObject[] tower;
+                tower = GameObject.FindGameObjectsWithTag("Tower");
+                int amount = (int)Mathf.Floor(percentOfTowerDestroyOnFire * tower.Length);
+                for (int i = 0; i < amount; i++)
+                {
+                    GameObject to = tower[Random.Range(0, tower.Length)];
+                    to.GetComponent<TowerBehavior>().Died();
+                }
                 break;
-                // case Disaster.Typhoon:
-                //     selectedDisasterObject = Instantiate(typhoonPreFab, position, Quaternion.identity);
-                //     selectedDisasterObject.name = "Disaster";
-                //     break;
+            // case Disaster.Typhoon:
+            //     selectedDisasterObject = Instantiate(typhoonPreFab, position, Quaternion.identity);
+            //     selectedDisasterObject.name = "Disaster";
+            //     break;
+            default:
+                if (displayText != null)
+                    Destroy(displayText);
+                break;
         }
 
     }

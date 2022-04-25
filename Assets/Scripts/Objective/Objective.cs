@@ -6,7 +6,7 @@ public class Objective : MonoBehaviour
 {
     // Start is called before the first frame update
     public static HealthBar healthBar;
-    public static float maxHealth = 10000;
+    public static float maxHealth = 5000;
     private static float currentHealth;
     private static bool died;
     void Start()
@@ -46,8 +46,7 @@ public class Objective : MonoBehaviour
     {
         float resultHp = currentHealth - value;
         healthBar.SetHealthBar(resultHp);
-        Debug.Log(value);
-        Debug.Log(resultHp);
+        Debug.Log("Objective Taken damange: " + resultHp);
         SetCurrentHealth(resultHp);
     }
 

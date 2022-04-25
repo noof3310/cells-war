@@ -9,27 +9,35 @@ public class EnemyHealthBar : MonoBehaviour
     public Vector3 offsetY = new Vector3(0f, 0f, 0);
     private float maxHealth;
     private float curHealth;
-    private Slider uiUse;
+    public Slider uiUse;
 
     public float healthBarLength;
-    // private Enemy enemy;
+    private Enemy enemy;
 
 
     // Use this for initialization
+    private void Awake()
+    {
+        HpBarGenerator();
+
+    }
     void Start()
     {
-        // enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
+        enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
         // curHealth = enemy.GetCurrentHealth();
         // maxHealth = enemy.GetMaxHealth();
         // SetMaxHealthBar(100);
         // SetHealthBar(50);
         healthBarLength = Screen.width / 6;
-        HpBarGenerator();
     }
     void Update()
     {
+
         if (uiUse != null)
+        {
             uiUse.transform.position = Camera.main.WorldToScreenPoint(transform.Find("Head").gameObject.transform.position + offsetY);
+            uiUse.value = enemy.GetCurrentHealth();
+        }
 
     }
 
@@ -41,18 +49,15 @@ public class EnemyHealthBar : MonoBehaviour
 
     public void SetMaxHealthBar(float health)
     {
-        if (uiUse != null)
-        {
-            uiUse.maxValue = health;
-        }
+
+        uiUse.maxValue = health;
+
     }
 
     public void SetHealthBar(float health)
     {
-        if (uiUse != null)
-        {
-            uiUse.value = health;
-        }
+        uiUse.value = health;
+
     }
 
 }

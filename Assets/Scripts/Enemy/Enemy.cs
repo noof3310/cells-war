@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float baseMaxHealth = 100;
+    public float baseMaxHealth;
     public float baseDamage;
     public float baseTimer;
     public float moveSpeed;
-    private float maxHealth;
+    [SerializeField] private float maxHealth;
     [SerializeField] private float damage;
-    [SerializeField] private float currentHealth = 100f;
+    [SerializeField] private float currentHealth;
     private float timer;
 
     public string gameObjectName;
@@ -35,7 +35,11 @@ public class Enemy : MonoBehaviour
         damage = baseDamage;
         maxHealth = baseMaxHealth;
         timer = baseTimer;
-        // LevelPowerUp();
+
+    }
+
+    void Start()
+    {
         SetCurrentHealth(baseMaxHealth);
         SetMaxHealth(baseMaxHealth);
         RandomBuff();
@@ -52,6 +56,7 @@ public class Enemy : MonoBehaviour
 
     void RandomBuff()
     {
+        LevelPowerUp();
 
         for (int i = 0; i < maximumBuffNumber; i++)
         {
@@ -76,6 +81,7 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+
     }
 
     void LevelPowerUp()
@@ -147,7 +153,15 @@ public class Enemy : MonoBehaviour
     public void TakenDamage(float value)
     {
         float resultHp = currentHealth - value;
-        SetCurrentHealth(resultHp);
+        if (resultHp >= 0)
+        {
+            SetCurrentHealth(resultHp);
+        }
+
+        else
+        {
+            SetCurrentHealth(0);
+        }
     }
 
 

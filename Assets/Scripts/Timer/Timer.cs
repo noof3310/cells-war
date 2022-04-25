@@ -8,6 +8,7 @@ public class Timer : MonoBehaviour
     public static float currentTime = 0f;
 
     [SerializeField] Text countdownText;
+    private string state;
     void Start()
     {
 
@@ -16,6 +17,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (currentTime <= 0 && GameManager.canChangeState)
         {
             GameManager.canChangeState = false;
@@ -27,11 +29,22 @@ public class Timer : MonoBehaviour
                 case GameState.RushState:
                     GameManager.UpdateGameState(GameState.RestState);
                     break;
+                case GameState.SpawnState:
+                    countdownText.text = "Fight!!";
+                    GameManager.UpdateGameState(GameState.FightState);
+                    break;
+                case GameState.FightState:
+                    countdownText.text = "Fight!!";
+                    break;
                 default:
                     break;
 
             }
         }
+        if (GameManager.State == GameState.FightState || GameManager.State == GameState.SpawnState) state = "Fight!!";
+        if (GameManager.State == GameState.RestState) state = "Rest: ";
+        if (GameManager.State == GameState.RushState) state = "Rush: ";
+
         if (currentTime <= 0 && !GameManager.canChangeState)
         {
             GameManager.canChangeState = true;
@@ -39,7 +52,7 @@ public class Timer : MonoBehaviour
         if (currentTime > 0)
         {
             currentTime -= 1 * Time.deltaTime;
-            countdownText.text = currentTime.ToString("0");
+            countdownText.text = state + currentTime.ToString("0");
             GameManager.canChangeState = false;
         }
 

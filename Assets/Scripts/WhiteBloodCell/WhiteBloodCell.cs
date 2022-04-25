@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class WhiteBloodCell : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int numberOfWhiteBloodCell;
+    public float numberOfWhiteBloodCell;
+    public static int valueOfWhiteBloodCell = 10;
     public Text countText;
 
     // public Text whiteBloodCell = "test";
@@ -23,8 +24,9 @@ public class WhiteBloodCell : MonoBehaviour
         setCountText(numberOfWhiteBloodCell);
 
     }
-    void setCountText(int count)
+    void setCountText(float count)
     {
-        countText.text = count.ToString();
+        int intCount = (int) count;
+        countText.text = intCount.ToString();
     }
 }

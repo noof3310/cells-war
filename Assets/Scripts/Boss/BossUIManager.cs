@@ -7,7 +7,7 @@ public class BossUIManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public Image prefabUI;
-    private Image uiUse;
+    public Image uiUse;
     public Vector3 offsetY = new Vector3(0f, 0f, 0f);
     void Start()
     {

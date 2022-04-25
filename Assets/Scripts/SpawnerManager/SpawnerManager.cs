@@ -6,7 +6,7 @@ public class SpawnerManager : MonoBehaviour
 {
     // public static ObjectPooling currentResources;
     public GameObject poolObject;
-    public int resourcePoolAmount = 50;
+    public int resourcePoolAmount;
     public bool willGrow = false;
 
     public List<GameObject> objectsToSpawn = new List<GameObject>();
@@ -22,6 +22,7 @@ public class SpawnerManager : MonoBehaviour
 
     public int amount;
     public int totalAmount;
+    public int ratioForEnemyAmountPerLevel;
     public float Radius = 50;
 
     public float initialTimer;
@@ -33,16 +34,16 @@ public class SpawnerManager : MonoBehaviour
 
         ResetAll();
 
-         if (resourceToSpawn.Count > 0) 
+        if (resourceToSpawn.Count > 0 && isResourceSpawner)
         {
             int index = Random.Range(0, objectsToSpawn.Count);
             Vector3 randomPos = Random.insideUnitCircle * Radius;
-            for (int i = 0; i < resourcePoolAmount; i++) 
-            {    
+            for (int i = 0; i < resourcePoolAmount; i++)
+            {
                 GameObject obj = Instantiate(resourceToSpawn[index], randomPos ,Quaternion.identity);
                 obj.SetActive(false);
                 whiteBloodCellList.Add(obj);
-            
+
             }
         }
     }
@@ -53,10 +54,14 @@ public class SpawnerManager : MonoBehaviour
 
         if (shouldSpawnBoss && GameManager.State == GameState.FightState)
         {
-            SpawnObjectAtRandom(bossToSpawn);
+            int bossAmount = (int)GameManager.level / GameManager.levelBossSpawn;
+            for (int i = 0; i < bossAmount; i++)
+            {
+                SpawnObjectAtRandom(bossToSpawn);
+            }
             shouldSpawnBoss = false;
         }
-
+        // For resource spawning
         if (isResourceSpawner && GameManager.State == GameState.RestState && whiteBloodCellList.Count > 0)
         {
             foreach (var objects in whiteBloodCellList)
@@ -65,7 +70,7 @@ public class SpawnerManager : MonoBehaviour
             }
             whiteBloodCellList.Clear();
             amount = totalAmount;
-            GameManager.UpdateGameState(GameState.FightState);
+            // GameManager.UpdateGameState(GameState.FightState);
 
         }
 
@@ -85,15 +90,15 @@ public class SpawnerManager : MonoBehaviour
             if (amount > 0 && timer <= 0)
             {
                 timer = initialTimer;
-                SpawnResourceAtRandom();
-                amount -= 1;
+                if(SpawnResourceAtRandom())
+                    amount -= 1;
             }
         }
-
+        // For Enemy spawning
         if (isEnemySpawner && enemyList.Count == 0 && amount == 0 && GameManager.State == GameState.FightState)
         {
             GameManager.UpdateGameState(GameState.RushState);
-            amount = totalAmount;
+            amount = totalAmount + GameManager.level * ratioForEnemyAmountPerLevel;
             GameManager.level += 1;
             if (GameManager.level % GameManager.levelBossSpawn == 0)
             {
@@ -129,16 +134,16 @@ public class SpawnerManager : MonoBehaviour
 
 
     }
-    public GameObject GetPoolObject() 
+    public GameObject GetPoolObject()
     {
-        for (int i = 0; i < whiteBloodCellList.Count; i++) 
+        for (int i = 0; i < whiteBloodCellList.Count; i++)
         {
-            if (!whiteBloodCellList[i].activeInHierarchy) 
+            if (!whiteBloodCellList[i].activeInHierarchy)
             {
                 return whiteBloodCellList[i];
             }
         }
-        if (willGrow) 
+        if (willGrow || whiteBloodCellList.Count < resourcePoolAmount)
         {
             int index2 = Random.Range(0, resourceToSpawn.Count);
 
@@ -157,8 +162,8 @@ public class SpawnerManager : MonoBehaviour
         amount = totalAmount;
         timer = initialTimer;
     }
-    
-    void SpawnResourceAtRandom()
+
+    bool SpawnResourceAtRandom()
     {
         // if (resourceToSpawn.Count > 0)
         // {
@@ -169,9 +174,10 @@ public class SpawnerManager : MonoBehaviour
         //     whiteBloodCellList.Add(Instantiate(resourceToSpawn[index], randomPos, Quaternion.identity));
         // }
         GameObject obj = GetPoolObject();
-        if (obj==null) return;
+        if (obj==null) return false;
         obj.transform.position = randomPos;
         obj.SetActive(true);
+        return true;
 
     }
 
