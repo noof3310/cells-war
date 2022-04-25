@@ -50,8 +50,20 @@ public class TowerBehavior : MonoBehaviour
         {
             StopAttack();
         }
+
     }
 
+
+    // void OnMouseDown()
+    // {
+    //     BoxCollider2D box = gameObject.GetComponent(typeof(BoxCollider2D)) as BoxCollider2D;
+    //     Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //     if (box.bounds.Contains(position))
+    //     {
+    //         isActive = !isActive;
+    //         Debug.Log("OnMouseDown Active=" + isActive);
+    //     }
+    // }
     // void OnTriggerEnter2D(Collider2D trig)
     // {
     //     if (trig.CompareTag(targetTagName) && !cooling)

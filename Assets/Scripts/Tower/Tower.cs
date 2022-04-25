@@ -18,7 +18,7 @@ public class Tower : MonoBehaviour
     private bool died;
     public List<TowerBuff> towerBuffs;
 
-
+    [SerializeField] private bool isSelected;
 
     // Start is called before the first frame update
     void Start()
@@ -126,7 +126,18 @@ public class Tower : MonoBehaviour
         float resultHp = currentHealth - value;
         SetCurrentHealth(resultHp);
     }
+
+    public void SetIsSelected(bool value)
+    {
+        isSelected = value;
+    }
+
+    public bool GetIsSelected()
+    {
+        return isSelected;
+    }
 }
+
 
 public enum TowerBuff
 {
