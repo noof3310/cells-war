@@ -11,6 +11,7 @@ public class Tower : MonoBehaviour
     private float damage;
     private float timer;
 
+    public float cost;
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
     public int maximumBuffNumber = 3;
@@ -135,6 +136,26 @@ public class Tower : MonoBehaviour
     public bool GetIsSelected()
     {
         return isSelected;
+    }
+
+    public void SetCost(float cost)
+    {
+        this.cost = cost > 0 ? cost : 0;
+    }
+
+    public float GetCost()
+    {
+        return cost;
+    }
+
+    public float GetLevelUpCost()
+    {
+        return cost / 2;
+    }
+
+    public float GetSellCost()
+    {
+        return cost / 2;
     }
 }
 

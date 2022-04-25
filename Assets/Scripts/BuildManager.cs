@@ -34,6 +34,11 @@ public class BuildManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int t = 0; t < towers.Count; t++)
+        {
+            towers[t].GetComponent<Tower>().SetCost(towerCost[t]);
+        }
+
         int i = 0;
         foreach (Tile towerIcon in towerIcons)
         {

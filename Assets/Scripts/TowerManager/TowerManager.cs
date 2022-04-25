@@ -12,7 +12,8 @@ public class TowerManager : MonoBehaviour
     void Start()
     {
         currentTowerActive = null;
-        this.statusBar.SetActive(currentTowerActive != null);
+        // this.statusBar.SetActive(currentTowerActive != null);
+        this.statusBar.GetComponent<StatusBar>().Hide();
     }
 
     // Update is called once per frame
@@ -30,7 +31,16 @@ public class TowerManager : MonoBehaviour
             {
                 SetCurrentTowerActive(null);
             }
-            this.statusBar.SetActive(currentTowerActive != null);
+            // this.statusBar.SetActive(currentTowerActive != null);
+            if (currentTowerActive != null)
+            {
+
+                this.statusBar.GetComponent<StatusBar>().Show(currentTowerActive);
+            }
+            else
+            {
+                this.statusBar.GetComponent<StatusBar>().Hide();
+            }
         }
 
     }
