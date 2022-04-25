@@ -5,12 +5,14 @@ using UnityEngine;
 public class TowerManager : MonoBehaviour
 {
     [SerializeField] private LayerMask towerLayer;
+    [SerializeField] private GameObject statusBar;
 
     private GameObject currentTowerActive;
     // Start is called before the first frame update
     void Start()
     {
         currentTowerActive = null;
+        this.statusBar.SetActive(currentTowerActive != null);
     }
 
     // Update is called once per frame
@@ -22,17 +24,18 @@ public class TowerManager : MonoBehaviour
 
             if (hit.collider != null && hit.collider is BoxCollider2D)
             {
-                SetCurrentTowerSelected(hit.collider.gameObject);
+                SetCurrentTowerActive(hit.collider.gameObject);
             }
             else
             {
-                SetCurrentTowerSelected(null);
+                SetCurrentTowerActive(null);
             }
+            this.statusBar.SetActive(currentTowerActive != null);
         }
 
     }
 
-    void SetCurrentTowerSelected(GameObject tower)
+    void SetCurrentTowerActive(GameObject tower)
     {
         if (currentTowerActive != null)
         {
@@ -43,5 +46,10 @@ public class TowerManager : MonoBehaviour
             tower.GetComponent<Tower>().SetIsSelected(true);
         }
         currentTowerActive = tower;
+    }
+
+    public GameObject GetCurrentTowerActive()
+    {
+        return currentTowerActive;
     }
 }
