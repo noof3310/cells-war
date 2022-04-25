@@ -54,7 +54,7 @@ public class DisasterGenerator : MonoBehaviour
                 for (int i = 0; i < amount; i++)
                 {
                     GameObject to = tower[Random.Range(0, tower.Length)];
-                    Destroy(to);
+                    to.GetComponent<Tower>().SetDied(true);
                 }
                 foreach (GameObject fire in fireList)
                 {
