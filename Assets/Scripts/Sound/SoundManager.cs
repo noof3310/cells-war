@@ -11,16 +11,17 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pickUpWBCSound = Resources.Load<AudioClip> ("pickup");
-        placeTowerSound = Resources.Load<AudioClip> ("placetower");
-        
+        pickUpWBCSound = Resources.Load<AudioClip>("pickup");
+        placeTowerSound = Resources.Load<AudioClip>("placetower");
+
         audioSrc = GetComponent<AudioSource>();
+        Debug.Log("test: " + pickUpWBCSound);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public static void playSound(string soundType)
