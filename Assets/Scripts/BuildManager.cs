@@ -145,7 +145,7 @@ public class BuildManager : MonoBehaviour
             {
                 if (!inHand)
                 {
-                    Collider2D[] colliders = Physics2D.OverlapCircleAll(player.getPosition(), 0.01f);
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector3)centerTowerPos, 0.01f);
                     foreach (var collider in colliders)
                     {
                         var go = collider.gameObject;
