@@ -39,7 +39,7 @@ public class DisasterGenerator : MonoBehaviour
             }
 
         }
-        else if (GameManager.State != GameState.RushState && GameManager.State != GameState.RestState && generateSuccess)
+        else if (GameManager.State != GameState.RushState && generateSuccess)
         {
             generateSuccess = false;
             if (selectedDisaster == Disaster.Rain)
