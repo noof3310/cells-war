@@ -106,7 +106,7 @@ public class BuildManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPos, 0.1f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector3)centerTowerPos, 0.01f);
             foreach (var collider in colliders)
             {
                 var go = collider.gameObject;
@@ -133,7 +133,7 @@ public class BuildManager : MonoBehaviour
             {
                 if (!inHand)
                 {
-                    Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPos, 0.1f);
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector3)centerTowerPos, 0.01f);
                     foreach (var collider in colliders)
                     {
                         var go = collider.gameObject;
