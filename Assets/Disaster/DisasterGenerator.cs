@@ -33,7 +33,6 @@ public class DisasterGenerator : MonoBehaviour
             generateSuccess = true;
             Disaster disaster = (Disaster)Random.Range(0, System.Enum.GetValues(typeof(Disaster)).Length);
             float rand = Random.Range(0f, 1f);
-            Debug.Log("Disaster random: " + rand);
             if (chanceForDisaster > rand)
             {
                 DisasterGenerate(disaster);

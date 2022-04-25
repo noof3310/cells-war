@@ -15,7 +15,6 @@ public class SoundManager : MonoBehaviour
         placeTowerSound = Resources.Load<AudioClip>("placetower");
 
         audioSrc = GetComponent<AudioSource>();
-        Debug.Log("test: " + pickUpWBCSound);
     }
 
     // Update is called once per frame

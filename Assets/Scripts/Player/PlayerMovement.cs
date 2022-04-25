@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (GameManager.State == GameState.RushState && DisasterGenerator.selectedDisaster == Disaster.Rain)
         {
-            Debug.Log("Call debuff rain decrease speed: " + thresholdDebuffMoveSpeedFromRain * 100 + "%");
             SetMoveSpeed(baseMoveSpeed * thresholdForRushState * (1 - thresholdDebuffMoveSpeedFromRain));
         }
         else
