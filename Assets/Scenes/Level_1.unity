@@ -224,7 +224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &63003347
 GameObject:
@@ -280,7 +280,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3187145845934419512, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3187145845934419512, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -340,7 +340,11 @@ PrefabInstance:
       objectReference: {fileID: 611067059142909746, guid: 4eb55f60a6884374d96f12114fc0fd99, type: 3}
     - target: {fileID: 3187145845934419519, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
       propertyPath: chanceForDisaster
-      value: 0.8
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187145845934419519, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
+      propertyPath: percentOfTowerDestroyOnFire
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
@@ -83403,13 +83407,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astarPath: {fileID: 1929236135}
   towers:
-  - {fileID: 2660242977574174831, guid: 3824b88a73ce679468edc42d885da2e0, type: 3}
-  - {fileID: 666191636440127340, guid: 22c900076fd425d4782eb58e3e662df4, type: 3}
+  - {fileID: 3999723773772569947, guid: 3824b88a73ce679468edc42d885da2e0, type: 3}
+  - {fileID: 2856283547614754079, guid: 22c900076fd425d4782eb58e3e662df4, type: 3}
   - {fileID: 8221600887576459428, guid: bc067fc7c5ace5640a9caec42951bfb5, type: 3}
   - {fileID: 4461725371697267928, guid: c93cac7ee55adf644a09a9140822e983, type: 3}
   towerCost:
   - 20
-  - 20
+  - 30
   - 5
   - 40
   towerIcons:
@@ -83437,7 +83441,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2582138680151507249
 PrefabInstance:
@@ -83448,7 +83452,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2582138678781220868, guid: 1464b04ef28e34645aa2cb84148a356c, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2582138679622060769, guid: 1464b04ef28e34645aa2cb84148a356c, type: 3}
       propertyPath: m_Pivot.x
@@ -83540,7 +83544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2582138679714864492, guid: 1464b04ef28e34645aa2cb84148a356c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2582138679714864495, guid: 1464b04ef28e34645aa2cb84148a356c, type: 3}
       propertyPath: valueOfWhiteBloodCell

@@ -22,6 +22,7 @@ public class TowerHealthBar : MonoBehaviour
     void Update()
     {
         curHealth = tower.GetCurrentHealth();
+        maxHealth = tower.GetMaxHealth();
 
     }
 

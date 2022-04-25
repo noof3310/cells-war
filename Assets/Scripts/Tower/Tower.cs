@@ -13,6 +13,7 @@ public class Tower : MonoBehaviour
     private float timer;
 
     public bool isBuffTower = false;
+    public TowerBuff typeOfTowerBuff;
 
     public string gameObjectName;
     public float chanceForBuff = 0.3f;
@@ -22,7 +23,7 @@ public class Tower : MonoBehaviour
     public List<TowerBuff> towerBuffs;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         gameObject.name = gameObjectName;
         died = false;
@@ -31,7 +32,15 @@ public class Tower : MonoBehaviour
         buffedTimer = baseTimer;
         timer = baseTimer;
         SetCurrentHealth(baseMaxHealth);
-        // RandomBuff();
+        if (isBuffTower)
+        {
+            RandomBuff();
+        }
+    }
+    void Start()
+    {
+
+
     }
 
     // Update is called once per frame
@@ -45,31 +54,8 @@ public class Tower : MonoBehaviour
 
     void RandomBuff()
     {
-
-        for (int i = 0; i < maximumBuffNumber; i++)
-        {
-            float randomInt = Random.Range(0f, 1f);
-            if (randomInt <= chanceForBuff)
-            {
-
-                TowerBuff buff = (TowerBuff)Random.Range(0, System.Enum.GetValues(typeof(TowerBuff)).Length);
-                Debug.Log("Buff: " + buff);
-                towerBuffs.Add(buff);
-                switch (buff)
-                {
-                    case TowerBuff.Attack:
-                        damage += baseDamage;
-                        break;
-                    case TowerBuff.Hp:
-                        maxHealth += baseMaxHealth / 2;
-                        SetCurrentHealth(maxHealth);
-                        break;
-                    case TowerBuff.Speed:
-                        timer += baseTimer / 3;
-                        break;
-                }
-            }
-        }
+        TowerBuff buff = (TowerBuff)Random.Range(1, System.Enum.GetValues(typeof(TowerBuff)).Length);
+        typeOfTowerBuff = buff;
     }
 
     // For testing taken damage. It can be hidden.
@@ -137,14 +123,30 @@ public class Tower : MonoBehaviour
     public void GetBuffed(TowerBuff buff)
     {
         towerBuffs.Add(buff);
+        Debug.Log(this.gameObjectName + " " + buff);
         switch (buff)
         {
             case TowerBuff.Attack:
                 damage = baseDamage * 2;
                 break;
             case TowerBuff.Speed:
-                buffedTimer = baseTimer / 2;
+                timer = baseTimer / 2;
                 break;
+            case TowerBuff.Hp:
+                if (currentHealth + (baseMaxHealth * 2) >= maxHealth + (baseMaxHealth * 2))
+                {
+                    currentHealth = baseMaxHealth * 2;
+
+                }
+                else
+                {
+                    currentHealth += baseMaxHealth * 2;
+
+                }
+                maxHealth = baseMaxHealth * 2;
+
+                break;
+
         }
     }
 
@@ -159,15 +161,21 @@ public class Tower : MonoBehaviour
                     damage = baseDamage;
                     break;
                 case TowerBuff.Speed:
-                    buffedTimer = baseTimer;
+                    timer = baseTimer;
+                    break;
+                case TowerBuff.Hp:
+                    maxHealth = baseMaxHealth;
+                    currentHealth -= baseMaxHealth;
                     break;
             }
         }
+
     }
 }
 
 public enum TowerBuff
 {
+    Unknown,
     Attack,
     Speed,
     Hp

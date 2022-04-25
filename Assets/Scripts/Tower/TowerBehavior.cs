@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class TowerBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
-    public TowerBuff buffEffect;
+    // public TowerBuff buffEffect;
     public float buffRange = 2f;
     public float attackDistance;
     public GameObject ItemPrefab;
@@ -29,10 +29,6 @@ public class TowerBehavior : MonoBehaviour
         attackMode = false;
         target = null;
 
-        if (tower.isBuffTower)
-        {
-            BuffTowerInRange();
-        }
     }
 
     // Update is called once per frame
@@ -40,7 +36,7 @@ public class TowerBehavior : MonoBehaviour
     {
         intTimer = tower.GetBuffedTimer();
 
-        if (tower.isBuffTower)
+        if (tower.isBuffTower && tower.typeOfTowerBuff != TowerBuff.Unknown)
         {
             BuffTowerInRange();
         }
@@ -170,12 +166,12 @@ public class TowerBehavior : MonoBehaviour
             var go = collider.gameObject;
             if (!(go == gameObject) && go.tag == "Tower" && !collider.isTrigger)
             {
-                Tower tower = go.GetComponent<Tower>();
-                if (!towerInRange.Contains(tower))
+                Tower t = go.GetComponent<Tower>();
+                if (!towerInRange.Contains(t) && !t.towerBuffs.Contains(tower.typeOfTowerBuff))
                 {
-                    towerInRange.Add(tower);
-                    tower.GetBuffed(buffEffect);
-                    Debug.Log("Buff " + tower + " " + buffEffect);
+                    towerInRange.Add(t);
+                    t.GetBuffed(tower.typeOfTowerBuff);
+                    Debug.Log("Buff " + t + " " + tower.typeOfTowerBuff);
                 }
             }
         }
@@ -189,11 +185,14 @@ public class TowerBehavior : MonoBehaviour
             var go = collider.gameObject;
             if (!(go == gameObject) && go.tag == "Tower" && !collider.isTrigger)
             {
-                Tower tower = go.GetComponent<Tower>();
-                if (towerInRange.Contains(tower))
+                Tower t = go.GetComponent<Tower>();
+                if (towerInRange.Contains(t))
                 {
-                    tower.CancleBuff(buffEffect);
-                    Debug.Log("Cancle Buff " + tower + " " + buffEffect);
+                    foreach (TowerBuff buff in t.towerBuffs)
+                    {
+                        t.CancleBuff(buff);
+                        if (tower.GetDied()) break;
+                    }
                 }
             }
         }

@@ -301,6 +301,7 @@ public class EnemyRangebehavior : MonoBehaviour
             foreach (Image img in gameObject.GetComponent<EnemyBuffUIManager>().uiUse)
                 Destroy(img.gameObject);
             gameObject.GetComponent<EnemyBuffUIManager>().uiUse.Clear();
+            Destroy(gameObject.GetComponent<EnemyHealthBar>().uiUse.gameObject);
             Destroy(this.gameObject);
 
         }
