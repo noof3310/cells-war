@@ -4357,7 +4357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7140874889164607533, guid: cae264042ed7a574fb249199642b417e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -316.76
+      value: -326.06
       objectReference: {fileID: 0}
     - target: {fileID: 7440617773133055841, guid: cae264042ed7a574fb249199642b417e, type: 3}
       propertyPath: m_Color.a
@@ -82290,6 +82290,7 @@ MonoBehaviour:
   shouldSpawnBoss: 0
   amount: 0
   totalAmount: 20
+  ratioForEnemyAmountPerLevel: 0
   Radius: 20
   initialTimer: 0.1
 --- !u!4 &1109875793
@@ -82726,6 +82727,7 @@ MonoBehaviour:
   shouldSpawnBoss: 1
   amount: 0
   totalAmount: 10
+  ratioForEnemyAmountPerLevel: 0
   Radius: 50
   initialTimer: 1
 --- !u!4 &1716432088
@@ -82742,6 +82744,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1782862473 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7864946232022073120, guid: cae264042ed7a574fb249199642b417e, type: 3}
+  m_PrefabInstance: {fileID: 423581438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1782862474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782862473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 900f403bd6c26499e82dbe4350f73c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1798051324
 GameObject:
   m_ObjectHideFlags: 0
@@ -83123,12 +83142,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astarPath: {fileID: 473504802}
   towers:
-  - {fileID: 2660242977574174831, guid: 3824b88a73ce679468edc42d885da2e0, type: 3}
-  - {fileID: 666191636440127340, guid: 22c900076fd425d4782eb58e3e662df4, type: 3}
+  - {fileID: 3999723773772569947, guid: 3824b88a73ce679468edc42d885da2e0, type: 3}
+  - {fileID: 2856283547614754079, guid: 22c900076fd425d4782eb58e3e662df4, type: 3}
   - {fileID: 8221600887576459428, guid: bc067fc7c5ace5640a9caec42951bfb5, type: 3}
   - {fileID: 4461725371697267928, guid: c93cac7ee55adf644a09a9140822e983, type: 3}
   - {fileID: 979115392174711135, guid: 13237cf04285a7f4b9096787b202f22b, type: 3}
-  towerCost: 0100000001000000010000000100000001000000
+  towerCost:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
   towerIcons:
   - {fileID: 11400000, guid: d7a5669cf2f60974385a9c29af5a42a3, type: 2}
   - {fileID: 11400000, guid: 731d31bccd95e2143ae8930cde5313eb, type: 2}
@@ -83143,7 +83167,6 @@ MonoBehaviour:
   handItem: 0
   inHand: 0
   handGridUI: {fileID: 618577611}
-  UIHands: []
 --- !u!4 &1934445112
 Transform:
   m_ObjectHideFlags: 0
@@ -83449,6 +83472,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9da13f123b99437dac30ea631fc3443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  statusBar: {fileID: 1782862473}
 --- !u!4 &2121759160
 Transform:
   m_ObjectHideFlags: 0
