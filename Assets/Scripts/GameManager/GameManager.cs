@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameState State;
     public static int level = 1;
     public static bool canChangeState = true;
-    public static float restTime = 10f;
+    public static float restTime = 30f;
     public static float rushTime = 10f;
-    public static int levelBossSpawn = 3;
+    public static int levelBossSpawn = 5;
     // Start is called before the first frame update
 
     void Awake()

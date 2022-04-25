@@ -271,7 +271,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rayCastLength: 6
-  attackDistance: 4
+  attackDistance: 5
   isBoss: 0
   target: {fileID: 0}
   speed: 200

@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabUI: {fileID: 1837169485727966860, guid: 578f1d17d6696e543b5145d1c23b0628, type: 3}
+  uiUse: {fileID: 0}
   offsetY: {x: 0, y: 1.5, z: 0}
 --- !u!50 &1390050263177214419
 Rigidbody2D:
@@ -313,9 +314,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMaxHealth: 300
-  baseDamage: 20
+  baseDamage: 5
   baseTimer: 2
   moveSpeed: 5
+  maxHealth: 0
   damage: 0
   currentHealth: 1000
   gameObjectName: Boss_1
@@ -408,4 +410,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 330624310642200814, guid: c90e3da9e6cc76342a3f38762cc4404f, type: 3}
   offsetY: {x: 0, y: 0, z: 0}
+  uiUse: {fileID: 0}
   healthBarLength: 100

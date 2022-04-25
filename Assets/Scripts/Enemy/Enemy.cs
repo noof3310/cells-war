@@ -87,7 +87,6 @@ public class Enemy : MonoBehaviour
     void LevelPowerUp()
     {
         int currentLevel = GameManager.level;
-        Debug.Log("Level up: " + Mathf.Pow(1 + hpLevelUpRatio, currentLevel) * baseMaxHealth);
         SetDamage(damage + Mathf.Pow(1 + damageLevelUpRatio, currentLevel) * baseDamage);
         SetCurrentHealth(Mathf.Pow(1 + hpLevelUpRatio, currentLevel) * baseMaxHealth);
         SetMaxHealth(Mathf.Pow(1 + hpLevelUpRatio, currentLevel) * baseMaxHealth);

@@ -108,7 +108,8 @@ public class EnemyRangebehavior : MonoBehaviour
                 }
             }
 
-            EnemyLogic();
+            if (!enemy.GetDied())
+                EnemyLogic();
             if (inRange == false)
             {
                 anim.SetBool("canWalk", false);

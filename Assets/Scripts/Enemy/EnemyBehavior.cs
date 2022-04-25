@@ -110,7 +110,8 @@ public class EnemyBehavior : MonoBehaviour
                     RaycastDebugger(facing);
                 }
             }
-            EnemyLogic();
+            if (!enemy.GetDied())
+                EnemyLogic();
             if (inRange == false)
             {
                 // anim.SetBool("canWalk", false);
@@ -207,11 +208,15 @@ public class EnemyBehavior : MonoBehaviour
 
             foreach (Collider2D col in colliders)
             {
-                distance = Vector2.Distance(transform.position, col.transform.position);
-                if (distance <= attackDistance)
+                if (col.name.Contains("Tower"))
                 {
-                    col.GetComponent<Tower>().TakenDamage(enemy.GetDamage());
+                    distance = Vector2.Distance(transform.position, col.transform.position);
+                    if (distance <= attackDistance)
+                    {
+                        col.GetComponent<Tower>().TakenDamage(enemy.GetDamage());
+                    }
                 }
+
             }
 
             List<Collider2D> tempColliders = new List<Collider2D>();
@@ -241,9 +246,10 @@ public class EnemyBehavior : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D trig)
     {
-        if (reachedEndOfPath && trig.CompareTag("Tower") && trig.name.Contains("Tower") && !cooling && isBoss && GetDistanceWithCoreTarget() > attackDistance)
+        if (reachedEndOfPath && trig.CompareTag("Tower") && trig.name.Contains("Tower") && !cooling && isBoss)
         {
             inRange = true;
+
             if (!colliders.Contains(trig)) { colliders.Add(trig); }
             float minDistance = 1000f;
             Collider2D selectedCol = new Collider2D();
@@ -259,7 +265,7 @@ public class EnemyBehavior : MonoBehaviour
             target = selectedCol.gameObject;
 
         }
-        else if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling && GetDistanceWithCoreTarget() > attackDistance)
+        else if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling)
         {
             target = trig.gameObject;
             inRange = true;
