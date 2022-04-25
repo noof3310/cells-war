@@ -23,7 +23,7 @@ public class PlayerCollision : MonoBehaviour
             // Destroy(collider.gameObject);
             SoundManager.playSound("pick");
             collider.gameObject.SetActive(false);
-            PlayerDetails.whiteBloodCellNumber += 1;
+            PlayerDetails.whiteBloodCellNumber += WhiteBloodCell.valueOfWhiteBloodCell;
         }
     }
 }

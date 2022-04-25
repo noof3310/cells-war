@@ -315,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMaxHealth: 300
   baseDamage: 5
-  baseTimer: 2
+  baseTimer: 5
   moveSpeed: 5
   maxHealth: 0
   damage: 0
