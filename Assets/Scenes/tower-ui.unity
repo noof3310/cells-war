@@ -966,6 +966,7 @@ GameObject:
   - component: {fileID: 802059643}
   - component: {fileID: 802059645}
   - component: {fileID: 802059644}
+  - component: {fileID: 802059646}
   m_Layer: 5
   m_Name: Tooltip
   m_TagString: Untagged
@@ -1031,6 +1032,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802059642}
   m_CullTransparentMesh: 1
+--- !u!114 &802059646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802059642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e844bda15c51344193b94d27114e898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &864766380
 GameObject:
   m_ObjectHideFlags: 0
@@ -5762,6 +5775,7 @@ GameObject:
   - component: {fileID: 1417576791}
   - component: {fileID: 1417576793}
   - component: {fileID: 1417576792}
+  - component: {fileID: 1417576794}
   m_Layer: 5
   m_Name: InfoButton
   m_TagString: Untagged
@@ -5826,6 +5840,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417576790}
   m_CullTransparentMesh: 1
+--- !u!114 &1417576794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417576790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c5eede2ead5b349a407b9035709af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1473641435 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5658327759576858598, guid: 146844979f52f794d8e8ce59c2038902, type: 3}
