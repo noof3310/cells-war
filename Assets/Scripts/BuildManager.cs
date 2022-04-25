@@ -117,7 +117,7 @@ public class BuildManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector3)centerTowerPos, 0.01f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(player.getPosition(), 0.01f);
             foreach (var collider in colliders)
             {
                 var go = collider.gameObject;
@@ -125,6 +125,7 @@ public class BuildManager : MonoBehaviour
                 {
                     go.GetComponent<Tower>().SetDied(true);
                     PlayerDetails.SellTower(towerCost[int.Parse(go.name.Substring(6, 1))]);
+                    break;
                 }
             }
         }
@@ -144,7 +145,7 @@ public class BuildManager : MonoBehaviour
             {
                 if (!inHand)
                 {
-                    Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector3)centerTowerPos, 0.01f);
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(player.getPosition(), 0.01f);
                     foreach (var collider in colliders)
                     {
                         var go = collider.gameObject;
