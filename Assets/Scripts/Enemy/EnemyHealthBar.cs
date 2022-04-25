@@ -16,6 +16,11 @@ public class EnemyHealthBar : MonoBehaviour
 
 
     // Use this for initialization
+    private void Awake()
+    {
+        HpBarGenerator();
+
+    }
     void Start()
     {
         enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
@@ -24,7 +29,6 @@ public class EnemyHealthBar : MonoBehaviour
         // SetMaxHealthBar(100);
         // SetHealthBar(50);
         healthBarLength = Screen.width / 6;
-        HpBarGenerator();
     }
     void Update()
     {

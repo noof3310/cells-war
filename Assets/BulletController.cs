@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
-{   
+{
     public static BulletController current;
     public int bulletPoolAmount;
     public bool isGrow;
@@ -24,15 +24,11 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public GameObject GetBullet(GameObject ItemPrefab, Vector3 pos,GameObject target,float damage)
     {
-        Debug.Log(ItemPrefab);
-        Debug.Log(pos);
-        Debug.Log(damage);
-        Debug.Log(target);
         for(int i = 0; i < bulletList.Count; i++)
         {
             if(!bulletList[i].activeInHierarchy)
