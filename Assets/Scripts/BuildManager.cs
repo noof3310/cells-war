@@ -62,6 +62,17 @@ public class BuildManager : MonoBehaviour
             if (i == selectedTower && isSelected) tileColor.a = 1f;
 
             UIImage.color = tileColor;
+
+            GameObject UITowerCost = new GameObject("UI Tower Cost");
+            UITowerCost.transform.SetParent(UITower.transform, false);
+            UITowerCost.transform.localScale = new Vector3(1f, 1f, 1f);
+
+            Text UIText = UITowerCost.AddComponent<Text>();
+            UIText.text = towerCost[i].ToString();
+            UIText.alignment = TextAnchor.LowerRight;
+            UIText.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+            UIText.fontSize = 48;
+
             UITowers.Add(UITower);
 
             i++;
