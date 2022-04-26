@@ -12,6 +12,7 @@ public class Tower : MonoBehaviour
     private float buffedTimer;
     private float timer;
 
+    public float cost;
     public bool isBuffTower = false;
     public TowerBuff typeOfTowerBuff;
 
@@ -21,6 +22,8 @@ public class Tower : MonoBehaviour
     [SerializeField] private float currentHealth;
     private bool died;
     public List<TowerBuff> towerBuffs;
+
+    [SerializeField] private bool isSelected;
 
     // Start is called before the first frame update
     private void Awake()
@@ -115,6 +118,35 @@ public class Tower : MonoBehaviour
         SetCurrentHealth(resultHp);
     }
 
+    public void SetIsSelected(bool value)
+    {
+        isSelected = value;
+    }
+
+    public bool GetIsSelected()
+    {
+        return isSelected;
+    }
+
+    public void SetCost(float cost)
+    {
+        this.cost = cost > 0 ? cost : 0;
+    }
+
+    public float GetCost()
+    {
+        return cost;
+    }
+
+    public float GetLevelUpCost()
+    {
+        return cost / 2;
+    }
+
+    public float GetSellCost()
+    {
+        return cost / 2;
+    }
     public float GetBuffedTimer()
     {
         return buffedTimer;
@@ -172,6 +204,7 @@ public class Tower : MonoBehaviour
 
     }
 }
+
 
 public enum TowerBuff
 {

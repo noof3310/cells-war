@@ -34,6 +34,11 @@ public class BuildManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int t = 0; t < towers.Count; t++)
+        {
+            towers[t].GetComponent<Tower>().SetCost(towerCost[t]);
+        }
+
         UIHand = new GameObject("UI Tower");
         UIHand.transform.parent = handGridUI;
         UIHand.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -106,7 +111,7 @@ public class BuildManager : MonoBehaviour
             RenderUITowers(4);
         }
         else if (Input.GetKeyDown(KeyCode.Space))
-        {            
+        {
             if (isTileAvailable(centerTowerPos) && isSelected && PlayerDetails.whiteBloodCellNumber - towerCost[selectedTower] >= 0)
             {
                 Instantiate(towers[selectedTower], centerTowerPos, Quaternion.identity);
@@ -168,10 +173,12 @@ public class BuildManager : MonoBehaviour
 
     void RenderUITowers(int selecter)
     {
-        if((selectedTower == selecter && isSelected) || inHand) {
+        if ((selectedTower == selecter && isSelected) || inHand)
+        {
             this.isSelected = false;
         }
-        else {
+        else
+        {
             this.selectedTower = selecter;
             this.isSelected = true;
         }
@@ -195,11 +202,13 @@ public class BuildManager : MonoBehaviour
         Image UIImage = UIHand.GetComponent<Image>();
         Color tileColor = UIImage.color;
 
-        if (inHand) {
+        if (inHand)
+        {
             tileColor.a = 1f;
             UIImage.sprite = towerIcons[handItem].sprite;
         }
-        else {
+        else
+        {
             tileColor.a = 0f;
         }
 
