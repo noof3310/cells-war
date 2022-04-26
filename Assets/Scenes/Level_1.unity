@@ -340,7 +340,7 @@ PrefabInstance:
       objectReference: {fileID: 611067059142909746, guid: 4eb55f60a6884374d96f12114fc0fd99, type: 3}
     - target: {fileID: 3187145845934419519, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
       propertyPath: chanceForDisaster
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3187145845934419519, guid: 526eff3b17235a54b849910fc977dabd, type: 3}
       propertyPath: percentOfTowerDestroyOnFire

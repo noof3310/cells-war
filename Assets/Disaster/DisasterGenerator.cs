@@ -35,7 +35,7 @@ public class DisasterGenerator : MonoBehaviour
             float rand = Random.Range(0f, 1f);
             if (chanceForDisaster > rand)
             {
-                DisasterGenerate(Disaster.Fire);
+                DisasterGenerate(disaster);
             }
 
         }
