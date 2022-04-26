@@ -21,7 +21,16 @@ public class TowerManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            RaycastHit2D[] allHit = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            RaycastHit2D hit = new RaycastHit2D();
+            foreach (RaycastHit2D e in allHit)
+            {
+                if (e.collider is BoxCollider2D)
+                {
+                    hit = e;
+                    break;
+                }
+            }
 
             if (hit.collider != null && hit.collider is BoxCollider2D)
             {
@@ -31,7 +40,7 @@ public class TowerManager : MonoBehaviour
             {
                 SetCurrentTowerActive(null);
             }
-            // this.statusBar.SetActive(currentTowerActive != null);
+
             if (currentTowerActive != null)
             {
 
