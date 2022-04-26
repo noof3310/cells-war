@@ -102,11 +102,17 @@ MonoBehaviour:
   baseMaxHealth: 100
   baseDamage: 2
   baseTimer: 1
+  maxHealth: 0
+  damage: 0
+  cost: 0
+  isBuffTower: 0
+  typeOfTowerBuff: 0
   gameObjectName: Tower_4
   chanceForBuff: 0.3
   maximumBuffNumber: 3
   currentHealth: 0
   towerBuffs: 
+  isSelected: 0
 --- !u!114 &979115392174711133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,10 +125,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c018c8880f8144f81e248fb9f2ebdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffRange: 2
   attackDistance: 10
   ItemPrefab: {fileID: 608402741988271069, guid: 6d69942074cf85046becd2a5755f560a, type: 3}
   targetTagName: Enemy
   target: {fileID: 0}
+  towerInRange: []
 --- !u!114 &-4501055492458061707
 MonoBehaviour:
   m_ObjectHideFlags: 0

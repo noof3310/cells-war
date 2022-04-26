@@ -104,6 +104,7 @@ MonoBehaviour:
   baseTimer: 0
   maxHealth: 0
   damage: 0
+  cost: 5
   isBuffTower: 0
   typeOfTowerBuff: 0
   gameObjectName: Tower_2
@@ -111,6 +112,7 @@ MonoBehaviour:
   maximumBuffNumber: 3
   currentHealth: 0
   towerBuffs: 
+  isSelected: 0
 --- !u!114 &8221600887576459431
 MonoBehaviour:
   m_ObjectHideFlags: 0

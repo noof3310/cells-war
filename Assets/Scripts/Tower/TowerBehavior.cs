@@ -120,15 +120,15 @@ public class TowerBehavior : MonoBehaviour
         // Vector3 randomPos = Random.insideUnitCircle * Radius;
         if (target.tag == "Tower" && target.transform.parent.gameObject.GetComponent<Tower>().GetCurrentHealth() > 0)
         {
-            BulletController.current.GetBullet(ItemPrefab,transform.position,target,tower.GetDamage());
+            BulletController.current.GetBullet(ItemPrefab, transform.position, target, tower.GetDamage());
         }
         else if (target.tag == "Objective" && target.GetComponent<Objective>().GetCurrentHealth() > 0)
         {
-            BulletController.current.GetBullet(ItemPrefab,transform.position,target,tower.GetDamage());
+            BulletController.current.GetBullet(ItemPrefab, transform.position, target, tower.GetDamage());
         }
         else if (target.tag == "Enemy" && target.transform.parent.gameObject.GetComponent<Enemy>().GetCurrentHealth() > 0)
         {
-            BulletController.current.GetBullet(ItemPrefab,transform.position,target,tower.GetDamage());
+            BulletController.current.GetBullet(ItemPrefab, transform.position, target, tower.GetDamage());
         }
 
 
