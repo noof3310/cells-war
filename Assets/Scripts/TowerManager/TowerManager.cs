@@ -34,10 +34,19 @@ public class TowerManager : MonoBehaviour
 
             if (hit.collider != null && hit.collider is BoxCollider2D)
             {
+                if (currentTowerActive != null)
+                {
+                    currentTowerActive.GetComponent<SpriteRenderer>().material.color = new Color(1, 1, 1, 1);
+                }
+                hit.collider.gameObject.GetComponent<SpriteRenderer>().material.color = Color.blue;
                 SetCurrentTowerActive(hit.collider.gameObject);
             }
             else
             {
+                if (currentTowerActive != null)
+                {
+                    currentTowerActive.GetComponent<SpriteRenderer>().material.color = new Color(1, 1, 1, 1);
+                }
                 SetCurrentTowerActive(null);
             }
 
