@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDetails : MonoBehaviour
 {
-    public static float whiteBloodCellNumber;
+    public static float whiteBloodCellNumber = 0;
     // Start is called before the first frame update
     void Start()
     {
