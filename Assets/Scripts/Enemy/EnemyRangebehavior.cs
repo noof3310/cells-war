@@ -181,10 +181,14 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D trig)
     {
-        if ((reachedEndOfPath||donotPathFind) && trig.CompareTag("Tower") && !cooling )
+        if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling )
         {
             target = trig.gameObject;
             inRange = true;
+        }
+        else if(donotPathFind && trig.CompareTag("Tower") && !cooling )
+        {
+            target = trig.gameObject;   
         }
         else if (trig.CompareTag("Objective") && !cooling)
         {
