@@ -59,7 +59,7 @@ public class EnemyBehavior : MonoBehaviour
 
         InvokeRepeating("UpdatePath", 3f, 2f);
         
-        donotPathFind = Random.Range(1,100) > 20;
+        donotPathFind = Random.Range(1,100) > 80;
         if(isBoss){
             donotPathFind = true;
         } 
