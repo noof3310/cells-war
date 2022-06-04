@@ -60,6 +60,9 @@ public class EnemyBehavior : MonoBehaviour
         InvokeRepeating("UpdatePath", 3f, 2f);
         
         donotPathFind = Random.Range(1,100) > 20;
+        if(isBoss){
+            donotPathFind = true;
+        } 
 
     }
     void UpdatePath()
@@ -204,6 +207,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (target.tag == "Objective")
         {
+            donotPathFind = false;
             target.GetComponent<Objective>().TakenDamage(enemy.GetDamage());
         }
         else if (target.tag == "Tower")
@@ -216,6 +220,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (target.tag == "Objective")
         {
+            donotPathFind = false;
             target.GetComponent<Objective>().TakenDamage(enemy.GetDamage());
         }
         else if (target.tag == "Tower")
@@ -318,10 +323,7 @@ public class EnemyBehavior : MonoBehaviour
             {
                 Move();
             }
-            else
-            {
-                StopAttack();
-            }
+            StopAttack();
         }
         else if (distance <= attackDistance && !cooling)
         {
