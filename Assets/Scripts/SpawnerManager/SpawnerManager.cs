@@ -170,7 +170,6 @@ public class SpawnerManager : MonoBehaviour
         // int index = Random.Range(0, resourceToSpawn.Count);
 
         Vector3 randomPos = Random.insideUnitCircle * Radius;
-
         //     whiteBloodCellList.Add(Instantiate(resourceToSpawn[index], randomPos, Quaternion.identity));
         // }
         GameObject obj = GetPoolObject();

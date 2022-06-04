@@ -26,13 +26,15 @@ public class EnemyBehavior : MonoBehaviour
     private bool inRange;
     private bool cooling;
     private float intTimer;
-    private GameObject currentTarget;
+    // private GameObject currentTarget;
     private Enemy enemy;
 
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
 
     public float keepDistance = 5f;
+
+    private bool donotPathFind = false;
 
     Path path;
     int currentWaypoint = 0;
@@ -46,7 +48,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         enemy = gameObject.GetComponent(typeof(Enemy)) as Enemy;
         coreTarget = GameObject.FindWithTag("Objective");
-        currentTarget = GameObject.FindWithTag("Objective");
+        // currentTarget = GameObject.FindWithTag("Objective");
         target = GameObject.FindWithTag("Objective");
         intTimer = enemy.baseTimer;
         anim = GetComponent<Animator>();
@@ -56,6 +58,8 @@ public class EnemyBehavior : MonoBehaviour
         seeker = GetComponent<Seeker>();
 
         InvokeRepeating("UpdatePath", 3f, 2f);
+        
+        donotPathFind = Random.Range(1,100) > 20;
 
     }
     void UpdatePath()
@@ -126,33 +130,38 @@ public class EnemyBehavior : MonoBehaviour
             {
                 return;
             }
+            if(!donotPathFind){
+                if (currentWaypoint >= path.vectorPath.Count)
+                {
+                    reachedEndOfPath = true;
+                    return;
+                }
+                else
+                {
+                    reachedEndOfPath = false;
+                }
 
-            if (currentWaypoint >= path.vectorPath.Count)
-            {
-                reachedEndOfPath = true;
-                return;
-            }
-            else
-            {
-                reachedEndOfPath = false;
-            }
+                if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
+                {
+                    // Debug.Log("stop");
+                    return;
+                }
+                // if (Random.Range(1,100) > 80)
+                // {
+                //     target = GameObject.FindWithTag("Tower");
+                // }
 
-            if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
-            {
-                // Debug.Log("stop");
-                return;
-            }
+                Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+                Vector2 force = direction * speed * Time.deltaTime;
 
-            Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-            Vector2 force = direction * speed * Time.deltaTime;
+                rb.AddForce(force);
 
-            rb.AddForce(force);
+                float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
-            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-
-            if (distance < nextWaypointDistance)
-            {
-                currentWaypoint++;
+                if (distance < nextWaypointDistance)
+                {
+                    currentWaypoint++;
+                }
             }
 
             if (rb.velocity.x >= 0.01f)
@@ -286,13 +295,33 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
+     void Move()
+    {
+        anim.SetBool("canWalk", true);
+        // if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_Type_1_attack"))
+        // {
+        Vector3 direction = target.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        reachedEndOfPath = true;
+        // rb.rotation = angle;
+        direction.Normalize();
+        movement = direction;
+        rb.MovePosition((Vector2)transform.position + (Vector2)(direction * enemy.moveSpeed * Time.deltaTime));
+    }
+
     void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.transform.position);
         if (distance > attackDistance && !cooling)
         {
-            //Move();
-            StopAttack();
+            if(donotPathFind)
+            {
+                Move();
+            }
+            else
+            {
+                StopAttack();
+            }
         }
         else if (distance <= attackDistance && !cooling)
         {
