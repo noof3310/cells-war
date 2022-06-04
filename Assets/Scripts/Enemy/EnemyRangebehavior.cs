@@ -28,8 +28,6 @@ public class EnemyRangebehavior : MonoBehaviour
     private GameObject currentTarget;
     private Enemy enemy;
 
-    private bool donotPathFind = false;
-
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
 
@@ -57,7 +55,6 @@ public class EnemyRangebehavior : MonoBehaviour
         seeker = GetComponent<Seeker>();
 
         InvokeRepeating("UpdatePath", 3f, 2f);
-        donotPathFind = Random.Range(1,100) > 20;
     }
 
     void UpdatePath()
@@ -129,34 +126,33 @@ public class EnemyRangebehavior : MonoBehaviour
             }
 
             // Debug.Log(path.vectorPath.Count);
-            if(!donotPathFind){
-                if (currentWaypoint >= path.vectorPath.Count)
-                {
-                    reachedEndOfPath = true;
-                    return;
-                }
-                else
-                {
-                    reachedEndOfPath = false;
-                }
 
-                if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
-                {
-                    // Debug.Log("stop");
-                    return;
-                }
+            if (currentWaypoint >= path.vectorPath.Count)
+            {
+                reachedEndOfPath = true;
+                return;
+            }
+            else
+            {
+                reachedEndOfPath = false;
+            }
 
-                Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-                Vector2 force = direction * speed * Time.deltaTime;
+            if ((path.vectorPath[currentWaypoint] - target.transform.position).magnitude <= keepDistance)
+            {
+                // Debug.Log("stop");
+                return;
+            }
 
-                rb.AddForce(force);
+            Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+            Vector2 force = direction * speed * Time.deltaTime;
 
-                float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+            rb.AddForce(force);
 
-                if (distance < nextWaypointDistance)
-                {
-                    currentWaypoint++;
-                }
+            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+
+            if (distance < nextWaypointDistance)
+            {
+                currentWaypoint++;
             }
 
             if (rb.velocity.x >= 0.01f)
@@ -199,13 +195,7 @@ public class EnemyRangebehavior : MonoBehaviour
         distance = Vector2.Distance(transform.position, target.transform.position);
         if (distance > attackDistance && !cooling)
         {
-             if(donotPathFind)
-            {
-                reachedEndOfPath = true;
-                Move();
-               
-            }
-         
+            // Move();
             StopAttack();
         }
         else if (distance <= attackDistance && !cooling)
@@ -282,7 +272,6 @@ public class EnemyRangebehavior : MonoBehaviour
         }
         else if (target.tag == "Objective" && target.GetComponent<Objective>().GetCurrentHealth() > 0)
         {
-            donotPathFind = false;
             BulletController.current.GetBullet(ItemPrefab, transform.position, target, enemy.GetDamage());
         }
         else if (target.tag == "Enemy" && target.transform.parent.gameObject.GetComponent<Enemy>().GetCurrentHealth() > 0)
