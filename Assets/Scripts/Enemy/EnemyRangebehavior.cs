@@ -37,6 +37,8 @@ public class EnemyRangebehavior : MonoBehaviour
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
 
+    private bool donotPathFind = false;
+
     Seeker seeker;
 
 
@@ -55,6 +57,8 @@ public class EnemyRangebehavior : MonoBehaviour
         seeker = GetComponent<Seeker>();
 
         InvokeRepeating("UpdatePath", 3f, 2f);
+
+        donotPathFind = Random.Range(1,100) > 80;
     }
 
     void UpdatePath()
@@ -177,7 +181,7 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D trig)
     {
-        if (reachedEndOfPath && trig.CompareTag("Tower") && !cooling)
+        if ((reachedEndOfPath||donotPathFind) && trig.CompareTag("Tower") && !cooling )
         {
             target = trig.gameObject;
             inRange = true;
