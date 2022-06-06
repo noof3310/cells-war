@@ -40,6 +40,15 @@ public class BulletBehavior : MonoBehaviour
     {
         Vector3 direction = target.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+         if (target.tag == "Tower") 
+        {
+            Debug.Log(direction.magnitude);
+            if(direction.magnitude < 0.05)
+            {
+                destroy = true;
+                anim.SetBool("destroy", true);
+            }
+        }
         direction.Normalize();
         movement = direction;
         transform.Translate(direction * speed * Time.deltaTime);
@@ -53,7 +62,6 @@ public class BulletBehavior : MonoBehaviour
         // {
         //     transform.rotation = new Quaternion(0, 0, 0, 1);
         // }
-
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -62,7 +70,19 @@ public class BulletBehavior : MonoBehaviour
         {
             destroy = true;
             anim.SetBool("destroy", true);
+            return;
         }
+        // if(target.tag == "Tower")
+        // {
+        //     Debug.Log(collider);
+        //     Debug.Log(collider.transform.parent.name);
+        //     if (collider.gameObject.GetComponent<Tower>().name == target.name)
+        //     {
+        //         destroy = true;
+        //         anim.SetBool("destroy", true);
+        //     }
+        // }
+       
     }
 
     void TriggerDestroy()

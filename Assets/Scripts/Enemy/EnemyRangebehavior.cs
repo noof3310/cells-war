@@ -188,7 +188,9 @@ public class EnemyRangebehavior : MonoBehaviour
         }
         else if(donotPathFind && trig.CompareTag("Tower") && !cooling )
         {
-            target = trig.gameObject;   
+            Debug.Log(trig);
+            target = trig.gameObject;
+            inRange = true;   
         }
         else if (trig.CompareTag("Objective") && !cooling)
         {
@@ -247,15 +249,19 @@ public class EnemyRangebehavior : MonoBehaviour
         enemy.SetTimer(intTimer);
         attackMode = true;
         anim.SetBool("canWalk", false);
-        Shoot();
+        if (!cooling)
+        {
+            Shoot();
+        }
         cooling = true;
         // anim.SetBool("attack", true);
     }
 
     void StopAttack()
     {
-        // attackMode = false;
-        // anim.SetBool("attack", false);
+        attackMode = false;
+        inRange = false;
+        anim.SetBool("attack", false);
     }
 
     void CoolDown()
@@ -273,19 +279,34 @@ public class EnemyRangebehavior : MonoBehaviour
 
     void Shoot()
     {
-        // Vector3 randomPos = Random.insideUnitCircle * Radius;
-        if (target.tag == "Tower" && target.transform.parent.gameObject.GetComponent<Tower>().GetCurrentHealth() > 0)
-        {
-            BulletController.current.GetBullet(ItemPrefab, transform.position, target, enemy.GetDamage());
+        if(target == null) {
+            target = currentTarget;
+            return;
         }
+        // Vector3 randomPos = Random.insideUnitCircle * Radius;
+        if (target.tag == "Tower")
+        {
+            try {
+                if(target.GetComponent<Tower>().GetCurrentHealth() > 0)
+                {
+                    BulletController.current.GetBullet(ItemPrefab, transform.position, target, enemy.GetDamage());
+                }
+            }
+            finally 
+            {
+                Debug.Log(target);
+            }
+        }
+        
+           
         else if (target.tag == "Objective" && target.GetComponent<Objective>().GetCurrentHealth() > 0)
         {
             BulletController.current.GetBullet(ItemPrefab, transform.position, target, enemy.GetDamage());
         }
-        else if (target.tag == "Enemy" && target.transform.parent.gameObject.GetComponent<Enemy>().GetCurrentHealth() > 0)
-        {
-            BulletController.current.GetBullet(ItemPrefab, transform.position, target, enemy.GetDamage());
-        }
+        // else if (target.tag == "Enemy" && target.transform.parent.gameObject.GetComponent<Enemy>().GetCurrentHealth() > 0)
+        // {
+        //     BulletController.current.GetBullet(ItemPrefab, transform.position, target, enemy.GetDamage());
+        // }
         // var obj = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
         // obj.GetComponent<BulletBehavior>().SetTarget(target);
         // obj.GetComponent<BulletBehavior>().SetDamage(enemy.GetDamage());
