@@ -61,7 +61,7 @@ public class EnemyBehavior : MonoBehaviour
         
         donotPathFind = Random.Range(1,100) > 80;
         if(isBoss){
-            donotPathFind = true;
+            donotPathFind = false;
         } 
 
     }
@@ -213,7 +213,9 @@ public class EnemyBehavior : MonoBehaviour
         else if (target.tag == "Tower")
         {
             target.GetComponent<Tower>().TakenDamage(enemy.GetDamage());
-
+            if(donotPathFind) {
+                Move();
+            }
         }
     }
     public void BossTakeDamage()
@@ -311,7 +313,9 @@ public class EnemyBehavior : MonoBehaviour
         // rb.rotation = angle;
         direction.Normalize();
         movement = direction;
-        rb.MovePosition((Vector2)transform.position + (Vector2)(direction * enemy.moveSpeed * Time.deltaTime));
+        int speed2 = (int) enemy.moveSpeed / 2; 
+        rb.MovePosition((Vector2)transform.position + (Vector2)(direction * speed2 * Time.deltaTime));
+        rb.AddForce(direction);
     }
 
     void EnemyLogic()
