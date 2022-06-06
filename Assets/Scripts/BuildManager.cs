@@ -26,6 +26,7 @@ public class BuildManager : MonoBehaviour
     public int handItem = 0;
 
     public bool inHand = false;
+    public float inHandHealth;
 
     public Transform handGridUI;
 
@@ -142,7 +143,8 @@ public class BuildManager : MonoBehaviour
                 {
                     inHand = false;
                     RenderUIHand();
-                    Instantiate(towers[handItem], centerTowerPos, Quaternion.identity);
+                    Tower tower = Instantiate(towers[handItem], centerTowerPos, Quaternion.identity).GetComponent<Tower>();
+                    tower.SetCurrentHealth(inHandHealth);
                     updatePath(centerTowerPos);
                 }
             }
@@ -156,7 +158,9 @@ public class BuildManager : MonoBehaviour
                         var go = collider.gameObject;
                         if (go.tag == "Tower" && !collider.isTrigger)
                         {
-                            go.GetComponent<Tower>().SetDied(true);
+                            Tower tower = go.GetComponent<Tower>();
+                            inHandHealth = tower.GetCurrentHealth();
+                            tower.SetDied(true);
                             handItem = int.Parse(go.name.Substring(6, 1));
                             break;
                         }
